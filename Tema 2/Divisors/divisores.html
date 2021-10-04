@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Divisores de un número</h1>
+    <p>Introduce un numero <input id="nombre"> <button onclick="obtenirNumero()">Obtenir</button></p>
+
+    <script>
+        function obtenirNumero(){
+            let valor = document.getElementById("nombre");
+            console.log(valor.value);
+
+            var array = [];
+
+            for(i=0; i < valor.value; i++){
+                
+                let operacio = valor.value % i;
+                
+                if(operacio === 0){
+                    array.push(i);
+                }
+            }
+
+            document.write("Els divisors de " +valor.value+ " son ");
+            array.reverse();
+
+            for(i=0; i < array.length; i++){
+                console.log(array[i]);
+                document.write(array[i]+" ");
+            }
+        }
+
+    </script>
+
+</body>
+</html>

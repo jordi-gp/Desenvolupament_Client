@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dia de la semana</h1>
+
+    <script>
+        let semanaIta = new Array(7);
+        let semanaEsp = new Array(7);
+        let data = new Date();
+        let dia = data.getUTCDay();
+
+        semanaIta = ["Lunedi", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"];
+        semanaEsp = ["Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Disabte", "Diumenge"];
+
+        document.write("Avui es el día número " +dia+ " de la setmana, conegut en español com a " +semanaEsp[dia -1]+ " i en Italià com a " +semanaIta[dia -1]);        
+
+    </script>
+</body>
+</html>

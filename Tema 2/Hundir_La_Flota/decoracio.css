@@ -1,0 +1,39 @@
+table{
+    border: 1px solid black;
+    background-color: lightblue;
+}
+
+td{
+    border: 1px solid black;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    background-color: white;
+}
+
+/*Menú desplegable de la posició Vertical*/
+#posVertical{
+    font-size: 15px;
+    margin: 10px 20px;
+    text-align: center;
+}
+
+/*Menú desplegable de la posició Horitzontal*/
+#posHoritzontal{
+    font-size: 15px;
+    text-align: center;
+}
+
+#partidaNova{
+    margin-left: 20px;
+    font-size: 15px;
+}
+
+#reiniciar{
+    margin-left: 20px;
+    font-size: 15px;
+}
+
+#confirmar{
+    font-size: 15px;
+}
