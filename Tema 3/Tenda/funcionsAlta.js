@@ -41,9 +41,8 @@ function afegir(){
                 } else {
                     arrProductes.push(producte);
                     localStorage.setItem('producte',JSON.stringify(arrProductes));
-                    //console.log(JSON.parse(localStorage.getItem('producte')));
-                    console.log(arrProductes.length);
-                    
+                    //console.log(arrProductes.length);
+                    alert("producte afegit amb exit");
                     setTimeout(buidaForm, 1);
                 }
             }
