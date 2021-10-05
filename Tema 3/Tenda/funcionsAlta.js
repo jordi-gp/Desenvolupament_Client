@@ -33,13 +33,17 @@ function afegir(){
             
             } else {
 
-                if (arrProductes.indexOf == -1){
+                arrProductes = JSON.parse(localStorage.getItem("producte"));
+
+                if (arrProductes.findIndex(element => element.descripcio == producte.descripcio) != -1){
+                    alert("El producte ya es troba registrat!");
 
                 } else {
-                    localStorage.setItem('producte',JSON.stringify(producte));
-                    //console.log(JSON.parse(localStorage.getItem('producte')));
                     arrProductes.push(producte);
-
+                    localStorage.setItem('producte',JSON.stringify(arrProductes));
+                    //console.log(JSON.parse(localStorage.getItem('producte')));
+                    console.log(arrProductes.length);
+                    
                     setTimeout(buidaForm, 1);
                 }
             }
