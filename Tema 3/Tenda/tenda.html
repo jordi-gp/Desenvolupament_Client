@@ -19,35 +19,34 @@
             border: 1px solid black;
         }
 
-        #taulerBasquet{
+        #basquet, th, td{
             border: 1px solid black;
         }
+        
     </style>
 </head>
 <body>
     <h1>La tenda del camp</h1>
+
+    <h2>Productes</h2>
     <div>
-        <table id='taulerInf'>
-            <th></th><th id='a'>Descripció</th><th id='a'>Preu</th><th id='a'>Quantitat</th>
+        <table id="basquet">
+            
+        </table>
+    </div>
+
+    <h2>Basquet</h2>
+    <div>
+        <table id="taulaProductes">
             <tr>
-                <td><button id='add'>Afegir</button></td>
-            </tr>
-            <tr>
-                <td><button id='add'>Afegir</button></td>
-            </tr>
-            <tr>
-                <td><button id='add'>Afegir</button></td>
+                <th></th><th>Descripció</th><th>Quantitat</th><th>Preu</th>
             </tr>
         </table>
     </div>
 
-    <h1>Basquet</h1>
-    <!--<div id='taulerBasquet'>
-        <table id='basquet'>
-            <th></th><th id='a'>Descripció</th><th id='a'>Preu</th><th id='a'>Quantitat</th>
-        </table>
-    </div>-->
+    <p id="preu"></p>
 
     <button type='button' id='alta' onclick="window.location.href='altaProducte.html'">Donar d'alta un producte</button>
+    <button type='button' id='mostra' onclick="mostrarProductes()">Mostrar</button>
 </body>
 </html>
