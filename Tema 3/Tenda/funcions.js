@@ -33,18 +33,21 @@ function afegir(){
             
             } else {
 
-                arrProductes = JSON.parse(localStorage.getItem("producte"));
+                
 
-                if (arrProductes.findIndex(element => element.descripcio == producte.descripcio) != -1){
-                    alert("El producte ya es troba registrat!");
 
-                } else {
-                    arrProductes.push(producte);
-                    localStorage.setItem('producte',JSON.stringify(arrProductes));
-                    //console.log(arrProductes.length);
-                    alert("producte afegit amb exit");
-                    setTimeout(buidaForm, 1);
-                }
+                // arrProductes = JSON.parse(localStorage.getItem("producte"));
+
+                // if (arrProductes.findIndex(element => element.descripcio.value == producte.descripcio) != -1){
+                //     alert("El producte ya es troba registrat!");
+
+                // } else {
+                //     arrProductes.push(producte);
+                //     localStorage.setItem('producte',JSON.stringify(arrProductes));
+                //     console.log(arrProductes.length);
+                //     alert("producte afegit amb exit");
+                //     setTimeout(buidaForm, 1);
+                // }
             }
         }
     }
@@ -52,4 +55,8 @@ function afegir(){
 
 function buidaForm(){
     document.getElementById('formulari').reset();
+}
+
+function mostrarProductes(){
+    
 }
