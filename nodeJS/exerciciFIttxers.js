@@ -1,4 +1,4 @@
-const readline = require('readline');
+const { strictEqual } = require('assert');
 const fs = require('fs');
 
 //ruta del fitxer
@@ -7,37 +7,27 @@ var directorio = "./GeneradorDocuments";
 var fitxer = "/Plantilla.txt";
 var info = "/basedades.csv";
 
-var justificant = {
-    nomPare: "",
-    nomAlumne: "",
-    curs: "",
-    grup: "",
-    diaInici: 0,
-    mesInici: "",
-    anyInici: 0,
-    diaFi: 0,
-    mesFi: "",
-    mesFi2: 0,
-    diaFalta: "",
-    mesFalta: "",
-    anyFalta: "",
-    totDia: "",
-    horesDia: "",
-    horaInici: "",
-    horaFi: "",
-    motiu: "",
-    diaActual: 0,
-    mesActual: "",
-    anyActual: 0
+//informacio del .csv
+var arxiu = fs.readFileSync(directorio+info, "utf-8");
+var arrInf = new Array();
+
+//informacio del .txt
+var document = fs.readFileSync(directorio+fitxer, "utf-8");
+var arrAux = new Array();
+
+arxiu.split(/\r?\n/).forEach(function(line){
+    arrInf.push(line);
+});
+
+
+
+for(i=0; i < arrInf.length; i++){
+    var a = document.replace(arrInf[i].split(";"), arrInf[i].split(";")); 
 }
 
-//llista els elements del directori
-var fitxers = fs.readdirSync(directorio);
 
-//llista el contingut del fitxer
-var arxiu = fs.readFileSync(directorio+info, "utf-8");
 
-console.log(arxiu.split(";"));
+console.log(a);
 
 //Comprovem si la carpeta 'resultat' ja existeix
 if(fs.existsSync("resultat")){
