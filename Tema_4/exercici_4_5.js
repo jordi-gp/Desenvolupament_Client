@@ -21,6 +21,10 @@ function afegirElement(){
 }
 
 function borrarElement(){
-    var objecte2 = document.getElementsByTagName("li");
-    
+    var pare = document.getElementById("listado");
+    var fill = document.getElementsByTagName("li");
+
+    var a = fill[fill.length -1];
+
+    pare.removeChild(a);
 }
