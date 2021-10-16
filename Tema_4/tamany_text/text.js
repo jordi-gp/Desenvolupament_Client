@@ -17,10 +17,12 @@ function agrandar(){
     var a = window.getComputedStyle(texto, null).getPropertyValue("font-size");
 
     //Es converteix a enter per a poder obtindre el número sols
-    a = parseInt(a);
+    //A més perque el valor que li estem sumant al tamany es un nombre amb decimals
+    a = parseFloat(a);
 
-    if(a < 40){
-        texto.style.fontSize = (a + 5) + "px";
+    if(a <= 25){
+        texto.style.fontSize = (a + 0.05) + "px";
+        console.log(a);
     } else {
         window.alert("S'ha arrivat al llímit de grandària del text");
     }
@@ -32,10 +34,11 @@ function reduir(){
     var a = window.getComputedStyle(texto, null).getPropertyValue("font-size");
 
     //Es converteix a enter per a poder obtindre el número sols
-    a = parseInt(a);
+    //A més perque el valor que li estem sumant al tamany es un nombre amb decimals
+    a = parseFloat(a);
 
-    if(a > 10){
-        texto.style.fontSize = (a - 5) + "px";
+    if(a >= 15){
+        texto.style.fontSize = (a - 0.05) + "px";
     } else {
         window.alert("S'ha arrivat al llímit de grandària del text");
     }
