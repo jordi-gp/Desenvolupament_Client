@@ -16,7 +16,7 @@ function agrandar(){
     var texto = document.querySelector("p");
     var a = window.getComputedStyle(texto, null).getPropertyValue("font-size");
 
-    //Es converteix a enter per a poder obtindre el número sols
+    //Es converteix a float per a poder obtindre el número sols
     //A més perque el valor que li estem sumant al tamany es un nombre amb decimals
     a = parseFloat(a);
 
@@ -33,7 +33,7 @@ function reduir(){
     var texto = document.querySelector("p");
     var a = window.getComputedStyle(texto, null).getPropertyValue("font-size");
 
-    //Es converteix a enter per a poder obtindre el número sols
+    //Es converteix a float per a poder obtindre el número sols
     //A més perque el valor que li estem sumant al tamany es un nombre amb decimals
     a = parseFloat(a);
 
