@@ -5,6 +5,7 @@ function main(){
     document.getElementById("eliminar").addEventListener("click", borrarElement);
 }
 
+//Introduim l'element que s'afegirà a la llista i en cas de deixar el camp buit avisa
 function afegirElement(){
     var respuesta = prompt("Introdueix l'element que vols afegir a la llista");
     
@@ -20,6 +21,7 @@ function afegirElement(){
     }
 }
 
+//Elimina l'últim element de la llista
 function borrarElement(){
     var pare = document.getElementById("listado");
     var fill = document.getElementsByTagName("li");
