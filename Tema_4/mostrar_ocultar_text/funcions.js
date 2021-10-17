@@ -11,15 +11,13 @@ function mostrarParagraf(){
     var parag1 = document.getElementsByClassName("paragraf1");
     var parag2 = document.getElementsByClassName("paragraf2");
 
-    var b =[];
-
     //Obtenim la propietat 'display'
-    var a = window.getComputedStyle(parag1[parag1.length -1], null).getPropertyValue("display");
-    var b = window.getComputedStyle(parag2[parag2.length -1], null).getPropertyValue("display");
+    var estilParag1 = window.getComputedStyle(parag1[parag1.length -1], null).getPropertyValue("display");
+    var estilParag2 = window.getComputedStyle(parag2[parag2.length -1], null).getPropertyValue("display");
     
     //Realitzem una comparació, si el paragraf s'esta mostrant,
     //avisem a l'usuari de que ja està visible, en cas contrari l'ocultem
-    if(a != "block"){
+    if(estilParag1 != "block"){
         parag1 = parag1[parag1.length -1];
         parag2 = parag2[parag2.length -1];
 
@@ -37,10 +35,10 @@ function ocultarParagraf(){
     var parag1 = document.getElementsByClassName("paragraf1");
     var parag2 = document.getElementsByClassName("paragraf2");
 
-    var a = window.getComputedStyle(parag1[parag1.length -1], null).getPropertyValue("display");
-    var b = window.getComputedStyle(parag2[parag2.length -1], null).getPropertyValue("display");
+    var estilParag1 = window.getComputedStyle(parag1[parag1.length -1], null).getPropertyValue("display");
+    var estilParag2 = window.getComputedStyle(parag2[parag2.length -1], null).getPropertyValue("display");
     
-    if(a != "none"){
+    if(estilParag1 != "none"){
         parag1 = parag1[parag1.length -1];
         parag2 = parag2[parag2.length -1];
 
