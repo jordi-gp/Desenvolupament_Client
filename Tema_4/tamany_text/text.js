@@ -14,15 +14,14 @@ function original(){
 //S'agranda el tamany del text en 0'05px
 function agrandar(){
     var texto = document.querySelector("p");
-    var a = window.getComputedStyle(texto, null).getPropertyValue("font-size");
+    var tamFont = window.getComputedStyle(texto, null).getPropertyValue("font-size");
 
     //Es converteix a float per a poder obtindre el número sols
     //A més perque el valor que li estem sumant al tamany es un nombre amb decimals
-    a = parseFloat(a);
+    tamFont = parseFloat(tamFont);
 
-    if(a <= 25){
-        texto.style.fontSize = (a + 0.05) + "px";
-        console.log(a);
+    if(tamFont <= 25){
+        texto.style.fontSize = (tamFont + 0.05) + "px";
     } else {
         window.alert("S'ha arrivat al llímit de grandària del text");
     }
@@ -31,14 +30,14 @@ function agrandar(){
 //Es redueix el tamany del text en 0'05px
 function reduir(){
     var texto = document.querySelector("p");
-    var a = window.getComputedStyle(texto, null).getPropertyValue("font-size");
+    var tamFont = window.getComputedStyle(texto, null).getPropertyValue("font-size");
 
     //Es converteix a float per a poder obtindre el número sols
     //A més perque el valor que li estem sumant al tamany es un nombre amb decimals
-    a = parseFloat(a);
+    tamFont = parseFloat(tamFont);
 
-    if(a >= 15){
-        texto.style.fontSize = (a - 0.05) + "px";
+    if(tamFont >= 15){
+        texto.style.fontSize = (tamFont - 0.05) + "px";
     } else {
         window.alert("S'ha arrivat al llímit de grandària del text");
     }
