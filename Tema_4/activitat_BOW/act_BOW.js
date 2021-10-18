@@ -4,7 +4,7 @@ function main(){
     mostraNavegador();
     tamFinestra();
     finestraEmergent();
-    document.getElementById("cambiaTamany").addEventListener("click", cambiaTamany());
+    //setInterval(tamanySegon, 10);
 }
 
 //Funció per mostrar el navegador en el que ens trobem
@@ -42,8 +42,17 @@ function finestraEmergent(){
 }
 
 function cambiaTamany(){
-    var altura = prompt("Quina altura desitges que tinga la finestra?");
-    var amplaria = prompt("Quina amplària desitges que tinga la finestra?");
+    //var altura = prompt("Quina altura desitges que tinga la finestra?");
+    //var amplaria = prompt("Quina amplària desitges que tinga la finestra?");
+}
 
-    var a = parseInt(altura);
+function tamanySegon(){
+    var tamSegon = document.getElementById("tamanyv2");
+
+    var altura = window.innerHeight;
+    var amplaria = window.innerWidth;
+    
+    tamSegon.appendChild(document.createTextNode("L'amplaria actual es de " + altura + "||" + amplaria));
+
+    document.body.appendChild(tamSegon);
 }
