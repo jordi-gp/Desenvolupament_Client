@@ -5,7 +5,6 @@ function main(){
     tamFinestra();
     finestraEmergent();
     document.getElementById("bFinestra").addEventListener("click", function (){cambiaAlt()});
-    //document.getElementById("cos").addEventListener("onresize", tamFinestra);
 }
 
 //Funció per mostrar el navegador en el que ens trobem
@@ -22,26 +21,26 @@ function mostraNavegador(){
 
 //Funció per mostrar el l'altura i amplària de la finestra en tot moment
 function tamFinestra(){
-    var parag1 = document.getElementById("altura");
-    var parag2 = document.getElementById("amplaria");
-
     var altura = window.outerHeight;
     var amplaria = window.outerWidth;
+
+    var parag1 = document.getElementById("altura");
+    var parag2 = document.getElementById("amplaria");
     
-    console.log(altura + "|" + amplaria);
-    //parag1.appendChild(document.createTextNode("L'altura de la finestra es de " + altura + " pixels"));
-    //parag2.appendChild(document.createTextNode("L'amplària de la finestra es de " + amplaria + " pixels"));
+    parag1.appendChild(document.createTextNode("L'altura de la finestra es de " + altura + " pixels"));
+    parag2.appendChild(document.createTextNode("L'amplària de la finestra es de " + amplaria + " pixels"));
     
-    //document.body.appendChild(parag1);
-    //document.body.appendChild(parag2);
+    document.body.appendChild(parag1);
+    document.body.appendChild(parag2);
 }
 
-function myFunction() {
-  var w = window.outerWidth;
-  var h = window.outerHeight;
-  var txt = "Window size: width=" + w + ", height=" + h;
-  document.getElementById("demo").innerHTML = txt;
-}
+//AQUESTA FUNCIÓ ESTA TRETA DE W3SCHOOLS JO NO HE ACONSEGUIT FER-HO
+/*function myFunction() {
+    var w = window.outerWidth;
+    var h = window.outerHeight;
+    var txt = "Window size: width=" + w + ", height=" + h;
+    document.getElementById("demo").innerHTML = txt;
+}*/
 
 
 //Funció per obrir una nova finestra amb una amplària i altura de 200px
