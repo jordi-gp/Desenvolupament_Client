@@ -1,12 +1,11 @@
 window.onload = main;
 
-
 function main(){
     mostraNavegador();
     tamFinestra();
     finestraEmergent();
     document.getElementById("bFinestra").addEventListener("click", function (){cambiaAlt()});
-    window.addEventListener("resize", tamFinestra);
+    //document.getElementById("cos").addEventListener("onresize", tamFinestra);
 }
 
 //Funció per mostrar el navegador en el que ens trobem
@@ -29,13 +28,20 @@ function tamFinestra(){
     var altura = window.outerHeight;
     var amplaria = window.outerWidth;
     
-    parag1.appendChild(document.createTextNode("L'altura de la finestra es de " + altura + " pixels"));
-    parag2.appendChild(document.createTextNode("L'amplària de la finestra es de " + amplaria + " pixels"));
+    console.log(altura + "|" + amplaria);
+    //parag1.appendChild(document.createTextNode("L'altura de la finestra es de " + altura + " pixels"));
+    //parag2.appendChild(document.createTextNode("L'amplària de la finestra es de " + amplaria + " pixels"));
     
-    document.body.appendChild(parag1);
-    document.body.appendChild(parag2);
+    //document.body.appendChild(parag1);
+    //document.body.appendChild(parag2);
 }
 
+function myFunction() {
+  var w = window.outerWidth;
+  var h = window.outerHeight;
+  var txt = "Window size: width=" + w + ", height=" + h;
+  document.getElementById("demo").innerHTML = txt;
+}
 
 
 //Funció per obrir una nova finestra amb una amplària i altura de 200px
