@@ -4,7 +4,7 @@ function main(){
     mostraNavegador();
     tamFinestra();
     finestraEmergent();
-    //setInterval(tamanySegon, 10);
+    document.getElementById("bAltura").addEventListener("click", function (){cambiaAlt()});
 }
 
 //Funció per mostrar el navegador en el que ens trobem
@@ -19,7 +19,7 @@ function mostraNavegador(){
     document.body.appendChild(titol);
 }
 
-//Funció per mostrar el l'altura i amplària de la finestra
+//Funció per mostrar el l'altura i amplària de la finestra en tot moment
 function tamFinestra(){
     var parag1 = document.getElementById("altura");
     var parag2 = document.getElementById("amplaria");
@@ -36,23 +36,20 @@ function tamFinestra(){
 
 //Funció per obrir una nova finestra amb una amplària i altura de 200px
 function finestraEmergent(){
-    //window.open("http://localhost:5500");
-    //window.innerHeight = "200px";
-    //window.innerWidth = "200px";
+    //var finestra = window.open("http://localhost:5500/Tema_3/Formatar_Data/fecha.html", "","width=200, height=200");
 }
 
-function cambiaTamany(){
-    //var altura = prompt("Quina altura desitges que tinga la finestra?");
-    //var amplaria = prompt("Quina amplària desitges que tinga la finestra?");
-}
+//Funció per obrir una nova finestra amb altura i amplària definides per l'usuari
+function cambiaAlt(){
+    var alt = prompt("Quina altura desitges que tinga la nova finestra?");
+    var amp = prompt("Quina amplaria desitges que tinga la nova finesra?");
 
-function tamanySegon(){
-    var tamSegon = document.getElementById("tamanyv2");
-
-    var altura = window.innerHeight;
-    var amplaria = window.innerWidth;
-    
-    tamSegon.appendChild(document.createTextNode("L'amplaria actual es de " + altura + "||" + amplaria));
-
-    document.body.appendChild(tamSegon);
+    //Comprovació de que cap dels camps està buit o conté un valor que no es de tipus enter
+    if(isNaN(alt) || isNaN(amp)){
+        console.error("Algún dels dels dos camps no té un valor de tipus enter");
+    } else if(alt == "" || amp == ""){
+        console.error("Algún dels dos camps està buit");
+    } else {
+        window.open("http://localhost:5500/Tema_3/Formatar_Data/fecha.html", "", "width="+alt +","+ "height="+amp);
+    }    
 }
