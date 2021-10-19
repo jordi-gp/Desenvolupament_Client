@@ -1,10 +1,12 @@
 window.onload = main;
 
+
 function main(){
     mostraNavegador();
     tamFinestra();
     finestraEmergent();
-    document.getElementById("bAltura").addEventListener("click", function (){cambiaAlt()});
+    document.getElementById("bFinestra").addEventListener("click", function (){cambiaAlt()});
+    window.addEventListener("resize", tamFinestra);
 }
 
 //Funció per mostrar el navegador en el que ens trobem
@@ -24,8 +26,8 @@ function tamFinestra(){
     var parag1 = document.getElementById("altura");
     var parag2 = document.getElementById("amplaria");
 
-    var altura = window.innerHeight;
-    var amplaria = window.innerWidth;
+    var altura = window.outerHeight;
+    var amplaria = window.outerWidth;
     
     parag1.appendChild(document.createTextNode("L'altura de la finestra es de " + altura + " pixels"));
     parag2.appendChild(document.createTextNode("L'amplària de la finestra es de " + amplaria + " pixels"));
@@ -34,9 +36,11 @@ function tamFinestra(){
     document.body.appendChild(parag2);
 }
 
+
+
 //Funció per obrir una nova finestra amb una amplària i altura de 200px
 function finestraEmergent(){
-    //var finestra = window.open("http://localhost:5500/Tema_3/Formatar_Data/fecha.html", "","width=200, height=200");
+    var finestra = window.open("http://localhost:5500/Tema_3/Formatar_Data/fecha.html", "","width=200, height=200");
 }
 
 //Funció per obrir una nova finestra amb altura i amplària definides per l'usuari
