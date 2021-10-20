@@ -36,3 +36,14 @@ function afegirElement(){
         localStorage.setItem("Elements", JSON.stringify(arrElements));
     }
 }
+
+//Funció per mostrar les tasques
+function mostrarElement(){
+    var arrElements = [];
+
+    if(JSON.parse(localStorage.getItem("Elements")) != null){
+        arrElements = JSON.parse(localStorage.getItem("Elements"));
+    }
+
+    document.getElementById("llista");
+}
