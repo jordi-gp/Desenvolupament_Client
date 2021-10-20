@@ -3,6 +3,7 @@ window.onload = main;
 function main(){
     mostraNavegador();
     tamFinestra();
+    window.addEventListener("resize", tamFinestra);
     finestraEmergent();
     document.getElementById("bFinestra").addEventListener("click", function (){cambiaAlt()});
 }
@@ -27,25 +28,22 @@ function tamFinestra(){
     var parag1 = document.getElementById("altura");
     var parag2 = document.getElementById("amplaria");
     
-    parag1.appendChild(document.createTextNode("L'altura de la finestra es de " + altura + " pixels"));
-    parag2.appendChild(document.createTextNode("L'amplària de la finestra es de " + amplaria + " pixels"));
+    var texto1 = document.createTextNode("L'altura de la finestra es de " + altura + " pixels");
+    var texto2 = document.createTextNode("L'amplària de la finestra es de " + amplaria + " pixels");
+
+    parag1.appendChild(texto1);
+    parag2.appendChild(texto2);
     
     document.body.appendChild(parag1);
     document.body.appendChild(parag2);
+
+    parag1.replaceChildren(texto1, texto1);
+    parag2.replaceChildren(texto2, texto2);
 }
-
-//AQUESTA FUNCIÓ ESTA TRETA DE W3SCHOOLS JO NO HE ACONSEGUIT FER-HO
-/*function myFunction() {
-    var w = window.outerWidth;
-    var h = window.outerHeight;
-    var txt = "Window size: width=" + w + ", height=" + h;
-    document.getElementById("demo").innerHTML = txt;
-}*/
-
 
 //Funció per obrir una nova finestra amb una amplària i altura de 200px
 function finestraEmergent(){
-    var finestra = window.open("http://localhost:5500/Tema_3/Formatar_Data/fecha.html", "","width=200, height=200");
+    //var finestra = window.open("http://localhost:5500/Tema_3/Formatar_Data/fecha.html", "","width=200, height=200");
 }
 
 //Funció per obrir una nova finestra amb altura i amplària definides per l'usuari
