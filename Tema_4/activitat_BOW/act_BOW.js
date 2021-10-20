@@ -22,8 +22,8 @@ function mostraNavegador(){
 
 //Funció per mostrar el l'altura i amplària de la finestra en tot moment
 function tamFinestra(){
-    var altura = window.outerHeight;
-    var amplaria = window.outerWidth;
+    var altura = window.innerHeight;
+    var amplaria = window.innerWidth;
 
     var parag1 = document.getElementById("altura");
     var parag2 = document.getElementById("amplaria");
@@ -43,7 +43,7 @@ function tamFinestra(){
 
 //Funció per obrir una nova finestra amb una amplària i altura de 200px
 function finestraEmergent(){
-    //var finestra = window.open("http://localhost:5500/Tema_3/Formatar_Data/fecha.html", "","width=200, height=200");
+    var finestra = window.open("http://localhost:5500/Tema_3/Formatar_Data/fecha.html", "","width=200, height=200");
 }
 
 //Funció per obrir una nova finestra amb altura i amplària definides per l'usuari
