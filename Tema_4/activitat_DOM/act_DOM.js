@@ -5,23 +5,34 @@ function main(){
 }
 
 //Funció per poder afegir adreses noves
-function afegirElement(nom, url){
+function afegirElement(){
+
+    //Valors que se li aplicaran a l'objecte
+    var nomAdr = document.getElementById("nomAdresa");
+    var urlAdr = document.getElementById("urlAdresa");
 
     //Creacio del objecte adresa
     var adresa = {
-        aNom: nom,
-        aUrl: url
+        aNom: nomAdr.value,
+        aUrl: urlAdr.value
     }
 
-    var a = document.getElementById("nomAdresa").value;
-    var b = document.getElementById("urlAdresa").value;
+    var arrElements = [];
 
-    adresa.aNom = a;
-    adresa.aUrl = b;
+    //Comprovació de que cap dels camps esta buit
+    if(adresa.aNom === "" && adresa.aUrl === ""){
+        console.error("Els dos camps estan buits!");
+    } else if(adresa.aNom === ""){
+        console.error("El camp de nom esta buit!");
+    } else if(adresa.aUrl === "") {
+        console.error("El camp de url esta buit!");
+    } else {
 
-    var arrElements = new Array();
-    
-    arrElements.push(adresa);
-
-
+        if(JSON.parse(localStorage.getItem("Elements")) != null){
+            arrElements = JSON.parse(localStorage.getItem("Elements"));
+        }
+        
+        arrElements.push(adresa);
+        localStorage.setItem("Elements", JSON.stringify(arrElements));
+    }
 }
