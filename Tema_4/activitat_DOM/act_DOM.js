@@ -59,10 +59,10 @@ function afegirElement(elem){
 
     //Soles nuestro señor Jesucristo sabe como ha funcionado esto sin petar
     but.setAttribute("type", "checkbox");
-    but.setAttribute("id", elem.aNom);
+    but.setAttribute("name", "checkbox");
+    li.setAttribute("id", elem.aNom);
     en.setAttribute("href", elem.aUrl);
     
-    li.setAttribute("href", elem.aUrl);
     li.appendChild(but);
     li.appendChild(en, cont);
     en.appendChild(cont);
@@ -80,10 +80,38 @@ function carregarElements(){
     arrElements.forEach(element => {
         afegirElement(element);
     });
+
+    
+}
+
+//Funció per detectar el botó que s'ha seleccionat
+function detectaBoto(){
+    arrElements = [];
+
+    if(JSON.parse(localStorage.getItem("Elements")) != null){
+        arrElements = JSON.parse(localStorage.getItem("Elements"));
+    }
 }
 
 //Funció per a borrar
-function eliminaElem(elem){
+function eliminaElem(bot){
+    var arrElements = [];
 
+    if(JSON.parse(localStorage.getItem("Elements")) != null){
+        arrElements = JSON.parse(localStorage.getItem("Elements"));
+    }
+
+    var bot = document.getElementsByName("checkbox");
     
+    console.log(bot);
+
+    bot.forEach(element => {
+        if(element.addEventListener("click", a)){
+            
+        }        
+    });
+}
+
+function a (){
+    console.log("a");
 }
