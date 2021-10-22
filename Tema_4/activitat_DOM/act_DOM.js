@@ -27,13 +27,13 @@ function afegirElement(){
     } else if(adresa.aUrl === "") {
         console.error("El camp de url esta buit!");
     } else {
-
         if(JSON.parse(localStorage.getItem("Elements")) != null){
             arrElements = JSON.parse(localStorage.getItem("Elements"));
         }
         
         arrElements.push(adresa);
         localStorage.setItem("Elements", JSON.stringify(arrElements));
+        mostrarElement();
     }
 }
 
@@ -45,5 +45,14 @@ function mostrarElement(){
         arrElements = JSON.parse(localStorage.getItem("Elements"));
     }
 
-    document.getElementById("llista");
+    var list = document.getElementById("llista");
+
+    arrElements.forEach(element => {
+        var li = document.createElement("li");
+        var cont = document.createTextNode(element.aNom);
+        li.appendChild(cont);
+        document.body.appendChild(li);
+        console.log(element);
+    });
+
 }
