@@ -3,7 +3,6 @@ window.onload = main;
 function main(){
     document.getElementById("crearAdresa").addEventListener("click", creaElement);
     carregarElements();
-    eliminaElem();
 }
 
 //Funció per poder afegir adreses noves
@@ -79,39 +78,6 @@ function carregarElements(){
 
     arrElements.forEach(element => {
         afegirElement(element);
+        console.log(arrElements);
     });
-
-    
-}
-
-//Funció per detectar el botó que s'ha seleccionat
-function detectaBoto(){
-    arrElements = [];
-
-    if(JSON.parse(localStorage.getItem("Elements")) != null){
-        arrElements = JSON.parse(localStorage.getItem("Elements"));
-    }
-}
-
-//Funció per a borrar
-function eliminaElem(bot){
-    var arrElements = [];
-
-    if(JSON.parse(localStorage.getItem("Elements")) != null){
-        arrElements = JSON.parse(localStorage.getItem("Elements"));
-    }
-
-    var bot = document.getElementsByName("checkbox");
-    
-    console.log(bot);
-
-    bot.forEach(element => {
-        if(element.addEventListener("click", a)){
-            
-        }        
-    });
-}
-
-function a (){
-    console.log("a");
 }
