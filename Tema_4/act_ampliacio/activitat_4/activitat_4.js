@@ -7,10 +7,17 @@ function main(){
 function busca(){
     var par = prompt("Quina paraula desitges buscar");
 
-    var a =document.getElementsByTagName("le");
-    var b = "";
+    var a =document.getElementById("p");
 
-    for(var i=0; i < a.length; i++){
-        console.log(a[i]);
+    var index = a.textContent.includes(par);
+
+    if(index === true){
+        for(var i=0; i < a.textContent.length; i++){
+            
+        }
+    } else {
+        alert("No s'ha trobat la paraula");
     }
+    
+    
 }

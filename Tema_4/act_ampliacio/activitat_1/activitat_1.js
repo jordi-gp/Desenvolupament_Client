@@ -1,6 +1,6 @@
 window.onload = main;
 
-var temps = 10;
+var temps = 31;
 var interval;
 
 function main(){
@@ -8,33 +8,32 @@ function main(){
     document.getElementById("cancelar").addEventListener("click", cancelar);
 }
 
-
+//Funció per iniciar el contador
 function iniciar(){
     interval = setInterval(comprovar, 1000);
-    console.log("a");
 }
 
+//Funció per comprovar que el temps no s'ha acabat
 function comprovar(){
     if(temps > 0){
         temps -= 1;
         console.log(temps);
+
+        var par = document.getElementById("contador");
+        var temp = document.createTextNode(temps);
+
+        par.appendChild(temp);
+        document.body.appendChild(par);
+
+        par.replaceChildren(temp);
+
     } else {
         document.location = "https://google.es";
     }
-
-    var p = document.getElementById("p");
-    var va = document.createTextNode(temps);
-    console.log(va);
-
-    p.appendChild(va);
-
-    document.body.appendChild(p);
-
-    p.replaceChildren(va);
-
 }
 
+//Cancelació del temporitzador
 function cancelar(){
     clearInterval(interval);
-    temps = 10;
+    temps = 30;
 }
