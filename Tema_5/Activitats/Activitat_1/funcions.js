@@ -63,13 +63,69 @@ var comunitats = [{"comunitat":"Andalucia",
             "Castellón",
             "Valencia"
     ]},
-    {
-
-    }];
+    {"comunitat":"Comunidad de Madrid",
+        "provincies":[
+            "Madrid"
+    ]},
+    {"comunitat":"Extremadura",
+        "provincies":[
+            "Badajoz",
+            "Cáceres"
+    ]},
+    {"comunitat":"Galicia",
+        "provincies":[
+            "La Coruña",
+            "Lugo",
+            "Ourense",
+            "Pontevedra"
+    ]},
+    {"comunitat":"Islas Baleares",
+        "provincies":[
+            "Islas Baleares"
+    ]},
+    {"comunitat":"La Rioja",
+        "provincia":[
+            "La Rioja"
+    ]},
+    {"comunitat":"País Vasco",
+        "provincia":[
+            "Álava",
+            "Guipúzcuoa",
+            "Vizcaya"
+    ]},
+    {"comunitat":"Navarra",
+        "provincia":[
+            "Navarra"
+    ]},
+    {"comunitat":"Melilla",
+        "provincia":[
+            "Melilla"
+    ]},
+    {"comunitat":"Principado de Asturias",
+        "provincies":[
+            "Asturias"
+    ]},
+    {"comunitat":"Región de Murcia",
+        "provincies":[
+            "Murcia"
+    ]}];
 function main() {
-
+    mostrarComunitats();
 }
 
 function mostrarComunitats() {
+    var sel = document.getElementById("comunitats");
+
+    comunitats.forEach(element => {
+        var op = document.createElement("option");
+        var txt = document.createTextNode(element.comunitat);
+
+        op.appendChild(txt);
+        sel.appendChild(op);
+    });
+
+    comunitats.forEach(element => {
+        console.log(element.provincies.length);
+    });
 
 }
