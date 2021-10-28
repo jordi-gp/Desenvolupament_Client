@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        //Creació de l'expressió regular
+        var expresion_1 = new RegExp (/\d\d\d/);
+
+        //Entrem en un bucle que ens demanarà una cadena
+        do{
+            cadena = prompt("cadena", "");
+            //Es comprova que la cadena coincideix
+            if(expresion_1.test("Concideix")){
+                alert(cadena);
+            } else {
+                alert("No Coincideix");
+            }
+        } while (cadena != "");
+    </script>
+    <title>Exemple d'Expressions Regulars</title>
+</head>
+<body>
+    
+</body>
+</html>

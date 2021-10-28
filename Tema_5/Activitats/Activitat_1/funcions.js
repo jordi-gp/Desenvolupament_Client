@@ -84,21 +84,21 @@ var comunitats = [{"comunitat":"Andalucia",
             "Islas Baleares"
     ]},
     {"comunitat":"La Rioja",
-        "provincia":[
+        "provincies":[
             "La Rioja"
     ]},
     {"comunitat":"País Vasco",
-        "provincia":[
+        "provincies":[
             "Álava",
             "Guipúzcuoa",
             "Vizcaya"
     ]},
     {"comunitat":"Navarra",
-        "provincia":[
+        "provincies":[
             "Navarra"
     ]},
     {"comunitat":"Melilla",
-        "provincia":[
+        "provincies":[
             "Melilla"
     ]},
     {"comunitat":"Principado de Asturias",
@@ -123,10 +123,14 @@ function mostrarComunitats() {
 
         op.appendChild(txt);
         sel.appendChild(op);
+
     });
 
     comunitats.forEach(element => {
-        console.log(element.provincies.length);
+        //console.log(element.provincies.length);
+        for(var i=0; i < element.provincies.length; i++){
+            console.log(element.comunitat + " " + element.provincies[i]);
+        }
     });
 
 }
