@@ -1,5 +1,6 @@
 window.onload = main;
 
+//Array amb l'informació necessària
 var comunitats = [{"comunitat":"Andalucia",
         "provincies":[
             "Almería",
@@ -59,9 +60,9 @@ var comunitats = [{"comunitat":"Andalucia",
     ]},
     {"comunitat":"Comunidad Valenciana",
         "provincies":[
-            "Alicante",
             "Castellón",
-            "Valencia"
+            "Valencia",
+            "Alicante"
     ]},
     {"comunitat":"Comunidad de Madrid",
         "provincies":[
@@ -112,8 +113,6 @@ var comunitats = [{"comunitat":"Andalucia",
 
 function main() {
     mostrarComunitats();
-    mostrarProvincies();
-    compara();
 }
 
 //Funció per mostrar les comunitats
@@ -127,8 +126,6 @@ function mostrarComunitats() {
         op.appendChild(txt);
         op.setAttribute("value", index);
         selCom.appendChild(op);
-
-        //console.log(op);
     });
     provincies();
 }
@@ -139,30 +136,32 @@ function mostrarProvincies(){
     var selCom = document.getElementById("comunitats").value;
     console.log(comunitats[selCom].provincies);
 
+    //esborrar opcions anteriors
+    //Eborrar les opcions anteriors
+    do{
+        selProv.lastChild.parentNode.removeChild(selProv.lastChild);
+    }while(selProv.lastChild != null);
+    
+    //ALTRA FORMA DE BORRAR
+    /*
+    selProv.parentNode.removeChild(selProv);
+    let select = document.createElement("select");
+    document.forms[0].appendChild(select);
+    select.setAttribute("id", "provincies");
+    selProv = document.getElementById("provincies");
+    */
+
     comunitats[selCom].provincies.forEach((element, index) => {      
-        //console.log(element.provincies.length);
+        var op = document.createElement("option");
+        var txt = document.createTextNode(element);
 
-        //for(var i=0; i < element.provincies.length; i++){
-            //console.log(element.provincies[i]);
-            var op = document.createElement("option");
-            var txt = document.createTextNode(element);
-
-            op.appendChild(txt);
-            op.setAttribute("id", index);
-            selProv.appendChild(op);
-            //console.log(op);
-        //}        
+        op.appendChild(txt);
+        op.setAttribute("id", index);
+        selProv.appendChild(op);
     });
 }
 
-//Funció per comparar les id's
-function compara(){
-    for(var i=0; i < comunitats.length; i++){
-        var b = document.getElementById("4");
-        //console.log(b);
-    }
-}
-
+//Mostrar la provincia en funció de la comunitat sel·leccionada
 function provincies(){
     document.getElementById("comunitats").addEventListener("change", mostrarProvincies);
 }
