@@ -112,25 +112,57 @@ var comunitats = [{"comunitat":"Andalucia",
 
 function main() {
     mostrarComunitats();
+    mostrarProvincies();
+    compara();
 }
 
+//Funció per mostrar les comunitats
 function mostrarComunitats() {
-    var sel = document.getElementById("comunitats");
+    var selCom = document.getElementById("comunitats");
 
-    comunitats.forEach(element => {
+    comunitats.forEach((element, index) => {
         var op = document.createElement("option");
         var txt = document.createTextNode(element.comunitat);
 
         op.appendChild(txt);
-        sel.appendChild(op);
+        op.setAttribute("value", index);
+        selCom.appendChild(op);
 
+        //console.log(op);
     });
+    provincies();
+}
 
-    comunitats.forEach(element => {
+//Funció per mostrar les províncies
+function mostrarProvincies(){
+    var selProv = document.getElementById("provincies");
+    var selCom = document.getElementById("comunitats").value;
+    console.log(comunitats[selCom].provincies);
+
+    comunitats[selCom].provincies.forEach((element, index) => {      
         //console.log(element.provincies.length);
-        for(var i=0; i < element.provincies.length; i++){
-            console.log(element.comunitat + " " + element.provincies[i]);
-        }
-    });
 
+        //for(var i=0; i < element.provincies.length; i++){
+            //console.log(element.provincies[i]);
+            var op = document.createElement("option");
+            var txt = document.createTextNode(element);
+
+            op.appendChild(txt);
+            op.setAttribute("id", index);
+            selProv.appendChild(op);
+            //console.log(op);
+        //}        
+    });
+}
+
+//Funció per comparar les id's
+function compara(){
+    for(var i=0; i < comunitats.length; i++){
+        var b = document.getElementById("4");
+        //console.log(b);
+    }
+}
+
+function provincies(){
+    document.getElementById("comunitats").addEventListener("change", mostrarProvincies);
 }
