@@ -1,5 +1,6 @@
 window.onload = main;
 
+//Array amb l'informació necessària
 var comunitats = [{"comunitat":"Andalucia",
         "provincies":[
             "Almería",
@@ -59,9 +60,9 @@ var comunitats = [{"comunitat":"Andalucia",
     ]},
     {"comunitat":"Comunidad Valenciana",
         "provincies":[
-            "Alicante",
             "Castellón",
-            "Valencia"
+            "Valencia",
+            "Alicante"
     ]},
     {"comunitat":"Comunidad de Madrid",
         "provincies":[
@@ -114,23 +115,53 @@ function main() {
     mostrarComunitats();
 }
 
+//Funció per mostrar les comunitats
 function mostrarComunitats() {
-    var sel = document.getElementById("comunitats");
+    var selCom = document.getElementById("comunitats");
 
-    comunitats.forEach(element => {
+    comunitats.forEach((element, index) => {
         var op = document.createElement("option");
         var txt = document.createTextNode(element.comunitat);
 
         op.appendChild(txt);
-        sel.appendChild(op);
-
+        op.setAttribute("value", index);
+        selCom.appendChild(op);
     });
+    provincies();
+}
 
-    comunitats.forEach(element => {
-        //console.log(element.provincies.length);
-        for(var i=0; i < element.provincies.length; i++){
-            console.log(element.comunitat + " " + element.provincies[i]);
-        }
+//Funció per mostrar les províncies
+function mostrarProvincies(){
+    var selProv = document.getElementById("provincies");
+    var selCom = document.getElementById("comunitats").value;
+    console.log(comunitats[selCom].provincies);
+
+    //esborrar opcions anteriors
+    //Eborrar les opcions anteriors
+    do{
+        selProv.lastChild.parentNode.removeChild(selProv.lastChild);
+    }while(selProv.lastChild != null);
+    
+    //ALTRA FORMA DE BORRAR
+    /*
+    selProv.parentNode.removeChild(selProv);
+    let select = document.createElement("select");
+    document.forms[0].appendChild(select);
+    select.setAttribute("id", "provincies");
+    selProv = document.getElementById("provincies");
+    */
+
+    comunitats[selCom].provincies.forEach((element, index) => {      
+        var op = document.createElement("option");
+        var txt = document.createTextNode(element);
+
+        op.appendChild(txt);
+        op.setAttribute("id", index);
+        selProv.appendChild(op);
     });
+}
 
+//Mostrar la provincia en funció de la comunitat sel·leccionada
+function provincies(){
+    document.getElementById("comunitats").addEventListener("change", mostrarProvincies);
 }
