@@ -80,10 +80,12 @@ function validaURL(){
     }
 }
 
+//Funció per mostrar les dates del formulari
 function mostraDades(){
     //Variables per obtindre els valors
     var dniVal = document.getElementById("DNI").value;
     var telVal = document.getElementById("tel").value;
+    var dataVal = document.getElementById("data").value;
     var matrVal = document.getElementById("matricula").value;
     var emailVal = document.getElementById("email").value;
     var urlVal = document.getElementById("url").value;
@@ -96,10 +98,10 @@ function mostraDades(){
 
     //Llista on es mostren els elements
     var list = document.createElement("ul");
-    var valList1 = document.createElement("li");
     
     //Camp del DNI
     var contDNI = document.createTextNode("DNI => " + dniVal);
+    var valList1 = document.createElement("li");
     valList1.appendChild(contDNI);
     list.appendChild(valList1);
 
@@ -110,24 +112,28 @@ function mostraDades(){
     list.appendChild(valList2);
 
     //Camp de la Data
+    var contData = document.createTextNode("Data => " + dataVal);
+    var valList3 = document.createElement("li");
+    valList3.appendChild(contData);
+    list.appendChild(valList3);
 
     //Camp de la matrícula del cotxe
     contMatr = document.createTextNode("Matrícula => " + matrVal);
-    var valList3 = document.createElement("li");
-    valList3.appendChild(contMatr);
-    list.appendChild(valList3);
+    var valList4 = document.createElement("li");
+    valList4.appendChild(contMatr);
+    list.appendChild(valList4);
 
     //Camp del correu electrònic
     contCorr = document.createTextNode("Correu Electrònic => " + emailVal);
-    var valList4 = document.createElement("li");
-    valList4.appendChild(contCorr);
-    list.appendChild(valList4);
+    var valList5 = document.createElement("li");
+    valList5.appendChild(contCorr);
+    list.appendChild(valList5);
 
     //Camp de la URL
     contUrl = document.createTextNode("URL => " + urlVal);
-    var valList5 = document.createElement("li");
-    valList5.appendChild(contUrl);
-    list.appendChild(valList5);
+    var valList6 = document.createElement("li");
+    valList6.appendChild(contUrl);
+    list.appendChild(valList6);
 
     document.body.appendChild(list);
 }
