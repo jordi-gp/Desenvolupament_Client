@@ -1,7 +1,7 @@
 window.onload = main;
 
 function main(){
-    document.getElementById("Enviar").addEventListener("click", validaDNI, validaTel);
+    document.getElementById("Enviar").addEventListener("click", validar);
 }
 
 //Expressions regulars per validar
@@ -38,7 +38,7 @@ function validaTel(){
 
 //Funció per validar la data
 function validaData(){
-    var telData = document.getElementById("data");
+    var telData = document.getElementById("data").value;
 
     if(data.test(telData)){
         return true;
