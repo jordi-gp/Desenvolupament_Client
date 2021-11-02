@@ -7,8 +7,8 @@ function main(){
 //Expressions regulars per validar
 const DNI = new RegExp(/^\d{9}[A-Z]{1}$/);
 const numTel = new RegExp(/^\d{3}\s\d{3,}\s\d{3}$/);
-const data = new RegExp(/^\d[1970-2030]{4}+\-\d[1-12]{2}+\-\d[1-31]{2}$/);
-const matrCotxe = new RegExp(/^\d\d\d\d\s[A-Z]{3}$/);
+const data = new RegExp(/^(19[7-9][0-9]|20[0-1][0-9]|202[0-1])-([0][1-9]||[1][0-2])-([0][1-9]||[1-2][0-9]||[3][0-1])$/);
+const matrCotxe = new RegExp(/^\d{4}\s[A-Z]{3}$/);
 const email = new RegExp(/^\w+@\w+\.\w{2,3}$/);
 const url = new RegExp(/^(ftp|http|https):\/\/[^ "]+\.\w{2,3}$/);
 
@@ -18,7 +18,6 @@ function validaDNI(){
 
     if(DNI.test(dniVal)){
         validaTel();
-        console.log(document.getElementById("data").value);
     } else {
         alert("El DNI ha de tindre un format correcte");
     }
