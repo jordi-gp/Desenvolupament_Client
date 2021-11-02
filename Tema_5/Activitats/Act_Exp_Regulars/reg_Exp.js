@@ -1,7 +1,7 @@
 window.onload = main;
 
 function main(){
-    document.getElementById("Enviar").addEventListener("click", validaDNI);
+    document.getElementById("Enviar").addEventListener("click", validaDNI, validaTel);
 }
 
 //Expressions regulars per validar
@@ -17,9 +17,10 @@ function validaDNI(){
     var dniVal = document.getElementById("DNI").value;
 
     if(DNI.test(dniVal)){
-        validaTel();
+        return true;
     } else {
-        alert("El DNI ha de tindre un format correcte");
+        error2(dniVal, "El DNI introduit no es correcte!");
+        return false;
     }
 }
 
@@ -28,9 +29,10 @@ function validaTel(){
     var telVal = document.getElementById("tel").value;
 
     if(numTel.test(telVal)){
-        validaData();
+        return true;
     } else {
-        alert("El telèfon ha de tindre un format correcte");
+        error2(telVal, "El telèfon introduit no es correcte!");
+        return false;
     }
 }
 
@@ -39,9 +41,10 @@ function validaData(){
     var telData = document.getElementById("data");
 
     if(data.test(telData)){
-        validaMatr();
+        return true;
     } else {
-        alert("La data ha de tindre un format correcte");
+        error2(telData, "La data introduida no es correcta!");
+        return false;
     }
 }
 
@@ -50,9 +53,10 @@ function validaMatr(){
     var matrVal = document.getElementById("matricula").value;
 
     if(matrCotxe.test(matrVal)){
-        validaEmail();
+        return true;
     } else {
-        alert("La matricula ha de tindre un format correcte");
+        error2(matrVal, "La matrícula introduida no es correcta");
+        return false;
     }
 }
 
@@ -61,9 +65,10 @@ function validaEmail(){
     var emailVal = document.getElementById("email").value;
 
     if(email.test(emailVal)){
-        validaURL();
+        return true;
     } else {
-        alert("El correu electrònic ha de tindre un format correcte");
+        error2(emailVal, "El correu electrònic introduit no es correcte");
+        return false;
     }
 }
 
@@ -72,10 +77,39 @@ function validaURL(){
     var urlVal = document.getElementById("url").value;
 
     if(url.test(urlVal)){
-        mostraDades();
-        document.getElementById("form").reset();
+        return true;
     } else {
-        alert("La URL ha de tindre un valor vàlid");
+        error2(urlVal, "L'URL introduida no es correcta");
+        return false;
+    }
+}
+
+//Funció per mostrar els missatges d'error
+function error2 (element, missatge){
+    document.getElementById("missatgeError").innerHTML = missatge;
+    element.className = "error";
+    //element.focus();
+}
+
+//Funció per eliminar els errors
+function esborrarError(){
+    var formulari = document.forms[0];
+
+    for(var i=0; i < formulari.elements.length; i++){
+        formulari.elements[i].className="";
+    }
+}
+
+//Funció per comprovar que es vol enviar el formulari
+function validar(e){
+    esborrarError();
+
+    if(validaDNI() && validaTel() && validaData() && validaMatr() && validaEmail() && validaURL() && confirm("Confirma si vols enviar el formulari")){
+        mostraDades();
+        return true;
+    } else {
+        e.preventDefault();
+        return false;
     }
 }
 
