@@ -8,41 +8,41 @@
     <title>Expressions Regulars amb JS</title>
 </head>
 <body>
-    <p id="missatgeError"></p>
-
     <h1>Formulari</h1>
     <form id="form">
         <!--Camp del DNI-->
         <label>Introdueix el teu DNI:</label>
-        <input type="text" id="DNI" />
+        <input type="text" id="DNI" placeholder="123456789A" />
         <br>
         <br>
         <!--Camp del número de telèfon-->
         <label>Introdueix el teu número de telèfon:</label>
-        <input type="text" id="tel" />
+        <input type="text" id="tel" placeholder="123 456 789" />
         <br>
         <br>
         <!--Camp de la data-->
         <label>Data:</label>
-        <input type="text" id="data" />
+        <input type="text" id="data" placeholder="2021-01-01" />
         <br>
         <br>
         <!--Camp de la matrícula-->
         <label>Matrícula del cotxe:</label>
-        <input type="text" id="matricula" />
+        <input type="text" id="matricula" placeholder="1234 ABC" />
         <br>
         <br>
         <!--Camp del Email-->
         <label>Email:</label>
-        <input type="text" id="email" />
+        <input type="text" id="email" placeholder="email@example.com" />
         <br>
         <br>
         <!--Camp de URL-->
         <label>URL:</label>
-        <input type="text" id="url" />
+        <input type="text" id="url" placeholder="https://example.com" />
         <br>
         <br>
         <input type="button" name="Enviar" id="Enviar" value="Enviar" />
     </form>
+
+    <p id="missatgeError" style="color: red;"></p>
 </body>
 </html>

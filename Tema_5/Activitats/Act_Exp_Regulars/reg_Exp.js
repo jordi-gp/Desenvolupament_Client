@@ -14,9 +14,9 @@ const url = new RegExp(/^(ftp|http|https):\/\/[^ "]+\.\w{2,3}$/);
 
 //Funció per validar el DNI
 function validaDNI(){
-    var dniVal = document.getElementById("DNI").value;
+    var dniVal = document.getElementById("DNI");
 
-    if(DNI.test(dniVal)){
+    if(DNI.test(dniVal.value)){
         return true;
     } else {
         error2(dniVal, "El DNI introduit no es correcte!");
@@ -26,9 +26,9 @@ function validaDNI(){
 
 //Funció per validar el telèfon
 function validaTel(){
-    var telVal = document.getElementById("tel").value;
+    var telVal = document.getElementById("tel");
 
-    if(numTel.test(telVal)){
+    if(numTel.test(telVal.value)){
         return true;
     } else {
         error2(telVal, "El telèfon introduit no es correcte!");
@@ -38,9 +38,9 @@ function validaTel(){
 
 //Funció per validar la data
 function validaData(){
-    var telData = document.getElementById("data").value;
+    var telData = document.getElementById("data");
 
-    if(data.test(telData)){
+    if(data.test(telData.value)){
         return true;
     } else {
         error2(telData, "La data introduida no es correcta!");
@@ -50,9 +50,9 @@ function validaData(){
 
 //Funció per validar la matrícula
 function validaMatr(){
-    var matrVal = document.getElementById("matricula").value;
+    var matrVal = document.getElementById("matricula");
 
-    if(matrCotxe.test(matrVal)){
+    if(matrCotxe.test(matrVal.value)){
         return true;
     } else {
         error2(matrVal, "La matrícula introduida no es correcta");
@@ -62,9 +62,9 @@ function validaMatr(){
 
 //Funció per validar el correu electrònic
 function validaEmail(){
-    var emailVal = document.getElementById("email").value;
+    var emailVal = document.getElementById("email");
 
-    if(email.test(emailVal)){
+    if(email.test(emailVal.value)){
         return true;
     } else {
         error2(emailVal, "El correu electrònic introduit no es correcte");
@@ -74,9 +74,9 @@ function validaEmail(){
 
 //Funció per validar el la URL
 function validaURL(){
-    var urlVal = document.getElementById("url").value;
+    var urlVal = document.getElementById("url");
 
-    if(url.test(urlVal)){
+    if(url.test(urlVal.value)){
         return true;
     } else {
         error2(urlVal, "L'URL introduida no es correcta");
@@ -88,7 +88,7 @@ function validaURL(){
 function error2 (element, missatge){
     document.getElementById("missatgeError").innerHTML = missatge;
     element.className = "error";
-    //element.focus();
+    element.focus();
 }
 
 //Funció per eliminar els errors
@@ -98,6 +98,8 @@ function esborrarError(){
     for(var i=0; i < formulari.elements.length; i++){
         formulari.elements[i].className="";
     }
+
+    document.getElementById("missatgeError").innerHTML="";
 }
 
 //Funció per comprovar que es vol enviar el formulari
