@@ -8,7 +8,7 @@ function main(){
 function validar(e){
     esborraError();
 
-    if(validarNom() && validaCognoms && validaNIF && validaCorreu && confirm("Confirma si vols enviar el formulari")){
+    if(validarNom() && validaCognoms && validaNIF && validaCorreu() && confirm("Confirma si vols enviar el formulari")){
         return true;
     } else {
         e.preventDefault();
@@ -92,7 +92,8 @@ function validaNIF(){
 
 //Funció per validar el correu electrònic
 function validaCorreu(){
-    var correu = document.getElementById("correu");
+    var correu = document.getElementById("email1");
+    var correuRep = document.getElementById("email2");
 
     if(!correu.checkValidity()){
 
@@ -103,6 +104,11 @@ function validaCorreu(){
         if(correu.validity.patternMismatch){
             error2(correu, "La direcció de correu electrònic no es correcte!");
         }
+
+        if(correu.value != correuRep.value){
+            error2(correu, "Els dos correus han de coincidir!");
+        }
+
 
         return false;
     }
