@@ -13,38 +13,41 @@
             <fieldset>
                 <legend>Informació Requerida</legend>
                     <label>Nom:</label>
-                    <input type="text" minlength="2" maxlength="20" pattern="^[A-Z]{1}[a-z]{2,20}$" placeholder="Lorem" required>
+                    <input type="text" id="nom" minlength="2" maxlength="20" pattern="^[A-Z]{1}[a-z]{2,20}$" placeholder="Lorem" required>
                 <br>
                 <br>
                     <label>Cognoms:</label>
-                    <input type="text" minlength="2" maxlength="30" pattern="^[A-Z]{1}[a-z]{2,14}\s[A-Z]{1}[a-z]{2,14}$" placeholder="Lorem Ipsum" required>
+                    <input type="text" id="cognoms" minlength="2" maxlength="30" pattern="^[A-Z]{1}[a-z]{2,14}\s[A-Z]{1}[a-z]{2,14}$" placeholder="Lorem Ipsum" required>
                 <br>
                 <br>
                     <label>NIF/NIE:</label>
-                    <input type="text" minlength="9" maxlength="9" pattern="^\d{8}\s[A-Z]{1}$" placeholder="12345678 A" required>
+                    <input type="text" id="nif" minlength="10" maxlength="10" pattern="^\d{8}\s[A-Z]{1}$" placeholder="12345678 A" required>
                 <br>
                 <br>
                     <label>Correu Electrònic:</label>
-                    <input type="email" required>
+                    <input type="email" id="email" pattern="^[A-Za-z]{1}[\w.\-]{1,25}+@gmail\.com|es$" placeholder="example_email24@gmail.com" size="25" required>
                 <br>
                 <br>
                     <label>Repeteix el correu:</label>
-                    <input type="email" pattern="^[A-Za-z]{1}[\w.\-]{1,25}+@gmail\.com|es$" placeholder="example_email24@gmail.com" size="25" required>
+                    <input type="email" id="email" pattern="^[A-Za-z]{1}[\w.\-]{1,25}+@gmail\.com|es$" placeholder="example_email24@gmail.com" size="25" required>
                 <br>
                 <br>
                     <label>Nickname:</label>
-                    <input type="text" minlength="2" maxlength="8" pattern="^\w{2,8}$" required>
+                    <input type="text" id="nickname" minlength="2" maxlength="8" pattern="^\w{2,8}$" required>
                 <br>
                 <br>
                     <label>Contrasenya:</label>
-                    <input type="password" required>
+                    <input type="password" id="contrasenya" required>
                 <br>
                 <br>
                     <label>Repetir Contrasenya:</label>
-                    <input type="password" required>
+                    <input type="password" id="contrasenya" required>
                 <br>
                 <br>
-                    <input type="submit" required>
+                    <input type="submit" id="Enviar">
+                <br>
+                <br>
+                <p id="missatgeError"></p>
             </fieldset>
         </form>
     </body>
