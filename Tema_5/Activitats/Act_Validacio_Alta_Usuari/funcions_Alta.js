@@ -8,7 +8,7 @@ function main(){
 function validar(e){
     esborraError();
 
-    if(validarNom() && validaCognoms && validaNIF && validaCorreu() && confirm("Confirma si vols enviar el formulari")){
+    if(validarNom() && validaCognoms() && validaNIF() && validaCorreu() && validaNick() && confirm("Confirma si vols enviar el formulari")){
         return true;
     } else {
         e.preventDefault();
@@ -39,6 +39,7 @@ function validarNom(){
     var nom = document.getElementById("nom");
 
     if(!nom.checkValidity()){
+        
         if(nom.validity.valueMissing){
             error2(nom, "Has d'introduïr un nom!");
         }
@@ -62,13 +63,13 @@ function validaCognoms(){
             error2(cognoms, "Has d'introduïr els teus cognoms!");
         }
 
-        if(nom.validity.patternMismatch){
+        if(cognoms.validity.patternMismatch){
             error2(cognoms, "Els cognoms han de tindre entre 2 i 30 caracters, a més han d'anar separats per un espai en blanc!");
         }
-
         return false;
     }
-    return true;
+
+    return true;    
 }
 
 //Funció per validar el NIF/NIE
@@ -105,12 +106,33 @@ function validaCorreu(){
             error2(correu, "La direcció de correu electrònic no es correcte!");
         }
 
-        if(correu.value != correuRep.value){
-            error2(correu, "Els dos correus han de coincidir!");
-        }
-
+        //COMPROVACIÓ DE QUE ELS DOS CORREUS INTRODUITS SON IGUALS
+        /*if(correu.value != correuRep.value){
+            error2(correu, "Els dos correus han de coincidir");
+            console.log("e");
+        }*/
 
         return false;
     }
     return true;
 }
+
+//Funció per validar el nick d'usuari
+function validaNick(){
+    var nick = document.getElementById("nickname");
+
+    if(!nick.checkValidity()){
+
+        if(nick.validity.valueMissing){
+            error2(nick, "Has d'introduir un nick d'usuari!");
+        }
+
+        if(nick.validity.patternMismatch){
+            error2(nick, "El nick d'usuari ha de contindre entre 2 i 6 caracters (A-Z||a-z||_) i començar per una lletra majúscula!")
+        }
+
+        return false;
+    }
+    return true;
+}
+
