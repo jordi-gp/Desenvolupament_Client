@@ -1,11 +1,11 @@
 window.onload = main;
 
 function main(){
-
     mostraCaptcha();
     document.getElementById("Enviar").addEventListener("click", validar, false);
 }
 
+//Definició dels nombres aleatoris utilitzats en el captcha
 var rand1 = Math.floor(Math.random()*10);
 var rand2 = Math.floor(Math.random()*10);
 var rand3 = Math.floor(Math.random()*10);
