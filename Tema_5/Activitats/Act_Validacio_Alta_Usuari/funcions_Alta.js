@@ -1,6 +1,7 @@
 window.onload = main;
 
 function main(){
+    captcha();
     document.getElementById("Enviar").addEventListener("click", validar, false);
 }
 
@@ -104,14 +105,13 @@ function validaCorreu(){
 
         if(correu.validity.patternMismatch){
             error2(correu, "La direcció de correu electrònic no es correcte!");
-        }
-
-        //COMPROVACIÓ DE QUE ELS DOS CORREUS INTRODUITS SON IGUALS
-        /*if(correu.value != correuRep.value){
-            error2(correu, "Els dos correus han de coincidir");
-            console.log("e");
-        }*/
-
+        }  
+        return false;
+    }
+     //COMPROVACIÓ DE QUE ELS DOS CORREUS INTRODUITS SON IGUALS
+     if(correu.value != correuRep.value){
+        error2(correu, "Els dos correus han de coincidir");
+        console.log("e");
         return false;
     }
     return true;
@@ -136,3 +136,14 @@ function validaNick(){
     return true;
 }
 
+//Funció per validar el captcha de l'usuari
+function captcha(){
+
+    var numRand1 = Math.floor(Math.random() * 10);
+    var numRand2 = Math.floor(Math.random() * 10);
+
+    suma = numRand1 + numRand2;
+    resta = numRand1 - numRand2;
+
+    console.log(suma + "||" + resta);
+}

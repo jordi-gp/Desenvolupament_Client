@@ -12,36 +12,36 @@
         <form>
             <fieldset>
                 <legend>Informació Requerida</legend>
-                    <label>Nom:</label>
+                    <label>Nom:*</label>
                     <input type="text" id="nom" minlength="2" maxlength="20" pattern="^[A-Z]{1}[a-z]{2,20}$" placeholder="Lorem" required>
                 <br>
                 <br>
-                    <label>Cognoms:</label>
+                    <label>Cognoms:*</label>
                     <input type="text" id="cognoms" minlength="2" maxlength="30" pattern="^[A-Z]{1}[a-z]{2,14}\s[A-Z]{1}[a-z]{2,14}$" placeholder="Lorem Ipsum" required>
                 <br>
                 <br>
-                    <label>NIF/NIE:</label>
+                    <label>NIF/NIE:*</label>
                     <input type="text" id="nif" minlength="10" maxlength="10" pattern="^\d{8}\s[A-Z]{1}$" placeholder="12345678 A" required>
                 <br>
                 <br>
-                    <label>Correu Electrònic:</label>
+                    <label>Correu Electrònic:*</label>
                     <input type="email" id="email1" pattern="^\w{3,25}@[a-z]{5}\.\w{2,3}$" placeholder="example_email24@gmail.com" size="25" required>
                 <br>
                 <br>
-                    <label>Repeteix el correu:</label>
+                    <label>Repeteix el correu:*</label>
                     <input type="email" id="email2" placeholder="example_email24@gmail.com" size="25" required>
                 <br>
                 <br>
-                    <label>Nickname:</label>
+                    <label>Nickname:*</label>
                     <input type="text" id="nickname" minlength="2" maxlength="8" pattern="^[A-Z]{1}\w{1,7}$" placeholder="Manolo_3" required>
                 <br>
                 <br>
-                    <label>Contrasenya:</label>
-                    <input type="password1" id="contrasenya" required>
+                    <label>Contrasenya:*</label>
+                    <input type="password" id="contrasenya" required>
                 <br>
                 <br>
-                    <label>Repetir Contrasenya:</label>
-                    <input type="password2" id="contrasenya" required>
+                    <label>Repetir Contrasenya:*</label>
+                    <input type="password" id="contrasenya" required>
                 <br>
                 <br>
                     <input type="submit" id="Enviar">
