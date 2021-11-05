@@ -13,15 +13,15 @@
             <fieldset>
                 <legend>Informació Requerida</legend>
                     <label>Nom:*</label>
-                    <input type="text" id="nom" minlength="2" maxlength="20" pattern="^[A-Z]{1}[a-z]{2,20}$" placeholder="Lorem" required>
+                    <input type="text" onblur="validarNom()" id="nom" minlength="2" maxlength="20" pattern="^[A-Z]{1}[a-z]{2,20}$" placeholder="Lorem" required>
                 <br>
                 <br>
                     <label>Cognoms:*</label>
-                    <input type="text" id="cognoms" minlength="2" maxlength="30" pattern="^[A-Z]{1}[a-z]{2,14}\s[A-Z]{1}[a-z]{2,14}$" placeholder="Lorem Ipsum" required>
+                    <input type="text" onblur="validaCognoms()" id="cognoms" minlength="2" maxlength="30" pattern="^[A-Z]{1}[a-z]{2,14}\s[A-Z]{1}[a-z]{2,14}$" placeholder="Lorem Ipsum" required>
                 <br>
                 <br>
                     <label>NIF/NIE:*</label>
-                    <input type="text" id="nif" minlength="10" maxlength="10" pattern="^\d{8}\s[A-Z]{1}$" placeholder="12345678 A" required>
+                    <input type="text" onblur="validaNIF()" id="nif" minlength="10" maxlength="10" pattern="^\d{8}\s[A-Z]{1}$" placeholder="12345678 A" required>
                 <br>
                 <br>
                     <label>Correu Electrònic:*</label>
@@ -33,15 +33,26 @@
                 <br>
                 <br>
                     <label>Nickname:*</label>
-                    <input type="text" id="nickname" minlength="2" maxlength="8" pattern="^[A-Z]{1}\w{1,7}$" placeholder="Manolo_3" required>
+                    <input type="text" onblur="validaNick()" id="nickname" minlength="2" maxlength="8" pattern="^[A-Z]{1}\w{1,7}$" placeholder="Manolo_3" required>
                 <br>
                 <br>
                     <label>Contrasenya:*</label>
-                    <input type="password" id="contrasenya" required>
+                    <input type="password" id="password1" required>
                 <br>
                 <br>
                     <label>Repetir Contrasenya:*</label>
-                    <input type="password" id="contrasenya" required>
+                    <input type="password" id="password2" required>
+                <br>
+                <br>
+                    <label>Captcha</label>
+                <br>
+                <br>
+                    <label id="operacioSum" ></label>
+                    <input type="text" id="solucioSum" size="5" required>
+                <br>
+                <br>
+                    <label id="operacioRest"></label>
+                    <input type="text" id="solucioRest" size="5" required>
                 <br>
                 <br>
                     <input type="submit" id="Enviar">

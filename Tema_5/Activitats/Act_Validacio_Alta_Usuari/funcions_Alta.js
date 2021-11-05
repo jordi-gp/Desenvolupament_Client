@@ -1,15 +1,21 @@
 window.onload = main;
 
 function main(){
-    captcha();
+
+    mostraCaptcha();
     document.getElementById("Enviar").addEventListener("click", validar, false);
 }
+
+var rand1 = Math.floor(Math.random()*10);
+var rand2 = Math.floor(Math.random()*10);
+var rand3 = Math.floor(Math.random()*10);
+var rand4 = Math.floor(Math.random()*10);
 
 //Funció per validar el formulari
 function validar(e){
     esborraError();
 
-    if(validarNom() && validaCognoms() && validaNIF() && validaCorreu() && validaNick() && confirm("Confirma si vols enviar el formulari")){
+    if(validarNom() && validaCognoms() && validaNIF() && validaCorreu() && validaNick() && validaPassword() && captcha1() && captcha2() && confirm("Confirma si vols enviar el formulari")){
         return true;
     } else {
         e.preventDefault();
@@ -51,6 +57,7 @@ function validarNom(){
 
         return false;
     }
+    esborraError();
     return true;
 }
 
@@ -67,9 +74,10 @@ function validaCognoms(){
         if(cognoms.validity.patternMismatch){
             error2(cognoms, "Els cognoms han de tindre entre 2 i 30 caracters, a més han d'anar separats per un espai en blanc!");
         }
+
         return false;
     }
-
+    esborraError();
     return true;    
 }
 
@@ -89,6 +97,7 @@ function validaNIF(){
 
         return false;
     }
+    esborraError();
     return true;
 }
 
@@ -105,15 +114,16 @@ function validaCorreu(){
 
         if(correu.validity.patternMismatch){
             error2(correu, "La direcció de correu electrònic no es correcte!");
-        }  
+        }
+
         return false;
     }
-     //COMPROVACIÓ DE QUE ELS DOS CORREUS INTRODUITS SON IGUALS
-     if(correu.value != correuRep.value){
-        error2(correu, "Els dos correus han de coincidir");
-        console.log("e");
+     //comprovació de que els dos correus introduits són iguals
+    if(correu.value != correuRep.value){
+        error2(correu, "Els dos correus han de coincidir!");
         return false;
     }
+
     return true;
 }
 
@@ -133,17 +143,95 @@ function validaNick(){
 
         return false;
     }
+    esborraError();
     return true;
 }
 
-//Funció per validar el captcha de l'usuari
-function captcha(){
+//Funció per validar la contrasenya de l'usuari
+function validaPassword(){
+    var pass1 = document.getElementById("password1");
+    var pass2 = document.getElementById("password2");
 
-    var numRand1 = Math.floor(Math.random() * 10);
-    var numRand2 = Math.floor(Math.random() * 10);
+    if(!pass1.checkValidity()){
 
-    suma = numRand1 + numRand2;
-    resta = numRand1 - numRand2;
+        if(pass1.validity.valueMissing){
+            error2(pass1, "Has d'introduir una contrasenya!");
+        }
 
-    console.log(suma + "||" + resta);
+        if(pass1.validity.patternMismatch()){
+            error2(pass1, "La contrasenya introduida no compleix els requeriments mínims establerts!");
+        }
+
+        return false;
+    }
+
+    //Comprovació de que les dos contrasenyes son iguals
+    if(pass1.value != pass2.value){
+        error2(pass1, "Les dos contrasenyes han de coincidir!");
+        return false;
+    }
+    esborraError();
+    return true;
+}
+
+//Funció per mostrar el camp de captcha
+function mostraCaptcha(){
+    //Captcha amb operació de suma
+    var opSum = document.getElementById("operacioSum");
+    var txt1 = document.createTextNode("Indica el resultat de la seguent operacio => " + rand1 + "+" + rand2 + " = ");
+    opSum.appendChild(txt1);
+
+    //Captcha amb operació de resta
+    var opRest = document.getElementById("operacioRest");
+    var txt2 = document.createTextNode("Indica el resultat de la seguent operacio => " + rand3 + "-" + rand4 + " = ");
+    opRest.appendChild(txt2);
+}
+
+//Funcions per validar el captcha de l'usuari
+
+//Validació amb operació de suma
+function captcha1(){
+
+    var solSum = document.getElementById("solucioSum");
+    var sum = rand1 + rand2;
+
+    if(!solSum.checkValidity()){
+        if(solSum.validity.valueMissing){
+            error2(solSum, "El camp està buit!");
+        }
+
+        return false;
+    }
+
+    if(parseInt(solSum.value) != sum){
+        error2(solSum, "El resultat introduit no es el correcte!");
+        return false;
+    }
+
+    esborraError();
+    return true;
+}
+
+//Validació amb operació de resta
+function captcha2(){
+
+    var solRest = document.getElementById("solucioRest");
+    var rest = rand3 - rand4;
+
+    if(!solRest.checkValidity()){
+        if(solRest.validity.valueMissing){
+            error2(solRest, "El camp està buit!");
+        }
+
+        return false;
+    }
+
+    if(parseInt(solRest.value) != rest){
+        error2(solRest, "El resultat introduit no es el correcte!");
+        console.log(rest);
+        return false;
+    }
+
+    esborraError();
+    return true;
 }
