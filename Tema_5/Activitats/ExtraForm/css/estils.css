@@ -27,10 +27,11 @@ main {
     display: none;
 }
 
-#capaError {
+/*¿?*/
+/*#capaError {
     background-color:  : red;
     color= blank:
-}
+}*/
 
 .error {
     border:1px solid red;
