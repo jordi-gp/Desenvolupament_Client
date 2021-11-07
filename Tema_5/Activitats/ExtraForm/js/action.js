@@ -1,21 +1,23 @@
 window.onload = main;
 
 function main(){
-    assignaId();
+    //assignaId();
+    creapErr();
     document.getElementById("tipo").addEventListener("change", canviaImatge2);
     document.getElementById("mostrarDescripcio").addEventListener("click", mostraDescripcio);
+    document.getElementById("enviar").addEventListener("click", validar);
 }
 
-const valNumSerie = new RegExp(/^\d{3}[A-Z]{4}([1-2]{1}|[A]{1})$/)
+const valNumSerie = new RegExp(/^\d{3}[A-Z]{4}([1-2]{1}|[A]{1})$/);
 
 //Assignació de id's per a les opcions
-function assignaId(){
+/*function assignaId(){
     var options = document.getElementsByTagName("option");
 
     for(var i=0; i < options.length; i++){
         options[i].setAttribute("id", i);
     }
-}
+}*/
 
 //FORMA DE CANVIAR L'IMATGE SELECCIONADA 1
 /*function canviaImatge(){
@@ -50,5 +52,63 @@ function mostraDescripcio(){
     campDesc.style.display = "block";
 }
 
-//APARTAT DE VALIDACIÓ DEL FORMULARI
+//Validació del camp Série
+function validaNumSerie(){
+    esborraError();
 
+    var numSer = document.getElementById("serie");
+    
+    if(valNumSerie.test(numSer.value)){
+        return true;
+    } else {
+        error2(numSer, "El número de serie introduït no es correcte!");
+        return false;
+    }
+}
+
+
+//APARTAT DE VALIDACIÓ DEL FORMULARI
+//Creació del camp <p> per mostrar errors
+function creapErr(){
+    var divErr = document.getElementById("capaError");
+    var errCont = document.createElement("p");
+
+    errCont.setAttribute("id", "missatgeError");
+    divErr.appendChild(errCont);
+
+    var  numSer = document.getElementById("serie");
+    numSer.setAttribute("required", "");
+}
+
+function error2(element, missatge){
+    var pErr = document.getElementById("missatgeError");
+    var errCont = document.createTextNode(missatge);
+
+    pErr.appendChild(errCont);
+    element.className = "error";
+    element.focus();
+}
+
+function esborraError(){
+    var formulari = document.forms[0];
+
+    for(var i=0; i < formulari.elements.length; i++){
+        formulari.elements[i].className="";
+    }
+
+    var msgErr = document.getElementById("missatgeError");
+    var contMsgErr = document.createTextNode("");
+
+    msgErr.replaceChildren(contMsgErr);
+}
+
+function validar(e){
+    esborraError();
+
+    if(validaNumSerie() && confirm("Vols enviar l'informe?")){
+        return true;
+    } else {
+        e.preventDefault();
+        return false;
+    }
+}

@@ -33,6 +33,10 @@ main {
     color= blank:
 }*/
 
+#missatgeError{
+    color: red;
+}
+
 .error {
     border:1px solid red;
 }
