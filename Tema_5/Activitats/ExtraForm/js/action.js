@@ -2,10 +2,9 @@ window.onload = main;
 
 function main(){
     //assignaId();
-    creapErr();
     document.getElementById("tipo").addEventListener("change", canviaImatge2);
     document.getElementById("mostrarDescripcio").addEventListener("click", mostraDescripcio);
-    document.getElementById("descripcioVal").addEventListener("input", contaPar);
+    document.getElementsByName("descripcio")[0].addEventListener("input", contaPar);
     document.getElementById("enviar").addEventListener("click", validar);
 }
 
@@ -55,43 +54,34 @@ function mostraDescripcio(){
 
 //Validació del camp Série
 function validaNumSerie(){
-    esborraError();
+    
 
     var numSer = document.getElementById("serie");
     
-    if(valNumSerie.test(numSer.value)){
-        return true;
-    } else {
+    debugger
+    if(numSer.value == " "){
+        error2(numSer, "Has d'emplenar aquest camp obligatoriament!");
+        return false;
+    } else if(!valNumSerie.test(numSer.value)){
         error2(numSer, "El número de serie introduït no es correcte!");
         return false;
+    } else {
+        return true;
     }
+    
 }
 
 //Validació del camp textArea
 function contaPar(){
-    var txtAr = document.getElementById("descripcioVal").value;
-    
-    var arrTxt = txtAr.split(" ");
-    
-    console.log(arrTxt.length);
+    var a = document.getElementsByName("descripcio")[0].value;
+    var b = a.split(" ");
+    console.log(b.length);
 
 }
 
 //APARTAT DE VALIDACIÓ DEL FORMULARI
-//Creació del camp <p> per mostrar errors
-function creapErr(){
-    var divErr = document.getElementById("capaError");
-    var errCont = document.createElement("p");
-
-    errCont.setAttribute("id", "missatgeError");
-    divErr.appendChild(errCont);
-
-    //var  numSer = document.getElementById("serie");
-    //numSer.setAttribute("required", "");
-}
-
 function error2(element, missatge){
-    var pErr = document.getElementById("missatgeError");
+    var pErr = document.getElementById("capaError");
     var errCont = document.createTextNode(missatge);
 
     pErr.appendChild(errCont);
@@ -106,10 +96,10 @@ function esborraError(){
         formulari.elements[i].className="";
     }
 
-    var msgErr = document.getElementById("missatgeError");
+    var msgErr = document.getElementById("capaError");
     var contMsgErr = document.createTextNode("");
 
-    msgErr.replaceChildren(contMsgErr);
+    msgErr.replace(contMsgErr);
 }
 
 function validar(e){

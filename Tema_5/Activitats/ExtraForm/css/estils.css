@@ -27,14 +27,9 @@ main {
     display: none;
 }
 
-/*¿?*/
-/*#capaError {
-    background-color:  : red;
-    color= blank:
-}*/
-
-#missatgeError{
-    color: red;
+#capaError {
+    background-color: red;
+    color: black;
 }
 
 .error {
