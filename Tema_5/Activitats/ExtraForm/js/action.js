@@ -5,6 +5,7 @@ function main(){
     creapErr();
     document.getElementById("tipo").addEventListener("change", canviaImatge2);
     document.getElementById("mostrarDescripcio").addEventListener("click", mostraDescripcio);
+    document.getElementById("descripcioVal").addEventListener("input", contaPar);
     document.getElementById("enviar").addEventListener("click", validar);
 }
 
@@ -31,7 +32,7 @@ const valNumSerie = new RegExp(/^\d{3}[A-Z]{4}([1-2]{1}|[A]{1})$/);
     } else if(idElem == 1){
         foto.setAttribute("src", "img/oficina.jpg");
     } else if(idElem == 2){
-        foto.setAttribute("src", "img/producion.jpg");
+        foto.setAttribute("src", "img/produccion.jpg");
     }
 }*/
 
@@ -66,6 +67,13 @@ function validaNumSerie(){
     }
 }
 
+//Validació del camp textArea
+function contaPar(){
+    var txtAr = document.getElementsByName("descripcio");
+    console.log(txtAr.value.length);
+    
+
+}
 
 //APARTAT DE VALIDACIÓ DEL FORMULARI
 //Creació del camp <p> per mostrar errors
