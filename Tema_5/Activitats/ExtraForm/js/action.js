@@ -58,8 +58,7 @@ function validaNumSerie(){
 
     var numSer = document.getElementById("serie");
     
-    debugger
-    if(numSer.value == " "){
+    if(numSer.value == ""){
         error2(numSer, "Has d'emplenar aquest camp obligatoriament!");
         return false;
     } else if(!valNumSerie.test(numSer.value)){
@@ -71,7 +70,7 @@ function validaNumSerie(){
     
 }
 
-//Validació del camp textArea
+//Funció per contar el nombre de paraules del textarea
 function contaPar(){
     var a = document.getElementsByName("descripcio")[0].value;
     var b = a.split(" ");
@@ -81,10 +80,10 @@ function contaPar(){
 
 //APARTAT DE VALIDACIÓ DEL FORMULARI
 function error2(element, missatge){
-    var pErr = document.getElementById("capaError");
+    var err = document.getElementById("capaError");
     var errCont = document.createTextNode(missatge);
 
-    pErr.appendChild(errCont);
+    err.appendChild(errCont);
     element.className = "error";
     element.focus();
 }
@@ -99,7 +98,7 @@ function esborraError(){
     var msgErr = document.getElementById("capaError");
     var contMsgErr = document.createTextNode("");
 
-    msgErr.replace(contMsgErr);
+    msgErr.replaceChildren(contMsgErr);
 }
 
 function validar(e){
