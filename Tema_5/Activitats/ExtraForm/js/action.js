@@ -69,9 +69,11 @@ function validaNumSerie(){
 
 //Validació del camp textArea
 function contaPar(){
-    var txtAr = document.getElementsByName("descripcio");
-    console.log(txtAr.value.length);
+    var txtAr = document.getElementById("descripcioVal").value;
     
+    var arrTxt = txtAr.split(" ");
+    
+    console.log(arrTxt.length);
 
 }
 
@@ -84,8 +86,8 @@ function creapErr(){
     errCont.setAttribute("id", "missatgeError");
     divErr.appendChild(errCont);
 
-    var  numSer = document.getElementById("serie");
-    numSer.setAttribute("required", "");
+    //var  numSer = document.getElementById("serie");
+    //numSer.setAttribute("required", "");
 }
 
 function error2(element, missatge){
