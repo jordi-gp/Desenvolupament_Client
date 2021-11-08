@@ -50,11 +50,17 @@ function canviaImatge2(){
 function mostraDescripcio(){
     var campDesc = document.getElementById("fDescripcio");
     campDesc.style.display = "block";
+
+    var campDesVal = document.getElementsByTagName("textarea");
+    campDesVal[0].setAttribute("required", "");
+
+    var p = document.createElement("p");
+    p.setAttribute("id", "numPar");
+    campDesc.appendChild(p);
 }
 
 //Validació del camp Série
 function validaNumSerie(){
-    
 
     var numSer = document.getElementById("serie");
     
@@ -73,9 +79,29 @@ function validaNumSerie(){
 //Funció per contar el nombre de paraules del textarea
 function contaPar(){
     var a = document.getElementsByName("descripcio")[0].value;
-    var b = a.split(" ");
-    console.log(b.length);
+    var b = document.getElementsByName("fDescripcio");
 
+    //Substitució dels salts de línea
+    a = a.replace(/\r?\n/g, " ");
+    //Substitució dels espais separats per un sol
+    a = a.replace(/[]+/g, " ");
+    //Es lleven els espais al principi i al final
+    a = a.replace(/^ /, "");
+    a = a.replace(/ $/, "");
+    //Substitució de punts i comes per espais en blanc
+    a = a.replace(/[,]/g, " ");
+    a = a.replace(/[.]/g, " ");
+
+    var b = a.split(" ");
+
+    if(a == ""){
+        b.length = 0;
+    }
+
+    var p = document.getElementById("numPar");
+    var pVal = document.createTextNode("Número de paraules: "+b.length);
+
+    p.replaceChildren(pVal);
 }
 
 //APARTAT DE VALIDACIÓ DEL FORMULARI
