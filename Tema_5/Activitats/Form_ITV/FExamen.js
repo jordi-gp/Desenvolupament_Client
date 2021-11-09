@@ -3,10 +3,8 @@ window.onload = main;
 function main(){
     //mostraEstacions();
     afigEvent();
+    document.getElementById("Enviar").addEventListener("click", validar, false);
 }
-
-//Declaració de les expressions regulars utilitzades
-const expRegMatr = new RegExp(/^([A-Z]{1}[0-9]{4}[A-Z]{2})|([0-9]{4}[A-Z]{3})|([A-Z]{1}[0-9]{4}[A-Z]{3})$/);
 
 //CAMP D'ESTACIÓ D'ITV
 function afigEvent(){
@@ -43,5 +41,52 @@ function mostraEstacions(){
 function validaMatricula(){
     var matrVal = document.getElementById("matricula");
 
+    if(!matrVal.checkValidity()){
+        if(matrVal.validity.valueMissing){
+            error2(matrVal, "Aquest camp no pot estar buit!");
+        }
+        if(matrVal.validity.patternMismatch){
+            error2(matrVal, "El valor introduït no es correcte!");
+        }
+        return false;
+    }
+    esborrarError();
+    return true;
 
 }
+
+//CAMP DELS ERRORS
+function error2(element, missatge){
+    var error = document.getElementById("missatgeError");
+    var errCont = document.createTextNode(missatge);
+
+    error.appendChild(errCont);
+    element.className = "error";
+    element.focus();
+}
+
+function esborrarError(){
+    var formulari = document.forms[0];
+
+    for(var i=0; i < formulari.elements.length; i++){
+        formulari.elements[i].className = "";
+    }
+
+    var msgError = document.getElementById("missatgeError");
+    var contMsgErr = document.createTextNode("");
+
+    msgError.replaceChildren(contMsgErr);
+}
+
+//CAMP DE VALIDACIÓ
+function validar(e){
+    esborrarError();
+
+    if(validaMatricula() && confirm("Desitges realitzar la reserva?")){
+        return true;
+    } else {
+        e.preventDefault();
+        return false;
+    }
+}
+

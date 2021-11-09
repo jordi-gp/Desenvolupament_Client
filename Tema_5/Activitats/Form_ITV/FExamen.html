@@ -33,7 +33,7 @@
                  <fieldset>
                     <legend>Vehicle</legend>
                     <label>Matricula</label>
-                    </br><input type="text" id="matricula" required>
+                    </br><input type="text" id="matricula" pattern="^([A-Z]{1}[0-9]{4}[A-Z]{2})|([0-9]{4}[A-Z]{3})|([A-Z]{1}[0-9]{4}[A-Z]{3})$" required>
                 </br><label class="formInfo"> La matrícula no puede contener espacios ni símbolos. Ejemplos: A1234BB, 1234BBB, B1234BBB</label>
                     </br><label>Tipus Combustible</label>
                     </br><select id="conbustible">
