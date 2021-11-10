@@ -2,8 +2,9 @@ window.onload = main;
 
 function main(){
     afigEvent();
-    afigEvent2();
-    validaEstacio();
+    mostraHores();
+    validaData();
+    document.querySelector("input[type='date']").addEventListener("change", validaData);
     document.getElementById("Enviar").addEventListener("click", validar, false);
 }
 
@@ -13,14 +14,6 @@ function afigEvent(){
 
     for(var i=0; i < radButtons.length; i++){
         radButtons[i].addEventListener("change", mostraEstacions);
-    }
-}
-
-function afigEvent2(){
-    var radButtons = document.getElementsByName("provincia");
-
-    for(var i=0; i < radButtons.length; i++){
-        radButtons[i].addEventListener("change", validaEstacio);
     }
 }
 
@@ -48,15 +41,14 @@ function mostraEstacions(){
 
 //CAMP DE VALIDACIÓ DE PROVÍNCIA I ESTACIÓ
 function validaEstacio(){
-    var estacio = document.getElementsByName("provincia");
+    var estacio = document.getElementById("estacio");
 
-    for(var i=0; i < estacio.length; i++){
-        if(estacio[i].checked == true){
-            console.log(estacio[i].value);
-        } else {
-            console.log("Has de seleccionar una estació");
+        if(estacio[estacio.selectedIndex].value == "Selecciona una opció"){
+            error2(estacio, "Has de seleccionar una estació!");
+            return false;
         }
-    }
+    esborrarError();
+    return true;
 }
 
 //CAMP DE VALIDACIÓ DE MATRICULA
@@ -72,9 +64,8 @@ function validaMatricula(){
         }
         return false;
     }
-    esborrarError();
+    //esborrarError();
     return true;
-
 }
 
 //CAMP DE VALIDACIÓ DEL TIPUS DE COMBUSTIBLE
@@ -88,16 +79,65 @@ function validaCombustible(){
     return true;
 }
 
+//MOSTRAR LA DATA QUE ES POT SELECCIONAR
+function mostraHores(){
+    var selHora = document.getElementById("hora");
+    
+    for(var i=7; i < 20; i++){
+        for(var j=0; j < 60; j+=15){
+            var mostraI = i;
+            var mostraJ = j;
+
+            if(i < 10){
+                mostraI = "0"+i;
+            }
+
+            if(j == 0){
+                mostraJ = j+"0";
+            }
+            
+            var opHora = document.createElement("option");
+            var horaVal = document.createTextNode(mostraI+":"+mostraJ);
+
+            opHora.appendChild(horaVal);
+            selHora.appendChild(opHora);
+        }
+    }
+}
+
+//CAMP DE VALIDACIÓ DE L'HORA
+function validaHores(){
+    var horaSel = document.getElementById("hora");
+
+    if(horaSel[horaSel.selectedIndex].value == "00:00"){
+        error2(horaSel, "Has de seleccionar un hora correcta!");
+        return false;
+    }
+    return true;
+}
+
+//CAMP DE VALIDACIÓ DE LA DATA
+function validaData(){
+    var temps = document.querySelector("input[type='date']");
+
+    var data = new Date(temps.value);
+
+    console.log(temps.value);
+    console.log(data.getDate());
+
+
+}
+
 //CAMP DE VALIDACIÓ DE LES DADES PERSONALS
 function validaNom(){
     var nom = document.getElementById("nom");
 
     if(!nom.checkValidity()){
         if(nom.validity.valueMissing){
-            error2(nom, "Aquest camp ha d'estar emplenat de forma obligatòria!");
+            error2(nom, "El camp del nom i cognoms no pot estar buit!");
         }
         if(nom.validity.patternMismatch){
-            error2(nom, "El nom introduit no es correcte!");
+            error2(nom, "El nom i cognoms introduits no es correcte!");
         }
         return false;
     }
@@ -109,7 +149,7 @@ function validaTelefon(){
 
     if(!telefon.checkValidity()){
         if(telefon.validity.valueMissing){
-            error2(telefon, "Aquest camp ha de ser emplenat de forma obligatòria!");
+            error2(telefon, "El camp del telèfon no pot estar buit!");
         }
         if(telefon.validity.patternMismatch){
             error2(telefon, "El número de telèfon introduït no es correcte!");
@@ -124,23 +164,26 @@ function validaEmail(){
 
     if(!email.checkValidity()){
         if(email.validity.valueMissing){
-            error2(email, "Aquest camp ha d'estar emplenat de forma obligatòria!");
+            error2(email, "El camp del correu electrònic no pot estar buit!");
         }
         if(email.validity.patternMismatch){
             error2(email, "El email introduït no es correcte!");
         }
     }
+    return true;
 }
 
 //VALIDACIÓ TERMES I CONDICIONS
 function validaTermCond(){
     var accept = document.getElementById("protecioDades");
 
-    if(accept.checked == true){
-        //return true
-    } else {
-        //return false
+    if(!accept.checkValidity()){
+        if(accept.checked != true){
+            error2(accept, "Has d'acceptar els termes i condicions!");
+        }
+        return false;
     }
+    return true;
 }
 
 //CAMP DELS ERRORS
@@ -150,6 +193,7 @@ function error2(element, missatge){
 
     error.appendChild(errCont);
     element.className = "error";
+    location.href = "#miModal";
     element.focus();
 }
 
@@ -170,7 +214,7 @@ function esborrarError(){
 function validar(e){
     esborrarError();
 
-    if(validaMatricula() && validaCombustible() && confirm("Desitges realitzar la reserva?")){
+    if(/*validaMatricula() && validaCombustible() && validaNom() && validaTelefon() &&*/ validaHores() && confirm("Desitges realitzar la reserva?")){
         return true;
     } else {
         e.preventDefault();
