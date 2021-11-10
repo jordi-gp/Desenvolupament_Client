@@ -3,8 +3,6 @@ window.onload = main;
 function main(){
     afigEvent();
     mostraHores();
-    validaData();
-    document.querySelector("input[type='date']").addEventListener("change", validaData);
     document.getElementById("Enviar").addEventListener("click", validar, false);
 }
 
@@ -43,10 +41,10 @@ function mostraEstacions(){
 function validaEstacio(){
     var estacio = document.getElementById("estacio");
 
-        if(estacio[estacio.selectedIndex].value == "Selecciona una opció"){
-            error2(estacio, "Has de seleccionar una estació!");
-            return false;
-        }
+    if(estacio[estacio.selectedIndex].value == "Selecciona una opció"){
+        error2(estacio, "Has de seleccionar una estació!");
+        return false;
+    }
     esborrarError();
     return true;
 }
@@ -64,7 +62,7 @@ function validaMatricula(){
         }
         return false;
     }
-    //esborrarError();
+    esborrarError();
     return true;
 }
 
@@ -76,6 +74,37 @@ function validaCombustible(){
         error2(combus, "Has de seleccionar un tipus de combustible almenys!");
         return false;
     }
+    esborrarError();
+    return true;
+}
+
+//CAMP DE VALIDACIÓ DE LA DATA
+function validaData(){
+    var temps = document.querySelector("input[type='date']");
+    var dataAct = new Date();
+    var dataMax = new Date();
+    const contTemps = 30;
+
+    //Data actual més el període de temps del que es disposa per solicitar una cita
+    dataMax.setDate(dataAct.getDate() + contTemps);
+    
+    //Data seleccionada
+    var dataSel = new Date(temps.value);
+
+    if(temps.value == ""){
+        error2(temps, "Has de seleccionar una data");
+        return false;
+    } else if(dataSel > dataMax){
+        error2(temps, "La data seleccionada ha de ser dins del rang de 30 díes desde la data actual!");
+        return false;
+    } else if(dataSel < dataAct){
+        error2(temps, "La data seleccionada no pot ser anterior a la data actual!");
+        return false;
+    } else if(dataSel.getDay() == 0){
+        error2(temps, "Els diumenges no es treballa!");
+        return false;
+    }
+    esborrarError();
     return true;
 }
 
@@ -113,19 +142,8 @@ function validaHores(){
         error2(horaSel, "Has de seleccionar un hora correcta!");
         return false;
     }
+    esborrarError();
     return true;
-}
-
-//CAMP DE VALIDACIÓ DE LA DATA
-function validaData(){
-    var temps = document.querySelector("input[type='date']");
-
-    var data = new Date(temps.value);
-
-    console.log(temps.value);
-    console.log(data.getDate());
-
-
 }
 
 //CAMP DE VALIDACIÓ DE LES DADES PERSONALS
@@ -141,6 +159,7 @@ function validaNom(){
         }
         return false;
     }
+    esborrarError();
     return true;
 }
 
@@ -156,6 +175,7 @@ function validaTelefon(){
         }
         return false;
     }
+    esborrarError();
     return true;
 }
 
@@ -170,6 +190,7 @@ function validaEmail(){
             error2(email, "El email introduït no es correcte!");
         }
     }
+    esborrarError();
     return true;
 }
 
@@ -183,6 +204,7 @@ function validaTermCond(){
         }
         return false;
     }
+    esborrarError();
     return true;
 }
 
@@ -214,7 +236,7 @@ function esborrarError(){
 function validar(e){
     esborrarError();
 
-    if(/*validaMatricula() && validaCombustible() && validaNom() && validaTelefon() &&*/ validaHores() && confirm("Desitges realitzar la reserva?")){
+    if(validaEstacio() && validaMatricula() && validaCombustible() && validaData() && validaHores() && validaNom() && validaTelefon() && validaEmail() && validaTermCond() && confirm("Desitges realitzar la reserva?")){
         return true;
     } else {
         e.preventDefault();
