@@ -1,4 +1,3 @@
-//
 var test = [{
     "pregunta" : "¿Que hace setTimeout?" ,
     "respostes" : ["a) Ejecuta una función transcurridos un tiempo determinado",
