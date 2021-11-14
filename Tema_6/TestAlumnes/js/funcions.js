@@ -6,9 +6,13 @@ function main(){
 
 var contador = 0;
 var acerts = 0;
+var reinici = true;
 
 //Funció per iniciar el programa
 function iniciar(){
+    if(reinici = true){
+        
+    }
     $("#iniciar").click(function(){
         mostraPregunta();
         mostraRespostes();
@@ -57,8 +61,6 @@ function canviaPregunta(){
 
 //Funció per validar la pregunta correcta
 function validaPregunta(){
-    //console.log(event.target.id);
-    //console.log(test[contador-1].acert);
     if(event.target.id == test[contador - 1].acert){
         acerts++;
         $("#acerts").text(acerts);
