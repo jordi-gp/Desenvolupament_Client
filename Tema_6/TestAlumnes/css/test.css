@@ -57,3 +57,10 @@ hr{
   padding: 10px;
   display: none;
 }
+
+#resultat {
+  padding: 5px;
+  background-color: #c1ce9c;
+  border: solid 1px #c3c3c3;
+  display: none;
+}
