@@ -10,9 +10,6 @@ var reinici = true;
 
 //Funció per iniciar el programa
 function iniciar(){
-    if(reinici = true){
-        
-    }
     $("#iniciar").click(function(){
         mostraPregunta();
         mostraRespostes();
@@ -70,6 +67,7 @@ function validaPregunta(){
     }
 }
 
+//Mostra el resultat i calcula la nota
 function resultat(){
     var nota = acerts/5;
     $("#resultat").append("Has acertat un total de "+acerts+" preguntes sobre "+contador+"<br>");
