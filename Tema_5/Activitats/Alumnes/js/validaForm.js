@@ -8,21 +8,24 @@ function main(){
 function validaNom(){
     var noms = document.getElementById("nombre");
 
+    esborraError();
+
     if(!noms.checkValidity()){
         if(noms.validity.ValueMissing){
-            //console.error("A")
             error2(noms, "Has d'introduir el teu nom i cognoms!");
         } else if(noms.validity.patternMissmatch){
             error2(noms, "El nom/cognoms introduït no es correcte!");
         }
         return false;
     }
-    esborraError();
+    
     return true;
 }
 
 function validaCorreu(){
     var correu = document.getElementById("email");
+
+    esborraError();
 
     if(!correu.checkValidity()){
         if(correu.validity.ValueMissing){
@@ -32,12 +35,14 @@ function validaCorreu(){
         }
         return false;
     }
-    esborraError();
+    
     return true;
 }
 
 function validaTelefon(){
     var telefon = document.getElementById("telefono");
+
+    esborraError();
 
     if(!telefon.checkValidity()){
         if(telefon.validity.ValueMissing){
@@ -47,18 +52,18 @@ function validaTelefon(){
         }
         return false;
     }
-    esborraError();
+    
     return true;
 }
 
 //CAMP DELS ERRORS
 function error2(element, missatge){
-    var error = document.getElementById("mensajeError");
-    var errCont = document.createTextNode(missatge);
-
-    error.appendChild(errCont);
+    document.getElementById("mensajeError").innerHTML = missatge;
     element.className = "text-danger";
     element.focus();
+    element.focus();
+
+    console
 }
 
 function esborraError(){
@@ -68,10 +73,10 @@ function esborraError(){
         formulari.elements[i].className = "";
     }
 
-    var missatgeError = document.getElementById("mensajeError");
+    /*var missatgeError = document.getElementById("mensajeError");
     var contMsgerr = document.createTextNode("");
 
-    missatgeError.replaceChildren(contMsgerr);
+    missatgeError.replaceChildren(contMsgerr);+*/
 }
 
 //FUNCIÓ PER VALIDAR EL FORMULARI
@@ -81,7 +86,6 @@ function valida(e){
 
     if(validaNom() && validaCorreu() && validaTelefon()){
         window.location = url;
-        console.log("a");
         return true;
     } else {
         e.preventDefault();

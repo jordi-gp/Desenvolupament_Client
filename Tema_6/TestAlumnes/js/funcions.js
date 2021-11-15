@@ -1,20 +1,41 @@
 $(document).ready(main);
     
 function main(){
-    iniciar();
+    $("#iniciar").click(iniciar);
 }
 
 var contador = 0;
 var acerts = 0;
-var reinici = true;
+var reinici = false;
 
 //Funció per iniciar el programa
-function iniciar(){
-    $("#iniciar").click(function(){
+function iniciar(){ 
+    //debugger
+    if(reinici == true){
+        reiniciar();
+    } else {
         mostraPregunta();
         mostraRespostes();
         $("#panel").show(1500);
-    });
+        reinici = true;
+    }
+}
+
+function reiniciar(){
+    $("#panel").hide(1500);
+    $("#pregunta").empty();
+    $("#respostes").empty();
+    $("#acerts").text("0");
+    $("#total").text("0");
+    $("#resultat").hide(1500);
+
+    contador = 0;
+    acerts = 0;
+
+    reinici = false;
+    $("#panel").show(1500);
+    iniciar();
+    
 }
 
 //Funció per mostrar la pregunta
@@ -52,7 +73,6 @@ function canviaPregunta(){
         }
 
         validaPregunta();
-        //resultat();
     });
 }
 
