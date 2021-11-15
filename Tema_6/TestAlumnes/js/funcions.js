@@ -58,6 +58,7 @@ function canviaPregunta(){
 
 //Funció per validar la pregunta correcta
 function validaPregunta(){
+    console.log(contador);
     if(event.target.id == test[contador - 1].acert){
         acerts++;
         $("#acerts").text(acerts);
@@ -69,7 +70,16 @@ function validaPregunta(){
 
 //Mostra el resultat i calcula la nota
 function resultat(){
-    var nota = acerts/5;
-    $("#resultat").append("Has acertat un total de "+acerts+" preguntes sobre "+contador+"<br>");
-    $("#resultat").append("La teva nota es de "+nota);
+    var totAcerts = acerts + 1;
+    const numPregunt = 5;
+    var nota = (totAcerts/numPregunt)*10;
+    $("#resultat").append("Has acertat un total de "+totAcerts+" preguntes sobre "+contador+"<br>");
+    if(nota >= 5){
+        $("#resultat").append("Enhorabona has aprovat!<br>");
+        $("#resultat").append("La teva nota es un "+nota+" sobre 10.");
+    } else {
+        $("#resultat").append("Has suspés!<br>");
+        $("#resultat").append("La teva nota es un "+nota+" sobre 10.");
+    }
+    
 }
