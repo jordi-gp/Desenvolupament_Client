@@ -8,75 +8,69 @@ function main(){
 function validaNom(){
     var noms = document.getElementById("nombre");
 
-    esborraError();
-
     if(!noms.checkValidity()){
         if(noms.validity.ValueMissing){
-            error2(noms, "Has d'introduir el teu nom i cognoms!");
+            error2(noms, "Debes introducir tu nombre y apellidos!");
         } else if(noms.validity.patternMissmatch){
-            error2(noms, "El nom/cognoms introduït no es correcte!");
+            error2(noms, "El nombre o apellidos introducido no es correcto!");
         }
         return false;
     }
-    
+    esborraError();    
     return true;
 }
 
 function validaCorreu(){
     var correu = document.getElementById("email");
 
-    esborraError();
-
     if(!correu.checkValidity()){
         if(correu.validity.ValueMissing){
-            error2(correu, "Has d'introduïr una direcció de correu electrònic!");
+            error2(correu, "Debes introducir tu correo electrònico!");
         } else if(correu.validity.patternMissmatch){
-            error2(correu, "El correu introduït no compleix amb els requisits mínims!");
+            error2(correu, "El correu electrònico introducido no es correcto!");
         }
         return false;
     }
-    
+    esborraError();
     return true;
 }
 
 function validaTelefon(){
     var telefon = document.getElementById("telefono");
 
-    esborraError();
-
     if(!telefon.checkValidity()){
         if(telefon.validity.ValueMissing){
-            error2(telefon, "Has d'introduir el teu número de telèfon!");
+            error2(telefon, "Debes introducir tu número de telèfono!");
         } else if(telefon.patternMissmatch){
-            error2(telefon, "El telèfon introduït no es vàlid!");
+            error2(telefon, "El número de telèfono introducido no es correcto!");
         }
         return false;
     }
-    
+    esborraError();
     return true;
 }
 
 //CAMP DELS ERRORS
 function error2(element, missatge){
-    document.getElementById("mensajeError").innerHTML = missatge;
+    var error = document.getElementById("mensajeError");
+    var errCont = document.createTextNode(missatge);
+
+    error.appendChild(errCont);
     element.className = "text-danger";
     element.focus();
-    element.focus();
-
-    console
 }
 
 function esborraError(){
     var formulari = document.forms[0];
 
-    for(var i=0; i < formulari.elements.length; i++){
-        formulari.elements[i].className = "";
+    for(var i=0; i < formulari.elements.length-1; i++){
+        formulari.elements[i].className = "form-control";
     }
 
-    /*var missatgeError = document.getElementById("mensajeError");
+    var missatgeError = document.getElementById("mensajeError");
     var contMsgerr = document.createTextNode("");
 
-    missatgeError.replaceChildren(contMsgerr);+*/
+    missatgeError.replaceChildren(contMsgerr);
 }
 
 //FUNCIÓ PER VALIDAR EL FORMULARI
@@ -85,7 +79,7 @@ function valida(e){
     const url = "FDArticles.html";
 
     if(validaNom() && validaCorreu() && validaTelefon()){
-        window.location = url;
+        window.location = "FDArticles.html";
         return true;
     } else {
         e.preventDefault();

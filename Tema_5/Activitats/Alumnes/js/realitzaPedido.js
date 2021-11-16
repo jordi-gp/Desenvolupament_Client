@@ -4,7 +4,7 @@ function main(){
     mostraArticle();
 }
 
-contador = 3;
+contador = 1;
 
 function mostraArticle(){
     //Mostrar el nom del producte

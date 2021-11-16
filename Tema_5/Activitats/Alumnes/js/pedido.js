@@ -22,12 +22,6 @@
     precioArticulo : 16,
     tallas : ["14 años","S-M","L-XL"],
     imagen : "manguitos.jpg"
-    },
-    {
-        nombreArticulo : "Calcetines",
-        precioArticulo : 6,
-        tallas : ["XS-S","M-L","XL"],
-        imagen : "calcetines.jpg"
-        }
+    }
 ];
 
