@@ -50,12 +50,29 @@ function validaTelefon(){
     return true;
 }
 
+//CAMP DEL LOCAL STORAGE
+function generaUsuari(){
+    var nom = document.getElementById("nombre").value;
+    var correu = document.getElementById("email").value;
+    var telefon = document.getElementById("telefono").value;
+
+    var usuari = {
+        nomUsu: nom,
+        corrUsu: correu,
+        telUsu: telefon
+    }
+
+    localStorage.setItem("Usuari", JSON.stringify(usuari));
+    console.log(JSON.parse(localStorage.getItem("Usuari")));
+}
+
 //CAMP DELS ERRORS
 function error2(element, missatge){
     var error = document.getElementById("mensajeError");
     var errCont = document.createTextNode(missatge);
 
     error.appendChild(errCont);
+
     element.className = "text-danger";
     element.focus();
 }
@@ -64,13 +81,13 @@ function esborraError(){
     var formulari = document.forms[0];
 
     for(var i=0; i < formulari.elements.length-1; i++){
-        formulari.elements[i].className = "form-control";
+        //formulari.elements[i].className = "form-control";
     }
 
     var missatgeError = document.getElementById("mensajeError");
     var contMsgerr = document.createTextNode("");
 
-    missatgeError.replaceChildren(contMsgerr);
+    missatgeError.appendChild(contMsgerr);
 }
 
 //FUNCIÓ PER VALIDAR EL FORMULARI
@@ -79,7 +96,8 @@ function valida(e){
     const url = "FDArticles.html";
 
     if(validaNom() && validaCorreu() && validaTelefon()){
-        window.location = "FDArticles.html";
+        generaUsuari();
+        window.location.assign(url);
         return true;
     } else {
         e.preventDefault();
