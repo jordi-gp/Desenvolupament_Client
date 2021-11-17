@@ -37,6 +37,7 @@ function mostraArticle(){
     //Mostrar les talles del producte
     var talles = document.getElementById("talla");
 
+    //Elimina le talles del producte anterior
     do {
         talles.lastChild.parentNode.removeChild(talles.lastChild);
     } while (talles.lastChild != null);
@@ -82,6 +83,7 @@ function afegirProducte(e){
             var usuari = JSON.parse(localStorage.getItem("Usuari"));
         }
 
+        //Creació de l'objecte de tipus producte
         var nomNewProduct = document.getElementById("nombreArticulo");
         var preuNewProduct = document.getElementById("precioArticulo");
         var tallaNewProduct = document.getElementById("talla");
