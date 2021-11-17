@@ -22,7 +22,6 @@ function getUsuari(){
 }
 
 function mostraArticle(){
-
     //Mostrar el nom del producte
     var article = document.getElementById("nombreArticulo");
     var valArticle = pedido[contador].nombreArticulo;
@@ -37,6 +36,10 @@ function mostraArticle(){
 
     //Mostrar les talles del producte
     var talles = document.getElementById("talla");
+
+    /*do {
+        talles.lastChild.parentNode.removeChild(talles.lastChild);
+    } while (talles.lastChild != null);*/
     
     for(var i=0; i < pedido[contador].tallas.length; i++){
         var selTalla = document.createElement("option");
@@ -57,6 +60,24 @@ function mostraArticle(){
 
     contador++;
 }    
+
+function afegirProducte(){
+    var nomNewProduct = document.getElementById("nombreArticulo");
+    var preuNewProduct = document.getElementById("precioArticulo");
+    var tallaNewProduct = document.getElementById("talla");
+
+    var newProduct = {
+        nomProd: nomNewProduct,
+        preuProd: preuNewProduct,
+        tallaProd: tallaNewProduct
+    }
+
+    if(JSON.parse(localStorage.getItem("Usuari")) != null){
+        var usuari = JSON.parse(localStorage.getItem("Usuari"));
+    }
+
+    localStorage.setItem("Usuari", JSON.stringify(newProduct));
+}
 
 function canviaProducte(){
     if(contador < 4){

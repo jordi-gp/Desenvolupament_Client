@@ -6,17 +6,19 @@ function main(){
 
 //VALIDACIÓ DEL FORMULARI
 function validaNom(){
+    debugger;
     var noms = document.getElementById("nombre");
 
     if(!noms.checkValidity()){
-        if(noms.validity.ValueMissing){
+        
+        if(noms.validity.valueMissing){
+            console.log("error");
             error2(noms, "Debes introducir tu nombre y apellidos!");
         } else if(noms.validity.patternMissmatch){
             error2(noms, "El nombre o apellidos introducido no es correcto!");
         }
         return false;
     }
-    esborraError();    
     return true;
 }
 
@@ -24,14 +26,13 @@ function validaCorreu(){
     var correu = document.getElementById("email");
 
     if(!correu.checkValidity()){
-        if(correu.validity.ValueMissing){
+        if(correu.validity.valueMissing){
             error2(correu, "Debes introducir tu correo electrònico!");
         } else if(correu.validity.patternMissmatch){
             error2(correu, "El correu electrònico introducido no es correcto!");
         }
         return false;
     }
-    esborraError();
     return true;
 }
 
@@ -39,14 +40,13 @@ function validaTelefon(){
     var telefon = document.getElementById("telefono");
 
     if(!telefon.checkValidity()){
-        if(telefon.validity.ValueMissing){
+        if(telefon.validity.valueMissing){
             error2(telefon, "Debes introducir tu número de telèfono!");
         } else if(telefon.patternMissmatch){
             error2(telefon, "El número de telèfono introducido no es correcto!");
         }
         return false;
     }
-    esborraError();
     return true;
 }
 
@@ -59,7 +59,9 @@ function generaUsuari(){
     var usuari = {
         nomUsu: nom,
         corrUsu: correu,
-        telUsu: telefon
+        telUsu: telefon,
+        producte: [],
+        total
     }
 
     localStorage.setItem("Usuari", JSON.stringify(usuari));
@@ -73,7 +75,7 @@ function error2(element, missatge){
 
     error.appendChild(errCont);
 
-    element.className = "text-danger";
+    element.className = "form-control border-danger";
     element.focus();
 }
 
@@ -92,15 +94,15 @@ function esborraError(){
 
 //FUNCIÓ PER VALIDAR EL FORMULARI
 function valida(e){
+    e.preventDefault();
     esborraError();
     const url = "FDArticles.html";
 
-    if(validaNom() && validaCorreu() && validaTelefon()){
+    if(validaNom()/* &&  validaCorreu() && validaTelefon()*/){
         generaUsuari();
         window.location.assign(url);
         return true;
     } else {
-        e.preventDefault();
         return false;
     }
 }
