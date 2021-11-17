@@ -13,10 +13,10 @@
     <div class="container-sm">
         <H1>Pedido de equipos ciclistas del club</H1>
 
-        <form > 
+        <form> 
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre y Apellidos</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required><!-- pattern="^([A-Z]{1}[a-z]{2,20} [A-Z]{1}[a-z]{2,20} [A-Z]{1}[a-z]{2,20}){1}$" >-->
+                <input type="text" class="form-control" id="nombre" name="nombre" pattern="^([A-Z]{1}[a-z]{2,20} [A-Z]{1}[a-z]{2,20} [A-Z]{1}[a-z]{2,20}){1}$" required>
               </div>
             <div class="mb-3">
               <label for="emailº" class="form-label">Correo electónico</label>
@@ -30,7 +30,7 @@
               <p id="mensajeError" class="text-danger"></p>
            </div> 
             <button type="submit" class="btn btn-primary" id="siguiente">Siguiente</button>
-          </form>
+        </form>
 
     </div>
 
