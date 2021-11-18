@@ -6,12 +6,16 @@ function main(){
     document.getElementById("siguiente").addEventListener("click", afegirProducte);
 }
 
-var contador = 1;
+var contador = 0;
 
 function getUsuari(){
 
     if(JSON.parse(localStorage.getItem("Usuari")) != null){
         var newUsu = JSON.parse(localStorage.getItem("Usuari"));
+    } else {
+        //En cas de no haver-se registrar s'envia a l'usuari a la pàgina de registre
+        alert("Has de crear un usuari per poder seleccionar les prendes");
+        window.location.assign("FDInici.html");
     }
 
     var mostraNomUsu = document.getElementById("nombreApellidos");
@@ -65,11 +69,13 @@ function mostraArticle(){
     var valImatge = "./img/"+pedido[contador].imagen;
 
     imatge.setAttribute("src", valImatge);
+    imatge.setAttribute("value", valImatge);
 
     contador++;
 }    
 
 function afegirProducte(e){
+    console.log(document.getElementById("imagen"));
     e.preventDefault();
     var talles = document.getElementById("talla");
 
@@ -87,11 +93,13 @@ function afegirProducte(e){
         var nomNewProduct = document.getElementById("nombreArticulo");
         var preuNewProduct = document.getElementById("precioArticulo");
         var tallaNewProduct = document.getElementById("talla");
+        var imgProd = document.getElementById("imagen");
 
         var newProduct = {
             nomProd: nomNewProduct.value,
             preuProd: preuNewProduct.value,
-            tallaProd: tallaNewProduct.value
+            tallaProd: tallaNewProduct.value,
+            imgProd: imgProd.src
         }
 
         usuari.producte.push(newProduct);
