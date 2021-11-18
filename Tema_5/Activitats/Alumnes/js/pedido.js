@@ -3,13 +3,13 @@
     nombreArticulo : "Maillot Invitus Pro",
     precioArticulo : 49,
     tallas : ["XS","S","M","L","XL","XXL","XXXL"],
-    imagen : "maillot.jpg"
+    imagen : "maillot invitus pro.jpg"
     },
     {
     nombreArticulo : "Culote",
     precioArticulo : 57,
     tallas : ["XS","S","M","L","XL","XXL","XXXL"],
-    imagen : "culot.jpg"
+    imagen : "culote.jpg"
     },
     {
     nombreArticulo : "Chaleco",

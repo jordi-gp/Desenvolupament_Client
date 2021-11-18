@@ -2,7 +2,7 @@ window.onload = main;
 
 function main(){
     llistaProd();
-    document.getElementById("borraProducte").addEventListener("click", eliminaProducte);
+    //document.getElementById("borraProducte").addEventListener("click", eliminaProducte);
 }
 
 var confirmUsu;
@@ -22,94 +22,104 @@ function getLocalStrg(){
 function llistaProd(){
     getLocalStrg();
 
-    //console.log(confirmUsu.producte.length);
-
+    console.log(confirmUsu.producte.length);
     var mainDiv = document.getElementById("articulos");
 
-    for(var i=0; i < confirmUsu.producte.length; i++){
-        console.log(confirmUsu.producte[i]);
+    if(confirmUsu.producte.length < 1){
+        var noProduc = document.createElement("h3");
+        var valNoProduc = document.createTextNode("No has seleccionat cap producte sapo");
 
-        //DIV 1
-        var div1 = document.createElement("div");
-        div1.setAttribute("class", "card mt-2");
-        div1.setAttribute("id", i);
-        div1.style.width = "25rem";
+        noProduc.appendChild(valNoProduc);
+        mainDiv.appendChild(noProduc);
 
-        mainDiv.appendChild(div1);
-
-        //NOM DEL PRODUCTE A MOSTRAR
-        var nomProd = document.createElement("h5");
-        nomProd.setAttribute("class", "card-header");
-
-        var valNomProd = document.createTextNode(confirmUsu.producte[i].nomProd);
-        nomProd.appendChild(valNomProd);
-        div1.appendChild(nomProd);
-
-        //DIV 2
-        var div2 = document.createElement("div");
-        div2.setAttribute("class", "card-body");
-        div1.appendChild(div2);
-
-        //DIV 3
-        var div3 = document.createElement("div");
-        div3.setAttribute("class", "row");
-        div2.appendChild(div3);
-
-        //DIV 4
-        var div4 = document.createElement("div");
-        div4.setAttribute("class", "col");
-        div3.appendChild(div4);
-
-        //PREU DEL PRODUCTE A MOSTRAR
-        var preuProd = document.createElement("h3");
-        preuProd.setAttribute("class", "card-tittle");
+        //MOSTRAR EL PREU DEL PRODUCTE BUIT
+        var preuTotal = document.getElementById("preuTot");
+        var valPreuTot = document.createTextNode(" "+confirmUsu.total+"€");
         
-        var valPreuProd = document.createTextNode(confirmUsu.producte[i].preuProd+"€");
-        preuProd.appendChild(valPreuProd);
-        div4.appendChild(preuProd);
+        preuTotal.appendChild(valPreuTot);
 
-        //TALLA DEL PRODUCTE A MOSTRAR
-        var tallaProd = document.createElement("p");
-        tallaProd.setAttribute("class", "card-text");
+    } else {
+        var suma = 0;
+        for(var i=0; i < confirmUsu.producte.length; i++){
+            console.log(confirmUsu.producte[i]);
 
-        var valTallaProd = document.createTextNode(confirmUsu.producte[i].tallaProd);
-        tallaProd.appendChild(valTallaProd);
-        div4.appendChild(tallaProd);
+            //DIV 1
+            var div1 = document.createElement("div");
+            div1.setAttribute("class", "card mt-2");
+            div1.setAttribute("id", i);
+            div1.style.width = "25rem";
 
-        //OPCIÓ PER BORRAR ELS ELEMENTS
-        var a = document.createElement("a");
-        a.setAttribute("href", "#");
-        a.setAttribute("id", "borraProducte");
-        a.setAttribute("class", "btn btn-primary text-end");
+            mainDiv.appendChild(div1);
 
-        var elemI = document.createElement("i");
-        elemI.setAttribute("class", "fa fa-trash-o");
-        elemI.ariaHidden = true;
+            //NOM DEL PRODUCTE A MOSTRAR
+            var nomProd = document.createElement("h5");
+            nomProd.setAttribute("class", "card-header");
 
-        a.appendChild(elemI);
-        div4.appendChild(a);
+            var valNomProd = document.createTextNode(confirmUsu.producte[i].nomProd);
+            nomProd.appendChild(valNomProd);
+            div1.appendChild(nomProd);
 
-        //APARTIR D'ACÍ ES S'APLIQUEN ELS ELEMENTS A div3
-        var div5 = document.createElement("div");
-        div5.setAttribute("class", "col");
-        div3.appendChild(div5);
+            //DIV 2
+            var div2 = document.createElement("div");
+            div2.setAttribute("class", "card-body");
+            div1.appendChild(div2);
 
-        //IMATGE DEL PRODUCTE AFEGIT
-        var imgProd = document.createElement("img");
-        imgProd.setAttribute("src", "./img/"+pedido[i].imagen);
-        div3.appendChild(imgProd);
+            //DIV 3
+            var div3 = document.createElement("div");
+            div3.setAttribute("class", "row");
+            div2.appendChild(div3);
 
-        //PREU TOTAL DE TOTS ELS PRODUCTES
-        var preuTotal = confirmUsu.total;
-        if(confirmUsu.producte[i].length > 1){
-            var preuInt = parseInt(confirmUsu.producte[i].preuProd);
-            preuTotal = preuInt + preuInt;
-        console.log(preuTotal);
-        } else {
-            console.log(confirmUsu.producte[i].preuProd);
+            //DIV 4
+            var div4 = document.createElement("div");
+            div4.setAttribute("class", "col");
+            div3.appendChild(div4);
+
+            //PREU DEL PRODUCTE A MOSTRAR
+            var preuProd = document.createElement("h3");
+            preuProd.setAttribute("class", "card-tittle");
+            
+            var valPreuProd = document.createTextNode(confirmUsu.producte[i].preuProd+"€");
+            preuProd.appendChild(valPreuProd);
+            div4.appendChild(preuProd);
+
+            //TALLA DEL PRODUCTE A MOSTRAR
+            var tallaProd = document.createElement("p");
+            tallaProd.setAttribute("class", "card-text");
+
+            var valTallaProd = document.createTextNode(confirmUsu.producte[i].tallaProd);
+            tallaProd.appendChild(valTallaProd);
+            div4.appendChild(tallaProd);
+
+            //OPCIÓ PER BORRAR ELS ELEMENTS
+            var a = document.createElement("a");
+            a.setAttribute("href", "#");
+            a.setAttribute("id", "borraProducte");
+            a.setAttribute("class", "btn btn-primary text-end");
+
+            var elemI = document.createElement("i");
+            elemI.setAttribute("class", "fa fa-trash-o");
+            elemI.ariaHidden = true;
+
+            a.appendChild(elemI);
+            div4.appendChild(a);
+
+            //APARTIR D'ACÍ ES S'APLIQUEN ELS ELEMENTS A div3
+            var div5 = document.createElement("div");
+            div5.setAttribute("class", "col");
+            div3.appendChild(div5);
+
+            //IMATGE DEL PRODUCTE AFEGIT
+            var imgProd = document.createElement("img");
+            var nombreProducte = confirmUsu.producte[i].nomProd.toLowerCase();
+            imgProd.setAttribute("src", "./img/"+nombreProducte+".jpg");
+            div3.appendChild(imgProd);
+
+            //PREU TOTAL DE TOTS ELS PRODUCTES
+            var preuTot = document.getElementById("preuTot");
+            var valPreuTot = parseInt(confirmUsu.producte[i].preuProd);
+            suma += valPreuTot;            
         }
-        
-
+        preuTot.append(" "+suma+"€");
     }
 }
 
