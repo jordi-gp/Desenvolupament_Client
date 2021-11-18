@@ -103,7 +103,7 @@ function afegirProducte(e){
 
 function canviaProducte(){
     //event.preventDefault();
-    if(contador < 4){
+    if(contador < pedido.length){
         mostraArticle();
     } else {
         window.location.assign("FDConfirmar.html");
