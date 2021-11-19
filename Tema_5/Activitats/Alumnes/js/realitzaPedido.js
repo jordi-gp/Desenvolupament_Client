@@ -124,7 +124,18 @@ function prevPre(){
 
     var talles = document.getElementById("talla");
     var selTalla = talles.options[talles.selectedIndex].value;
-    console.log(usuari.total);
+    var suma = 0;
+    for( var i=0; i < usuari.producte.length; i++){
+        var valPreu = parseInt(usuari.producte[i].preuProd);
+
+        if(selTalla == "Talla"){
+            valPreu = 0;
+            console.log(valPreu);
+        } else {            
+            console.log(valPreu);
+        }
+        
+    }
     
 }
 
