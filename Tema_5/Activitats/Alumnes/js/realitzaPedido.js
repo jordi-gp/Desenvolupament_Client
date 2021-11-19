@@ -114,6 +114,6 @@ function canviaProducte(){
     if(contador < pedido.length){
         mostraArticle();
     } else {
-        window.location.assign("FDConfirmar.html");
+        location.replace("FDConfirmar.html");
     }
 }

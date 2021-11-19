@@ -93,13 +93,16 @@ function llistaProd(){
             var a = document.createElement("a");
             a.setAttribute("href", "#");
             a.setAttribute("id", i);
-            a.onclick = (eliminaProducte);
             a.setAttribute("class", "btn btn-primary text-end");
 
             var elemI = document.createElement("i");
             elemI.setAttribute("class", "fa fa-trash-o");
             elemI.ariaHidden = true;
 
+            a.addEventListener("click", function(){
+                console.log(i);
+                console.log(document.getElementById("mainDiv"+i));
+            });
             a.appendChild(elemI);
             div4.appendChild(a);
 

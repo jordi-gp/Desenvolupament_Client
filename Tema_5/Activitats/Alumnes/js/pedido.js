@@ -23,5 +23,12 @@
     tallas : ["14 años","S-M","L-XL"],
     imagen : "manguitos.jpg"
     }
+    ,
+    {
+    nombreArticulo : "Calcetines",
+    precioArticulo : 16,
+    tallas : ["14 años","S-M","L-XL"],
+    imagen : "calcetines.jpg"
+    }
 ];
 
