@@ -2,9 +2,9 @@ window.onload = main;
 
 function main(){
     llistaProd();
-    //document.getElementById("borraProducte").addEventListener("click", eliminaProducte);
 }
 
+var i = 0;
 var confirmUsu;
 
 function getLocalStrg(){
@@ -22,10 +22,11 @@ function getLocalStrg(){
 function llistaProd(){
     getLocalStrg();
 
-    console.log(confirmUsu.producte.length);
     var mainDiv = document.getElementById("articulos");
 
     if(confirmUsu.producte.length < 1){
+        //mainDiv.setAttribute("id", "mainDiv");
+
         var noProduc = document.createElement("h3");
         var valNoProduc = document.createTextNode("No has seleccionat cap producte sapo");
 
@@ -40,13 +41,11 @@ function llistaProd(){
 
     } else {
         var suma = 0;
-        for(var i=0; i < confirmUsu.producte.length; i++){
-            console.log(confirmUsu.producte[i]);
-
+        for(i=0; i < confirmUsu.producte.length; i++){
             //DIV 1
             var div1 = document.createElement("div");
             div1.setAttribute("class", "card mt-2");
-            div1.setAttribute("id", i);
+            div1.setAttribute("id", "mainDiv"+i);
             div1.style.width = "25rem";
 
             mainDiv.appendChild(div1);
@@ -93,7 +92,8 @@ function llistaProd(){
             //OPCIÓ PER BORRAR ELS ELEMENTS
             var a = document.createElement("a");
             a.setAttribute("href", "#");
-            a.setAttribute("id", "borraProducte");
+            a.setAttribute("id", i);
+            a.onclick = (eliminaProducte);
             a.setAttribute("class", "btn btn-primary text-end");
 
             var elemI = document.createElement("i");
@@ -119,14 +119,15 @@ function llistaProd(){
             var valPreuTot = parseInt(confirmUsu.producte[i].preuProd);
             suma += valPreuTot;            
         }
+        confirmUsu.total = suma;
+        
+        //console.log(confirmUsu);
         preuTot.append(" "+suma+"€");
     }
 }
 
 function eliminaProducte(){
-    getLocalStrg();
-
     for(var i=0; i < confirmUsu.producte.length; i++){
-        console.log()
+        console.log(document.getElementById(i));
     }
 }
