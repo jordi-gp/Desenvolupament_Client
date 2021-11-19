@@ -9,9 +9,7 @@ function validaNom(){
     var noms = document.getElementById("nombre");
 
     if(!noms.checkValidity()){
-        
         if(noms.validity.valueMissing){
-            console.log("error");
             error2(noms, "Debes introducir tu nombre y apellidos!");
         } else if(noms.validity.patternMismatch){
             error2(noms, "El nombre o apellidos introducido no es correcto!");

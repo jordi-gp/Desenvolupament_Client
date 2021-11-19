@@ -1,12 +1,38 @@
 window.onload = main;
 
 function main(){
-    getUsuari();
-    mostraArticle();
-    document.getElementById("siguiente").addEventListener("click", afegirProducte);
+    if(JSON.parse(localStorage.getItem("Usuari")) != null) {
+        getUsuari();
+        mostraArticle();
+        document.getElementById("siguiente").addEventListener("click", afegirProducte);
+    } else {
+        sendToLogin();
+    }
 }
 
 var contador = 0;
+
+function sendToLogin(){
+    var div = document.getElementById("totalProductes");
+    div.style.display = "none";
+
+    //En cas de no haver-se registrar s'envia a l'usuari a la pàgina de registre
+        var p = document.createElement("h3");
+        var valP = document.createTextNode("Has d'iniciar sessió per accedir a aquest apartat!");
+        p.style.margin = "15px";
+        p.append(valP);
+
+        var tornaInici = document.createElement("a");
+        var valInici = document.createTextNode("Iniciar Sessió");
+        tornaInici.appendChild(valInici);
+        tornaInici.style.margin = "15px";
+        tornaInici.style.fontSize = "20px";
+        tornaInici.setAttribute("href", "FDInici.html");
+
+        document.body.appendChild(p);
+        document.body.appendChild(tornaInici);
+        //window.location.assign("FDInici.html");
+}
 
 function getUsuari(){
 

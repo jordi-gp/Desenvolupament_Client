@@ -1,8 +1,13 @@
 window.onload = main;
 
 function main(){
-    llistaProd();
-    eliminaProducte();
+    if(JSON.parse(localStorage.getItem("Usuari")) != null){
+        llistaProd();
+        eliminaProducte();
+    } else {
+        sendToLogin();
+    }
+    
 }
 
 var i = 0;
@@ -12,11 +17,30 @@ function getLocalStrg(){
     //Obtenció del localStorage
     if(JSON.parse(localStorage.getItem("Usuari")) != null){
         confirmUsu = JSON.parse(localStorage.getItem("Usuari"));
-    } else {
-        //En cas de no haver-se registrar s'envia a l'usuari a la pàgina de registre
-        alert("Has de crear un usuari abans per poder accedir a aquest apartat");
-        window.location.assign("FDInici.html");
     }
+}
+
+function sendToLogin(){
+    var div = document.getElementById("productes");
+    div.style.display = "none";
+
+    //En cas de no haver-se registrar s'envia a l'usuari a la pàgina de registre
+        var p = document.createElement("h3");
+        var valP = document.createTextNode("Has d'iniciar sessió per accedir a aquest apartat!");
+        p.style.margin = "15px";
+        p.append(valP);
+
+        var tornaInici = document.createElement("a");
+        var valInici = document.createTextNode("Iniciar Sessió");
+        tornaInici.style.margin = "15px";
+        tornaInici.style.fontSize = "20px";
+        tornaInici.appendChild(valInici);
+
+        tornaInici.setAttribute("href", "FDInici.html");
+
+        document.body.appendChild(p);
+        document.body.appendChild(tornaInici);
+        //window.location.assign("FDInici.html");
 }
 
 //Funció per mostrar cada un dels elements que s'han seleccionat
