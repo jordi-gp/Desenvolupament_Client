@@ -2,8 +2,8 @@ window.onload = main;
 
 function main(){
     if(JSON.parse(localStorage.getItem("Usuari")) != null) {
-        getUsuari();
         mostraArticle();
+        document.getElementById("talla").addEventListener("change", prevPre);
         document.getElementById("siguiente").addEventListener("click", afegirProducte);
     } else {
         sendToLogin();
@@ -32,23 +32,6 @@ function sendToLogin(){
         document.body.appendChild(p);
         document.body.appendChild(tornaInici);
         //window.location.assign("FDInici.html");
-}
-
-function getUsuari(){
-
-    if(JSON.parse(localStorage.getItem("Usuari")) != null){
-        var newUsu = JSON.parse(localStorage.getItem("Usuari"));
-    } else {
-        //En cas de no haver-se registrar s'envia a l'usuari a la pàgina de registre
-        alert("Has de crear un usuari per poder seleccionar les prendes");
-        window.location.assign("FDInici.html");
-    }
-
-    var mostraNomUsu = document.getElementById("nombreApellidos");
-    var valNomUsu = document.createTextNode(newUsu["nomUsu"]);
-
-    mostraNomUsu.appendChild(valNomUsu);
-
 }
 
 function mostraArticle(){
@@ -101,7 +84,6 @@ function mostraArticle(){
 }    
 
 function afegirProducte(e){
-    console.log(document.getElementById("imagen"));
     e.preventDefault();
     var talles = document.getElementById("talla");
 
@@ -135,7 +117,16 @@ function afegirProducte(e){
 }
 
 //TODO: mostrar preu acumulatiu dels productes
-//Rezar per que no siga molt difícil i poder acabar-ho a temps
+function prevPre(){
+    if(JSON.parse(localStorage.getItem("Usuari")) != null){
+        var usuari = JSON.parse(localStorage.getItem("Usuari"));
+    }
+
+    var talles = document.getElementById("talla");
+    var selTalla = talles.options[talles.selectedIndex].value;
+    console.log(usuari.total);
+    
+}
 
 function canviaProducte(){
     //event.preventDefault();
