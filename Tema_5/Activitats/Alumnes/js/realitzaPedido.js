@@ -110,6 +110,11 @@ function afegirProducte(e){
             imgProd: imgProd.src
         }
 
+        var suma=0;
+
+        usuari.total += suma;
+        console.log(usuari.total);
+
         usuari.producte.push(newProduct);
         localStorage.setItem("Usuari", JSON.stringify(usuari));
         canviaProducte();
@@ -125,14 +130,14 @@ function prevPre(){
     var talles = document.getElementById("talla");
     var selTalla = talles.options[talles.selectedIndex].value;
     var suma = 0;
-    for( var i=0; i < usuari.producte.length; i++){
+    for(var i=0; i < usuari.producte.length; i++){
         var valPreu = parseInt(usuari.producte[i].preuProd);
 
         if(selTalla == "Talla"){
-            valPreu = 0;
+            valPreu -= suma;
             console.log(valPreu);
         } else {            
-            console.log(valPreu);
+            console.log(suma+=valPreu);
         }
         
     }
