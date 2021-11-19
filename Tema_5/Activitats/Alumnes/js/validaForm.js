@@ -4,10 +4,6 @@ function main(){
     document.getElementById("siguiente").addEventListener("click", valida, false);
 }
 
-function prova(){
-    window.location.assign("FDArticles.html");
-}
-
 //VALIDACIÓ DEL FORMULARI
 function validaNom(){
     var noms = document.getElementById("nombre");

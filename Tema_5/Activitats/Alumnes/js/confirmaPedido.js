@@ -2,6 +2,7 @@ window.onload = main;
 
 function main(){
     llistaProd();
+    eliminaProducte();
 }
 
 var i = 0;
@@ -25,8 +26,6 @@ function llistaProd(){
     var mainDiv = document.getElementById("articulos");
 
     if(confirmUsu.producte.length < 1){
-        //mainDiv.setAttribute("id", "mainDiv");
-
         var noProduc = document.createElement("h3");
         var valNoProduc = document.createTextNode("No has seleccionat cap producte sapo");
 
@@ -99,10 +98,6 @@ function llistaProd(){
             elemI.setAttribute("class", "fa fa-trash-o");
             elemI.ariaHidden = true;
 
-            a.addEventListener("click", function(){
-                console.log(i);
-                console.log(document.getElementById("mainDiv"+i));
-            });
             a.appendChild(elemI);
             div4.appendChild(a);
 
@@ -123,14 +118,34 @@ function llistaProd(){
             suma += valPreuTot;            
         }
         confirmUsu.total = suma;
-        
-        //console.log(confirmUsu);
         preuTot.append(" "+suma+"€");
     }
 }
 
+//Funció per eliminar els productes i actualitzar el preu i l'objecte
+//del localStorage
 function eliminaProducte(){
-    for(var i=0; i < confirmUsu.producte.length; i++){
-        console.log(document.getElementById(i));
+    const botons = document.querySelectorAll(".btn.btn-primary.text-end");
+
+    function clicando(){
+        var prodSelected = document.getElementById("mainDiv"+this.id);
+        prodSelected.remove();
+        confirmUsu.producte.splice(this.id, 1);
+
+        if(confirmUsu.producte.length == 0){
+            confirmUsu.total = 0;
+        }
+
+        newUsu();
+        location.reload();
     }
+
+    botons.forEach(boton =>{
+        boton.addEventListener("click", clicando);
+    });
+}
+
+//Creació d'un nou usuari per actualitzar el nombre de productes en l'array
+function newUsu(){
+    localStorage.setItem("Usuari", JSON.stringify(confirmUsu));
 }
