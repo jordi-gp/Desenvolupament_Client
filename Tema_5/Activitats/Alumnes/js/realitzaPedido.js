@@ -108,6 +108,8 @@ function afegirProducte(e){
     }
 }
 
+//TODO: mostrar preu acumulatiu dels productes
+//Rezar per que no siga molt difícil i poder acabar-ho a temps
 
 function canviaProducte(){
     //event.preventDefault();
