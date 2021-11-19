@@ -125,7 +125,7 @@ function llistaProd(){
 //Funció per eliminar els productes i actualitzar el preu i l'objecte
 //del localStorage
 function eliminaProducte(){
-    const botons = document.querySelectorAll(".btn.btn-primary.text-end");
+    var botons = document.querySelectorAll(".btn.btn-primary.text-end");
 
     function clicando(){
         var prodSelected = document.getElementById("mainDiv"+this.id);
