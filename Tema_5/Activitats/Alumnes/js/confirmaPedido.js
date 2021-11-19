@@ -122,27 +122,27 @@ function llistaProd(){
     }
 }
 
-//Funció per eliminar els productes i actualitzar el preu i l'objecte
-//del localStorage
 function eliminaProducte(){
     var botons = document.querySelectorAll(".btn.btn-primary.text-end");
 
-    function clicando(){
-        var prodSelected = document.getElementById("mainDiv"+this.id);
-        prodSelected.remove();
-        confirmUsu.producte.splice(this.id, 1);
+    botons.forEach(boton =>{
+        boton.addEventListener("click", borraProducte);
+    });
+}
 
-        if(confirmUsu.producte.length == 0){
-            confirmUsu.total = 0;
-        }
+//Funció per eliminar els productes i actualitzar el preu i l'objecte
+//del localStorage
+function borraProducte(){
+    var prodSelected = document.getElementById("mainDiv"+this.id);
+    prodSelected.remove();
+    confirmUsu.producte.splice(this.id, 1);
 
-        newUsu();
-        location.reload();
+    if(confirmUsu.producte.length == 0){
+        confirmUsu.total = 0;
     }
 
-    botons.forEach(boton =>{
-        boton.addEventListener("click", clicando);
-    });
+    newUsu();
+    location.reload();
 }
 
 //Creació d'un nou usuari per actualitzar el nombre de productes en l'array
