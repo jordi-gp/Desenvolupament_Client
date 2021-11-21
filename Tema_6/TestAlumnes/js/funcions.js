@@ -10,7 +10,6 @@ var reinici = false;
 
 //Funció per iniciar el programa
 function iniciar(){ 
-    //debugger
     if(reinici == true){
         reiniciar();
     } else {
