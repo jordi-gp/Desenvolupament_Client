@@ -1,43 +1,34 @@
 $(document).ready(main);
 
 function main(){
-    multiplicar();
+    tabla();
 }
 
-function multiplicar(){
-    //Número de la taula
+function tabla(){
+    var div = $("<div></div>");
+    var tabla = $("<table></table>");
+
+    $("body").append(div);
+    $(div).append(tabla);
+
+    $(tabla).css("margin", "auto");
+    $(tabla).css("border", "1px solid black");
+    $(tabla).css("border-collapse", "collapse");
+
     for(var i=0; i <= 10; i++){
-        //Bloc div
-        var div = $("<div></div>");
-        $(div).css("display", "inline-block");
-        $("body").append(div);
-        
-        //Taula
-        var tabla = $("<table></table>");
-        $(tabla).css("border", "1px solid black");
-        $(tabla).css("margin", "5px");
-        $(div).append(tabla);
-
-        //Files
-        var files = $("<tr></tr>");
-        $(tabla).append(files);
-
-        //Contingut de les files
-        var valFiles = $("<th></th>").text("Taula de multiplicar del "+i);
-        $(files).append(valFiles);
-        
-        //Multiplicadors
         for(var j=0; j <= 10; j++){
-            //console.log(i+"x"+j+"="+i*j);
-            var filesRes = $("<tr></tr>");
-            $(tabla).append(filesRes);
+            var files = $("<tr></tr>");
+            var fila1 = $("<td></td>").text(i);
+            var fila2 = $("<td></td>").text(j);
+            var fila3 = $("<td></td>").text(i*j);
 
-            var operacio = i*j;
-            var valFilesRes = $("<td></td>").text(i+"x"+j+"="+operacio);
-            
-            $(filesRes).append(valFilesRes);
+            $(tabla).append(files);
+            $(files).append(fila1);
+            $(files).append(fila2);
+            $(files).append(fila3);
 
             $("tr").filter(":odd").css("background-color", "lightblue");
+            $("td").css("text-align", "center");
         }
     }
 }
