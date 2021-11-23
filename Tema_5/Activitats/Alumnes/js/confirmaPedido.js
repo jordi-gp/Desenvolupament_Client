@@ -142,7 +142,7 @@ function llistaProd(){
             suma += valPreuTot;            
         }
         confirmUsu.total = suma;
-        preuTot.append(" "+suma+"€");
+        preuTot.replaceChildren(" "+suma+"€");
     }
 }
 
@@ -161,15 +161,33 @@ function borraProducte(){
     prodSelected.remove();
     confirmUsu.producte.splice(this.id, 1);
 
+    var suma = 0;
+
+    //newUsu();
+
     if(confirmUsu.producte.length == 0){
         confirmUsu.total = 0;
+    } else {
+        for(var i=0; i < confirmUsu.producte.length; i++){
+            var intPreu = parseInt(confirmUsu.producte[i].preuProd)
+            suma += intPreu;
+        }
+        confirmUsu.total = suma;
     }
 
+    var preuTot = document.getElementById("preuTot");
+    var node = document.createTextNode(confirmUsu.total+"€");
+
+    preuTot.replaceChildren(node);
+
     newUsu();
-    location.reload();
 }
 
 //Creació d'un nou usuari per actualitzar el nombre de productes en l'array
 function newUsu(){
     localStorage.setItem("Usuari", JSON.stringify(confirmUsu));
+
+    if(JSON.parse(localStorage.getItem("Usuari")) != null){
+        confirmUsu = JSON.parse(localStorage.getItem("Usuari"));
+    }
 }
