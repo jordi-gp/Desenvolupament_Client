@@ -2,22 +2,44 @@ let arrPoke = new Array;
 window.onload = main;
 
 function main  (){
-console.log("Conttol Scrool",document.body.scrollHeight - window.innerHeight,  window.scrollY)
+document.addEventListener("scroll", ()=>{
+  //console.log("Conttol Scrool",document.body.scrollHeight - window.innerHeight,  window.scrollY);
+
+  //Posició del scroll
+  var posY = parseInt(window.scrollY);
+  //Tamany total que opcupa la pàgina
+  var control = parseInt(document.body.scrollHeight - window.innerHeight);
+
+  var element = 10;
+  paginaAct = 0;
+
+  console.log(posY);
+  console.log(control);
+
+  //console.log(control);
+  if(posY+1 == control){
+    console.log("a");
+  }
+
+});
 
 // cridar al api 
 fetch('https://pokeapi.co/api/v2/pokemon?limit=1100&offset=0')
   .then(response => response.json())
   .then(data =>{
-     //console.log ( data.results);
-     arrPoke = data.results;
-     //console.log(arrPoke);
-     cargarLista();
+      //console.log ( data.results);
+      arrPoke = data.results;
+      //console.log(arrPoke);
+      cargarLista();
   });
 }
 
+//var elements = 10 que son els elements a mostrar
+//pagina actual = 0
+
 function cargarLista (){
   //recorrer Array
-  for(let i=0;i<100; i++){
+  for(let i=0;i<10  ; i++){
     cargarPagina(arrPoke[i],i);
   };
 }
