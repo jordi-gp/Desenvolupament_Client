@@ -1,5 +1,14 @@
+var pagInici = 0;
+var pagFin = 0;
+var paginacio = 10;
+
+
 let arrPoke = new Array;
 window.onload = main;
+
+/*
+
+*/
 
 function main  (){
 document.addEventListener("scroll", ()=>{
@@ -64,3 +73,19 @@ function cargarPagina (element, ind){
       });
 };
 
+function scrollInfinito(){
+  document.body.scrollHeight - window.innerHeight == window.scrollY;
+}
+
+/*
+  if(paginaInicio == 0 && paginaFin ==0){
+    paginaFin = 10;
+  } else {
+    paginaInicio = PaginaFin;
+    paginaFin += paginacion;
+  }
+
+  if(paginaFin < arr.length){
+    
+  }
+*/
