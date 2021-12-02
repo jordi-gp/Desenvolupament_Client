@@ -1,56 +1,50 @@
-var pagInici = 0;
-var pagFin = 0;
-var paginacio = 10;
-
-
 let arrPoke = new Array;
 window.onload = main;
 
-/*
+var paginacio = 10;
+var pagInici = 0;
+var pagFin = 10;
 
-*/
-
-function main  (){
-document.addEventListener("scroll", ()=>{
-  //console.log("Conttol Scrool",document.body.scrollHeight - window.innerHeight,  window.scrollY);
-
-  //Posició del scroll
-  var posY = parseInt(window.scrollY);
-  //Tamany total que opcupa la pàgina
-  var control = parseInt(document.body.scrollHeight - window.innerHeight);
-
-  var element = 10;
-  paginaAct = 0;
-
-  console.log(posY);
-  console.log(control);
-
-  //console.log(control);
-  if(posY+1 == control){
-    console.log("a");
-  }
-
-});
-
-// cridar al api 
-fetch('https://pokeapi.co/api/v2/pokemon?limit=1100&offset=0')
+function main(){
+  // cridar al api 
+  fetch('https://pokeapi.co/api/v2/pokemon?limit=1100&offset=0')
   .then(response => response.json())
   .then(data =>{
-      //console.log ( data.results);
       arrPoke = data.results;
-      //console.log(arrPoke);
       cargarLista();
+      console.log(arrPoke);
   });
+
+  document.addEventListener("scroll", carregaElements);
 }
 
-//var elements = 10 que son els elements a mostrar
-//pagina actual = 0
-
 function cargarLista (){
+  
   //recorrer Array
-  for(let i=0;i<10  ; i++){
+
+  /**************************************************************************
+  * En cas de ser major el nombre de paginació al dels elements de l'array  *
+  * s'utilitza per al bucle 'for' el '.length' del array per tal de mostrar *
+  * els elements justs que falten i no fer una càrrega excesiva que         *
+  * realmente no es necessària                                              *
+  ***************************************************************************/
+
+  if(paginacio > arrPoke.length){
+    for(let i=pagInici;i < arrPoke.length  ; i++){
+      cargarPagina(arrPoke[i],i);
+    };
+  }
+  
+  for(let i=pagInici;i<paginacio  ; i++){
     cargarPagina(arrPoke[i],i);
   };
+
+  pagInici = paginacio;
+  paginacio += pagFin;
+   
+  //console.log(pagInici);
+  //console.log(paginacio);
+  //console.log(pagFin);
 }
 
 function cargarPagina (element, ind){
@@ -58,7 +52,7 @@ function cargarPagina (element, ind){
     fetch(element.url)
      .then(response => response.json())
      .then(data =>{
-         //console.log(data);
+        //console.log(data);
         // Afegir dades
         document.getElementById("listado").innerHTML += '<div class="card mb-4">' +
           '<a href="#!"><img class="card-img-top" src="'+  data.sprites.front_default + '" alt="..." /></a>' +
@@ -73,19 +67,11 @@ function cargarPagina (element, ind){
       });
 };
 
-function scrollInfinito(){
-  document.body.scrollHeight - window.innerHeight == window.scrollY;
+function carregaElements(){
+  var pos = window.scrollY;
+  var ampleTot = document.body.scrollHeight - window.innerHeight;
+  
+  if(pos == ampleTot){
+    cargarLista();
+  }
 }
-
-/*
-  if(paginaInicio == 0 && paginaFin ==0){
-    paginaFin = 10;
-  } else {
-    paginaInicio = PaginaFin;
-    paginaFin += paginacion;
-  }
-
-  if(paginaFin < arr.length){
-    
-  }
-*/
