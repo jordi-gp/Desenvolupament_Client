@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/funcions_act.js"></script>
+    <title>Activitat Guiada AJAX</title>
+</head>
+<body>
+    <div id="encuesta">
+        <h3> &iquest;Qu&eacute; equipo crees que va a ganar la liga este a&ntilde;o?</h3>
+        <form>
+            Real Madrid:
+            <input type="radio" name="voto" value="0" onclick="getVoto(this.value)"><br>
+            Barcelona:
+            <input type="radio" name="voto" value="1" onclick="getVoto(this.value)"><br>
+            Atl&eacute;tico de Madrid:
+            <input type="radio" name="voto" value="2" onclick="getVoto(this.value)"><br>
+            València:
+            <input type="radio" name="voto" value="3" onclick="getVoto(this.value)"><br>
+        </form>
+    </div>
+</body>
+</html>
