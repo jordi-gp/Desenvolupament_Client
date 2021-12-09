@@ -11,6 +11,6 @@ function getVoto(int) {
     }
     //Enviament de l'informació obtinguda al fitxer '.php'
     //encarregat de processar l'informació
-    xmlhttp.open("GET", "./php/enquesta_vot.php?voto="+int, true);
+    xmlhttp.open("GET", "http://localhost/enquesta/enquesta_vot.php?voto="+int);
     xmlhttp.send();
 }
