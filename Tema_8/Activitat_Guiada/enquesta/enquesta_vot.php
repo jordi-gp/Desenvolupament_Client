@@ -1,6 +1,6 @@
 <?php
     //S'obté el fitxer on es van a guardar les dades
-    $fichero = "./informacio_obtinguda/resultado.txt"
+    $fichero = "resultado.txt";
     $contenido = file($fichero);
 
     //Es guarda en un array tota l'informació arreplegada
@@ -33,8 +33,18 @@
         break;
     }
 
+    /*foreach ($array as $contenido){
+        echo $contenido;
+    }
+    echo $val;*/
+
+    $insertvoto = $rea."@".$bar."@".$atl."@".$val.'@';
+    $fp = fopen($fichero, "w");
+    fputs($fp, $insertvoto);
+    fclose($fp);
+
     //Càlcul del percentatge dels vots
-    $denominador = (int)$rea + (int)$bar + (int)+$atl + (int)$val;
+    $denominador = (int)$rea + (int)$bar + (int)$atl + (int)$val;
 
     $quantRea = 100 * round($rea / $denominador, 2);
     $quantBar = 100 * round($bar / $denominador, 2);
