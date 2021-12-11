@@ -3,9 +3,8 @@ window.onload = main;
 var arrCom = new Array();
 
 function main(){
-    
-    carrega();
     document.getElementById("carrega_Prov").addEventListener("click", carrega);
+
     //Autobuscador realizado con 'jquery'
     $(function() {
         arrCom;
@@ -27,6 +26,8 @@ function cargaComunidadesCast() {
             comunidades.data.forEach(element => {
                 arrCom.push(element.DMUN50);
             });
+            //console.log(comunidades.data.length);
+            //console.log(arrCom.length);
         }
     }
 
@@ -44,6 +45,8 @@ function cargaComunidadesVal(){
             comunidades.data.forEach(element =>{
                 arrCom.push(element.DMUN50);
             });
+            //console.log(comunidades.data.length);
+            //console.log(arrCom.length);
         }
     }
 
@@ -61,6 +64,8 @@ function cargaComunidadesAlc(){
             comunidades.data.forEach(element => {
                 arrCom.push(element.DMUN50);
             });
+            //console.log(comunidades.data.length);
+            console.log(arrCom.length);            
         }    
     }
     xmlhttp.open("GET", "https://apiv1.geoapi.es/municipios?CPRO=03&type=JSON&key=&sandbox=1");
@@ -68,10 +73,13 @@ function cargaComunidadesAlc(){
 }
 
 function carrega(){
-    cargaComunidadesCast();
-    cargaComunidadesVal();
-    cargaComunidadesAlc();
-    
-    console.log(arrCom.length);
-    document.getElementById("info").innerHTML = "S'han carregat " + arrCom.length + " poblacions";
+
+    if(arrCom.length <= 542){
+        cargaComunidadesCast();
+        cargaComunidadesVal();
+        cargaComunidadesAlc();
+        document.getElementById("info").innerHTML = "S'han carregat " + arrCom.length + " poblacions";
+    }
 }
+    
+    
