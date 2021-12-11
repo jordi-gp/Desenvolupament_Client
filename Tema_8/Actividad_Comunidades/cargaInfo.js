@@ -3,13 +3,18 @@ window.onload = main;
 var arrCom = new Array();
 
 function main(){
-    //Done: cargar las províncias de las diferentes apis
-    cargaComunidadesCast();
-    cargaComunidadesVal();
-    cargaComunidadesAlc();
-
-    //TODO: Guardar totes les provincies en un sol array
-    //TODO: A partir del codi donat de jquery realitzar el buscador
+    
+    carrega();
+    document.getElementById("carrega_Prov").addEventListener("click", carrega);
+    //Autobuscador realizado con 'jquery'
+    $(function() {
+        arrCom;
+        
+        $("#tags").autocomplete({
+            source:arrCom
+        });
+        
+    });
 }
 
 function cargaComunidadesCast() {
@@ -20,7 +25,7 @@ function cargaComunidadesCast() {
             var comunidades = JSON.parse(this.responseText);
 
             comunidades.data.forEach(element => {
-                //console.log(element.DMUN50);
+                arrCom.push(element.DMUN50);
             });
         }
     }
@@ -37,7 +42,7 @@ function cargaComunidadesVal(){
             var comunidades = JSON.parse(this.responseText);
 
             comunidades.data.forEach(element =>{
-                //console.log(element.DMUN50);
+                arrCom.push(element.DMUN50);
             });
         }
     }
@@ -54,11 +59,19 @@ function cargaComunidadesAlc(){
             var comunidades = JSON.parse(this.responseText);
 
             comunidades.data.forEach(element => {
-                console.log(element.DMUN50);
+                arrCom.push(element.DMUN50);
             });
-        }
+        }    
     }
-
     xmlhttp.open("GET", "https://apiv1.geoapi.es/municipios?CPRO=03&type=JSON&key=&sandbox=1");
-    xmlhttp.send();
+    xmlhttp.send(); 
+}
+
+function carrega(){
+    cargaComunidadesCast();
+    cargaComunidadesVal();
+    cargaComunidadesAlc();
+    
+    console.log(arrCom.length);
+    document.getElementById("info").innerHTML = "S'han carregat " + arrCom.length + " poblacions";
 }
