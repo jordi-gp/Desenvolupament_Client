@@ -121,7 +121,6 @@ function afegirProducte(e){
     }
 }
 
-//TODO: mostrar preu acumulatiu dels productes
 function prevPre(){
     if(JSON.parse(localStorage.getItem("Usuari")) != null){
         var usuari = JSON.parse(localStorage.getItem("Usuari"));

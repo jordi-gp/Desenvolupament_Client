@@ -16,7 +16,8 @@ function cargaComunidades(provincia){
             comunidades.data.forEach(element => {
                 arrCom.push(element.DMUN50);
             });
-            console.log(arrCom);
+            
+            //console.log(arrCom);
             filtrar();
             document.getElementById("info").innerHTML = "S'han carregat " + arrCom.length + " poblacions";
         }    
@@ -40,4 +41,3 @@ function filtrar() {
         source:arrCom
     });
 };
-    
