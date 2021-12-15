@@ -31,7 +31,7 @@ function cridaApi(dataActual) {
     xmlhttp.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200){
             var info = JSON.parse(this.responseText);
-
+            console.log(info);
             var numRegio = 6;
             var infoObtinguda = info.dates[dataActual].countries.Spain.regions[numRegio].sub_regions;
 
