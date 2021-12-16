@@ -8,26 +8,74 @@ function main(){
 
 function cridaApi(){
     var url = "https://www.serverred.es/api/libros";
-    var llista = document.getElementById("files");
+    var url_aux = "https://www.serverred.es/api/autores";
+    var lista = document.getElementById("files");
+
+    /*fetch(url_aux)
+        .then(response => response.json())
+        .then(data_aux =>
+            data_aux.resultado.forEach(element => {
+                console.log(element);
+            })
+            )*/
 
     fetch(url)
         .then(response => response.json())
         .then(data => 
             data.resultado.forEach(element => {
-                console.log(element);
+                //console.log(element);
+                //Valores obtenidos del 'JSON'
+                var id_llibre = element._id;
                 var titulo = element.titulo;
                 var editorial = element.editorial;
                 var precio = element.precio;
-                var num_mods = element.__v;
-                var id_llibre = element._id;
                 var autor = element.autor;
+                var num_mods = element.__v;
 
-                llista.innerHTML += "<th></th>"+
-                                    "<th>"+num_mods+"</th>"+
-                                    "<th>"+titulo+"</th>"+
-                                    "<th>"+editorial+"</th>"+
-                                    "<th>"+precio+"</th>"+
-                                    "<th>"+autor+"</th>";
+                //Nodos de texto
+                var val_titulo = document.createTextNode(titulo);
+                var val_editorial = document.createTextNode(editorial);
+                var val_precio = document.createTextNode(precio);
+                var val_autor = document.createTextNode(autor);
+                var val_boto_esborrar = document.createTextNode("Esborrar");
+                var val_boto_modificar = document.createTextNode("Modificar");
+
+                //Botones de la pàgina
+                var boto_esborrar = document.createElement("button");
+                boto_esborrar.setAttribute("class", "btn btn-primary btn-lg");
+                boto_esborrar.setAttribute("id", id_llibre);
+                boto_esborrar.appendChild(val_boto_esborrar);
+
+                var boto_modificar = document.createElement("button");
+                boto_modificar.setAttribute("class", "btn btn-primary btn-lg");
+                boto_modificar.setAttribute("id", id_llibre);
+                boto_modificar.appendChild(val_boto_modificar);
+
+                //Elementos del documento 'HTML'
+                var tr = document.createElement("tr");
+                var td_1 = document.createElement("td");
+                var td_2 = document.createElement("td");
+                var td_3 = document.createElement("td");
+                var td_4 = document.createElement("td");
+                var td_5 = document.createElement("td");
+                var td_6 = document.createElement("td");
+
+                //Añadido de información a cada campo
+                td_1.appendChild(boto_esborrar);
+                td_2.appendChild(boto_modificar);
+                td_3.appendChild(val_titulo);
+                td_4.appendChild(val_editorial);
+                td_5.appendChild(val_precio);
+                td_6.appendChild(val_autor);
+
+                //Agregamiento a los campos creados a la tabla
+                tr.appendChild(td_1);
+                tr.appendChild(td_2);
+                tr.appendChild(td_3);
+                tr.appendChild(td_4);
+                tr.appendChild(td_5);
+                tr.appendChild(td_6);
+                lista.appendChild(tr);
             })
         )
 
