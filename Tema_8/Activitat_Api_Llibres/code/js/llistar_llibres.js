@@ -14,7 +14,7 @@ function cridaApi(){
         .then(response => response.json())
         .then(data => 
             data.resultado.forEach(element => {
-                //console.log(element);
+                console.log(element);
                 var titulo = element.titulo;
                 var editorial = element.editorial;
                 var precio = element.precio;
@@ -22,7 +22,7 @@ function cridaApi(){
                 var id_llibre = element._id;
                 var autor = element.autor;
 
-                llista.innerHTML = "<th></th>"+
+                llista.innerHTML += "<th></th>"+
                                     "<th>"+num_mods+"</th>"+
                                     "<th>"+titulo+"</th>"+
                                     "<th>"+editorial+"</th>"+
