@@ -4,26 +4,34 @@ function main(){
     cridaApi();
 }
 
-//TODO: mostrar el llistat de llibres
+var arrInfo = [];
+var arrInfoAux = [];
 
+//TODO: mostrar el llistat de llibres
 function cridaApi(){
     var url = "https://www.serverred.es/api/libros";
     var url_aux = "https://www.serverred.es/api/autores";
     var lista = document.getElementById("files");
 
-    /*fetch(url_aux)
+    //Uso de arrays para guardar la información de la API
+    fetch(url_aux)
         .then(response => response.json())
-        .then(data_aux =>
+        .then(data_aux => {
             data_aux.resultado.forEach(element => {
-                console.log(element);
+                arrInfoAux.push(element);
             })
-            )*/
+        })
+        //En caso de fallar la petición, la capturamos
+        .catch(error => {
+            console.log("Ha ocorregut un error realitzant la petició " + error);
+        })
+        console.log(arrInfoAux);
 
     fetch(url)
         .then(response => response.json())
-        .then(data => 
-            data.resultado.forEach(element => {
-                //console.log(element);
+        .then(data => data.resultado.forEach(element => {
+                arrInfo.push(element);
+
                 //Valores obtenidos del 'JSON'
                 var id_llibre = element._id;
                 var titulo = element.titulo;
@@ -78,5 +86,11 @@ function cridaApi(){
                 lista.appendChild(tr);
             })
         )
-
+        .then(data_aux => arrInfo.forEach(element => {
+            //console.log(element);
+        })
+        )
+        .catch(error => {
+            //console.log("Ha ocorregut un error realitzant la petició " + error);
+        })
 }
