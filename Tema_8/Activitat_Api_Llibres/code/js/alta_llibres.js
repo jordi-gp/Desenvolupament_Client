@@ -132,7 +132,7 @@ function validaTitulo(){
 //Validación del editorial seleccionado
 function validaEditorial(){
     var editorial = document.getElementById("editorial");
-
+    
     if(!editorial.checkValidity()){
         if(editorial.validity.valueMissing){
             error2(editorial, "El campo de editorial no se puede dejar vacío");

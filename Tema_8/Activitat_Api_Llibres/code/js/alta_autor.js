@@ -29,8 +29,10 @@ function validaAnyNaix(){
     if(!anyNaix.checkValidity()){
         if(anyNaix.validity.valueMissing){
             error2(anyNaix, "Se debe indicar de forma obligatoria el año de nacimiento");
-        } else if(anyNaix.value < 1){
+        } else if(anyNaix.value < 0){
             error2(anyNaix, "El año de nacimiento no puede ser inferior a 1");
+        } else if(anyNaix.value > 2000){
+            error2(anyNaix, "El año de nacimiento no puede ser superior a 2000");
         }
         return false;
     }
@@ -70,10 +72,33 @@ function validar(e){
 
     //Llamamiento de funciones de validación creadas
     if(validaNomAutor() && validaAnyNaix()){
-
-        return true;
-   
+        creaAutor();
+        location.assign("../html/llistatAutors.html");
     } else {
         return false;
     }
+}
+
+//Función para crear un nuevo autor
+function creaAutor(){
+    const apiAutors = "https://www.serverred.es/api/autores";
+    var nombreAutor = document.getElementById("nom").value;
+    var añoAutor = document.getElementById("anynaix").value;
+
+    var autor = {
+        nombre: nombreAutor,
+        año_nacimiento: añoAutor
+    }
+
+    fetch(apiAutors, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(autor),
+    })
+    .then(response => response.json())
+    .catch((error) => {
+        console.log("Error:", error)
+    });
 }

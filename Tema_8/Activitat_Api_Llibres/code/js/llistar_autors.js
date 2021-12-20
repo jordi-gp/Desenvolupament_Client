@@ -12,7 +12,6 @@ function cridaApi(){
         .then(response => response.json())
         .then(data =>
             data.resultado.forEach(element => {
-                console.log(element);
                 //Valores obtenidos del 'JSON'
                 var ano_nacimiento = element.año_nacimiento;
                 var nombre_autor = element.nombre;
