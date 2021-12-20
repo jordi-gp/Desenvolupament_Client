@@ -75,8 +75,6 @@ function carregaAutors(){
         }))        
 }
 
-
-
 /***************************
 * APARTADO DE VALIDACIONES *
 ***************************/
@@ -119,51 +117,32 @@ function error2(element, missatge){
 function validaTitulo(){
     var titulo = document.getElementById("titol");
 
-    if(titulo.value == ""){
-        error2(titulo, "El campo de título no se puede dejar vacío");
+    if(!titulo.checkValidity()){
+        if(titulo.validity.valueMissing){
+            error2(titulo, "El campo de título no se puede dejar en blanco");
+        } else if(titulo.validity.patternMismatch){
+            error2(titulo, "El título ha de tener como mínimo 3 caracteres");
+        }
         return false;
-    } else if(titulo.value.length < 3){
-        error2(titulo, "El campo del título ha de contener almenos 3 caracteres");
-        return false;
-    } else if(titulo.value.length > 250){
-        error2(titulo, "El campo del título no puede contener mas de 250 caracteres");
-    } else {
-        esborrarError();
-        return true;
     }
+    esborrarError();
+    return true;
 }
-
-// function validaTitulo(){
-//     var titulo = document.getElementById("titol");
-
-//     if(!titulo.checkValidity()){
-//         if(titulo.validity.valueMissing){
-//             error2(titulo, "El campo de título no se puede dejar en blanco");
-//         }
-//         if(titulo.validity.patternMismatch){
-//             error2(titulo, "El título ha de tener como mínimo 3 caracteres");
-//         }
-//         return false;
-//     }
-//     esborrarError();
-//     return true;
-// }
 
 //Validación del editorial seleccionado
 function validaEditorial(){
     var editorial = document.getElementById("editorial");
 
-    if(editorial.value == ""){
-        error2(editorial, "El campo de editorial no puede estar vacío");
+    if(!editorial.checkValidity()){
+        if(editorial.validity.valueMissing){
+            error2(editorial, "El campo de editorial no se puede dejar vacío");
+        } else if(editorial.validity.patternMismatch){
+            error2(editorial, "El campo de editorial ha de contener almenos 3 caracteres");
+        }
         return false;
-    } else if(editorial.value.length < 3){
-        error2(editorial, "El campo de editorial ha de contener como mínimo 3 caracteres");
-    } else if(editorial.value.length > 250){
-        error2(editorial, "El campo de editorial no puede contener más de 250 caracteres");
-    } else {
-        esborrarError();
-        return true;
     }
+    esborrarError();
+    return true;
 }
 
 //Validación del precio seleccionado

@@ -4,21 +4,6 @@ function main(){
     document.getElementById("btnGravar").addEventListener("click", validar, false);
 }
 
-//Objeto a cargar una vez realizadas las validaciones
-/*var autorSchema = new mongoose.Schema({
-    nombre: {
-        type: String,
-        required: true,
-        minlength: 3,
-        trim: true
-    },
-    año_nacimiento: {
-        type: Number,
-        min: 0,
-        max: 2000,
-        trim: true
-    }
-})*/
 
 //Campo de las validaciones
 //Validación del nombre del autor
@@ -37,17 +22,21 @@ function validaNomAutor(){
     return true;
 }
 
-// function validaNomAutor(){
-//     var nomAut = document.getElementById("nom").value;
+//Validación del campo de año de nacimiento
+function validaAnyNaix(){
+    var anyNaix = document.getElementById("anynaix");
 
-//     if(nomAut == ""){
-//         error2(nomAut, "El campo de nom d'autor no pot estar buit");
-//         return false;
-//     } else {
-//         console.log("S'ha introduit un nom");
-//         console.log(nomAut);
-//     }
-// }
+    if(!anyNaix.checkValidity()){
+        if(anyNaix.validity.valueMissing){
+            error2(anyNaix, "Se debe indicar de forma obligatoria el año de nacimiento");
+        } else if(anyNaix.value < 1){
+            error2(anyNaix, "El año de nacimiento no puede ser inferior a 1");
+        }
+        return false;
+    }
+    esborrarError();
+    return true;
+}
 
 //Mostrado de errores en la validación
 function error2(element, missatge){
@@ -75,13 +64,16 @@ function esborrarError(){
 
 //Validación de todos los campos del formulario
 function validar(e){
+    e.preventDefault();
+ 
     esborrarError();
 
     //Llamamiento de funciones de validación creadas
-    if(validaNomAutor()){
+    if(validaNomAutor() && validaAnyNaix()){
+
         return true;
+   
     } else {
-        e.preventDefault();
         return false;
     }
 }

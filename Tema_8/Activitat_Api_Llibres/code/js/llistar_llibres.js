@@ -45,7 +45,7 @@ function cridaApi() {
             var val_titulo = document.createTextNode(titulo);
             var val_editorial = document.createTextNode(editorial);
             var val_precio = document.createTextNode(precio);
-            var val_autor = document.createTextNode(autor);
+            var val_autor = document.createTextNode(buscarAutor(autor));
             var val_boto_esborrar = document.createTextNode("Esborrar");
             var val_boto_modificar = document.createTextNode("Modificar");
 
@@ -75,7 +75,7 @@ function cridaApi() {
             td_3.appendChild(val_titulo);
             td_4.appendChild(val_editorial);
             td_5.appendChild(val_precio);
-            td_6.appendChild(buscarAutor(val_autor));
+            td_6.appendChild(val_autor);
 
             //Agregamiento a los campos creados a la tabla
             tr.appendChild(td_1);
@@ -93,11 +93,10 @@ function cridaApi() {
 
 function buscarAutor(val_autor) {
     arrInfoAux.forEach(element => {
-        console.log(element._id);
-        console.log(val_autor);
-        
-        if(element._id == val_autor){
-            val_autor == element.nombre;
+        if(val_autor == element._id){
+            val_autor = element.nombre;
+        } else {
+            val_autor = "Autor esborrat";
         }
     });
     return val_autor;
