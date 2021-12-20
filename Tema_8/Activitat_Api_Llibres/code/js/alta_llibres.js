@@ -2,57 +2,54 @@ window.onload = main;
 
 function main(){
     carregaAutors();
+    fetch(apiAutores)
+    .then(response => response.json())
+    .then(data_aux => {
+        data_aux.resultado.forEach(element => {
+            arrInfoAux.push(element);
+        })
+    })
     document.getElementById("btnGravar").addEventListener("click", validar, false);
 }
 
-/******************
-* OBJETO A CARGAR *
-******************/
-/*var libroSchema = new mongoose.Schema({
-    titulo:{
-        type: String,
-        required: true,
-        minlength: 3,
-        trim: true
-    },
-    editorial:{
-        type: String,
-        trim: true
-    },
-    precio:{
-        type: Number,
-        required: true,
-        min: 0,
-        trim: true
-    },
-    autor:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'autor'
-    }
-})*/
+const apiLlibres = "https://www.serverred.es/api/libros";
+const apiAutores = "https://www.serverred.es/api/autores";
+
+var arrInfoAux = [];
 
 //Función para cargar un nuevo libro una vez se han completado las validaciones
-function carregaNouLlibre(){
-    var valTitol = document.getElementById("titol").value;
-    var valEditorial = document.getElementById("editorial").value;
-    var valPreu = document.getElementById("precio").value;
-    var valAutor = document.getElementById("autor").value;
+function creaLlibre(){
+    var titol = document.getElementById("titol").value;
+    var editorial = document.getElementById("editorial").value;
+    var precio = document.getElementById("precio").value;
+    var listaAutores = document.getElementById("autor");
+    var idAutor;
+    
+    arrInfoAux.forEach(element => {
+        if(listaAutores[listaAutores.selectedIndex].value == element.nombre){
+            idAutor = element._id;
+            return idAutor;
+        }
+    });
 
-    libroSchema = {
-        titulo: valTitol,
-        editorial: valEditorial,
-        precio: valPreu,
-        autor: valAutor
+    var llibreNou = {
+        titulo: titol,
+        editorial: editorial,
+        precio: precio,
+        autor: idAutor
     }
 
-    fetch("https://www.serverred.es/api/libros", {
+    fetch(apiLlibres, {
         method: "POST",
-        body: JSON.stringify(libroSchema),
-        headers: {"Content-type": "application/json; charset=UTF-8"}
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(llibreNou),
     })
     .then(response => response.json())
-    .then(json => console.log(json))
-    .catch(err => console.log(err))
+    .catch((error) => {
+        console.log("Error:", error)
+    })
 }
 
 /*******************
@@ -80,13 +77,13 @@ function carregaAutors(){
 ***************************/
 //Validación del formulario
 function validar(e){
+    e.preventDefault();
     esborrarError();
 
     if(validaTitulo() && validaEditorial() && validaPreu() && validaSelectAutor()){
-        //carregaNouLlibre;
+        creaLlibre();
         return true;
     } else {
-        e.preventDefault();
         return false;
     }
 }

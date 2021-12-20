@@ -31,9 +31,9 @@ function validaAnyNaix(){
     if(!anyNaix.checkValidity()){
         if(anyNaix.validity.valueMissing){
             error2(anyNaix, "Se debe indicar de forma obligatoria el año de nacimiento");
-        } else if(anyNaix.value < 0){
+        } else if(anyNaix.validity.rangeUnderflow){
             error2(anyNaix, "El año de nacimiento no puede ser inferior a 1");
-        } else if(anyNaix.value > 2000){
+        } else if(anyNaix.validity.rangeOverflow){
             error2(anyNaix, "El año de nacimiento no puede ser superior a 2000");
         }
         return false;
@@ -74,7 +74,6 @@ function validar(e){
     //Llamamiento de funciones de validación creadas
     if(validaNomAutor() && validaAnyNaix()){
         creaAutor();
-        //location.assign("../html/llistatAutors.html");
         return true;
     } else {
         return false;
