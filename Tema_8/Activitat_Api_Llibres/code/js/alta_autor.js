@@ -18,14 +18,16 @@ function validaNomAutor(){
         }
         return false;
     }
-    esborrarError();
+    //esborrarError();
     return true;
 }
 
 //Validación del campo de año de nacimiento
 function validaAnyNaix(){
+    debugger;
     var anyNaix = document.getElementById("anynaix");
 
+    console.log(anyNaix.checkValidity());
     if(!anyNaix.checkValidity()){
         if(anyNaix.validity.valueMissing){
             error2(anyNaix, "Se debe indicar de forma obligatoria el año de nacimiento");
@@ -36,7 +38,7 @@ function validaAnyNaix(){
         }
         return false;
     }
-    esborrarError();
+    //esborrarError();
     return true;
 }
 
@@ -67,13 +69,13 @@ function esborrarError(){
 //Validación de todos los campos del formulario
 function validar(e){
     e.preventDefault();
- 
     esborrarError();
 
     //Llamamiento de funciones de validación creadas
     if(validaNomAutor() && validaAnyNaix()){
         creaAutor();
-        location.assign("../html/llistatAutors.html");
+        //location.assign("../html/llistatAutors.html");
+        return true;
     } else {
         return false;
     }
