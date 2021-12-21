@@ -55,7 +55,7 @@ function cridaApi() {
             boto_esborrar.appendChild(val_boto_esborrar);
 
             var boto_modificar = document.createElement("button");
-            boto_modificar.setAttribute("class", "btn btn-primary btn-lg");
+            boto_modificar.setAttribute("class", "btn btn-primary btn-lg editar");
             boto_modificar.setAttribute("id", id_llibre);
             boto_modificar.appendChild(val_boto_modificar);
 
@@ -85,18 +85,28 @@ function cridaApi() {
             tr.appendChild(td_6);
             lista.appendChild(tr);
         }))
-        .then(afegirEvent)
+        .then(afegirEventBorrar)
+        .then(afegirEventEditar)
         .catch(error => {
             console.log("Ha ocorregut un error realitzant la petició " + error);
         })
 }
 
-//Función para borrar autores
-function afegirEvent(){
+//Función para borrar libros
+function afegirEventBorrar(){
     var llistaBotons = document.getElementsByClassName("borrar");
 
     for(var i=0; i < llistaBotons.length; i++){
         llistaBotons[i].addEventListener("click", borrarLlibre);
+    }
+}
+
+//Función para editar libros
+function afegirEventEditar(){
+    var llistaBotons = document.getElementsByClassName("editar");
+    
+    for(var i=0; i < llistaBotons.length; i++){
+        this.titulo
     }
 }
 

@@ -4,6 +4,8 @@ function main(){
     cridaApi();
 }
 
+var arrayAux = [];
+
 function cridaApi(){
     var url = "https://www.serverred.es/api/autores";
     var lista = document.getElementById("files");
@@ -35,7 +37,7 @@ function cridaApi(){
 
                 //Botón para modificar el autor
                 var boto_editar = document.createElement("button");
-                boto_editar.setAttribute("class", "btn btn-primary btn-lqg");
+                boto_editar.setAttribute("class", "btn btn-primary btn-lqg editar");
                 boto_editar.setAttribute("id", id_autor);
                 boto_editar.appendChild(text_boto_editar);
 
@@ -59,15 +61,19 @@ function cridaApi(){
                 tr.appendChild(td_4);
 
                 lista.appendChild(tr);
+
+                arrayAux.push(element);
             })
         )
-        .then(afegirEvent)
+        .then(afegirEventBorrar)
+        .then(afegirEventEditar)
         .catch(error => {
             console.log("Ha ocorregut un error realitzant la petició " + error);
         })
 }
 
-function afegirEvent(){
+//Añadido de los eventos para borrar autores
+function afegirEventBorrar(){
     var llistaBotons = document.getElementsByClassName("borrar");
 
     for(var i=0; i < llistaBotons.length; i++){
@@ -75,6 +81,16 @@ function afegirEvent(){
     }
 }
 
+//Añadido de los eventos para editar autores
+function afegirEventEditar(){
+    var llistaBotons = document.getElementsByClassName("editar");
+    
+    for(var i=0; i < llistaBotons.length; i++){
+        llistaBotons[i].addEventListener("click", editarAutor);
+    }
+}
+
+//Función para borrar el autor seleccionado
 function borrarAutor(){
     var id = this.id;
     var url = "https://www.serverred.es/api/autores/"+id;
@@ -84,4 +100,20 @@ function borrarAutor(){
     })
     .then(location.reload())
 
+}
+
+//Función para enviar al formulario de edición del autor
+function editarAutor(){
+    arrayAux.forEach(element => {
+        if(this.id == element._id){
+            var objAutor = {
+                nombre: element.nombre,
+                año_nacimiento: element.año_nacimiento,
+                id: element._id
+            }
+            console.log(element._id);
+            localStorage.setItem("Autor", JSON.stringify(objAutor));
+        }
+    })
+    location.assign("../html/modificarAutors.html");
 }
