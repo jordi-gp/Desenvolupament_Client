@@ -106,10 +106,11 @@ function afegirEventEditar(){
     var llistaBotons = document.getElementsByClassName("editar");
     
     for(var i=0; i < llistaBotons.length; i++){
-        this.titulo
+        llistaBotons[i].addEventListener("click", editarLlibre);
     }
 }
 
+//Función para borrar el libro seleccionado
 function borrarLlibre(){
     var id = this.id;
     var url = "https://serverred.es/api/libros/"+id;
@@ -118,6 +119,23 @@ function borrarLlibre(){
         method: "DELETE"
     })
     .then(location.reload())
+}
+
+//Función para editar el libro seleccionado
+function editarLlibre(){
+    arrInfo.forEach((element, index) => {
+        if(this.id == element._id){
+            var objLlibre = {
+                autor: element.autor,
+                editorial: element.editorial,
+                precio: element.precio,
+                titulo: element.titulo,
+                id: element._id
+            }
+            localStorage.setItem("Llibre", JSON.stringify(objLlibre));
+        }
+    })
+    location.assign("../html/modificarLlibres.html");
 }
 
 function buscarAutor(val_autor) {

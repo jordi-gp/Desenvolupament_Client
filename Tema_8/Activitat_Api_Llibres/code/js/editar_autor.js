@@ -28,7 +28,8 @@ function rellenaCampos(){
 
 }
 
-//Validaciones de los formularios
+//Validación del formulario
+//Mostrado de errores del formulario
 function error2(element, missatge){
     var error = document.getElementById("missatgeError");
     var msgError = document.createTextNode(missatge);
@@ -60,7 +61,7 @@ function validar(e){
     if(validaNomAutor() && validaAnyNaix()){
         modificaAutor();
     } else {
-        console.log("No s'ha validao shurmano");
+        console.error("No se ha podido modificar el libro seleccionado")
     }
 }
 
@@ -114,6 +115,7 @@ function modificaAutor(){
         body: JSON.stringify(newAutor)
     })
     .then(response => response.json())
+    .then(location.assign("../html/llistatAutors.html"))
     .catch((error) => {
         console.log("Error => ", error);
     });

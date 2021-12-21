@@ -111,7 +111,6 @@ function editarAutor(){
                 año_nacimiento: element.año_nacimiento,
                 id: element._id
             }
-            console.log(element._id);
             localStorage.setItem("Autor", JSON.stringify(objAutor));
         }
     })
