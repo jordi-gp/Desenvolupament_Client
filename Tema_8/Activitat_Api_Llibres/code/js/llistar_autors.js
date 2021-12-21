@@ -29,7 +29,8 @@ function cridaApi(){
                 //Botones de la pàgina
                 //Botón para borrar el autor
                 var boto_borrar = document.createElement("button");
-                boto_borrar.setAttribute("class", "btn btn-primary btn-lg");
+                boto_borrar.setAttribute("class", "btn btn-primary btn-lg borrar");
+                boto_borrar.setAttribute("id", id_autor);
                 boto_borrar.appendChild(text_boto_borrar);
 
                 //Botón para modificar el autor
@@ -60,4 +61,27 @@ function cridaApi(){
                 lista.appendChild(tr);
             })
         )
+        .then(afegirEvent)
+        .catch(error => {
+            console.log("Ha ocorregut un error realitzant la petició " + error);
+        })
+}
+
+function afegirEvent(){
+    var llistaBotons = document.getElementsByClassName("borrar");
+
+    for(var i=0; i < llistaBotons.length; i++){
+        llistaBotons[i].addEventListener("click", borrarAutor);
+    }
+}
+
+function borrarAutor(){
+    var id = this.id;
+    var url = "https://www.serverred.es/api/autores/"+id;
+
+    fetch(url, {
+        method: "DELETE"
+    })
+    .then(location.reload())
+
 }

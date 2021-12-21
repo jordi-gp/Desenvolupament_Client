@@ -22,7 +22,6 @@ function main() {
 var arrInfo = [];
 var arrInfoAux = [];
 
-//TODO: mostrar el llistat de llibres
 function cridaApi() {
     var url = "https://www.serverred.es/api/libros";
     var lista = document.getElementById("files");
@@ -51,7 +50,7 @@ function cridaApi() {
 
             //Botones de la pàgina
             var boto_esborrar = document.createElement("button");
-            boto_esborrar.setAttribute("class", "btn btn-primary btn-lg");
+            boto_esborrar.setAttribute("class", "btn btn-primary btn-lg borrar");
             boto_esborrar.setAttribute("id", id_llibre);
             boto_esborrar.appendChild(val_boto_esborrar);
 
@@ -86,18 +85,37 @@ function cridaApi() {
             tr.appendChild(td_6);
             lista.appendChild(tr);
         }))
+        .then(afegirEvent)
         .catch(error => {
             console.log("Ha ocorregut un error realitzant la petició " + error);
         })
+}
+
+//Función para borrar autores
+function afegirEvent(){
+    var llistaBotons = document.getElementsByClassName("borrar");
+
+    for(var i=0; i < llistaBotons.length; i++){
+        llistaBotons[i].addEventListener("click", borrarLlibre);
+    }
+}
+
+function borrarLlibre(){
+    var id = this.id;
+    var url = "https://serverred.es/api/libros/"+id;
+
+    fetch(url, {
+        method: "DELETE"
+    })
+    .then(location.reload())
 }
 
 function buscarAutor(val_autor) {
     arrInfoAux.forEach(element => {
         if(val_autor == element._id){
             val_autor = element.nombre;
-        } else {
-            val_autor = "Autor esborrat";
-        }
+            return val_autor;
+        }        
     });
     return val_autor;
 }

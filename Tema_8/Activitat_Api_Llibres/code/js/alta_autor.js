@@ -24,7 +24,6 @@ function validaNomAutor(){
 
 //Validación del campo de año de nacimiento
 function validaAnyNaix(){
-    debugger;
     var anyNaix = document.getElementById("anynaix");
 
     console.log(anyNaix.checkValidity());
@@ -74,6 +73,7 @@ function validar(e){
     //Llamamiento de funciones de validación creadas
     if(validaNomAutor() && validaAnyNaix()){
         creaAutor();
+        location.assign("../html/index.html");
         return true;
     } else {
         return false;
