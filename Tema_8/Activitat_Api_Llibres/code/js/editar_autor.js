@@ -113,9 +113,10 @@ function modificaAutor(){
             "Content-Type": "application/json",
         },
         body: JSON.stringify(newAutor)
+        
     })
     .then(response => response.json())
-    .then(location.assign("../html/llistatAutors.html"))
+    .then(data => location.assign("../html/llistatAutors.html"))
     .catch((error) => {
         console.log("Error => ", error);
     });

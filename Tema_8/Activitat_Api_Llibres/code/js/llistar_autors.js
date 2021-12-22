@@ -17,14 +17,11 @@ function cridaApi(){
                 //Valores obtenidos del 'JSON'
                 var ano_nacimiento = element.año_nacimiento;
                 var nombre_autor = element.nombre;
-                //var num_mods = element.__v;
                 var id_autor = element._id;
 
                 //Nodos de texto
                 var val_ano_nac = document.createTextNode(ano_nacimiento);
                 var val_nombre_aut = document.createTextNode(nombre_autor);
-                //var val_num_mods = document.createTextNode(num_mods);
-                //var val_id_aut = document.createTextNode(id_autor);
                 var text_boto_editar = document.createTextNode("Modificar");
                 var text_boto_borrar = document.createTextNode("Esborrar");
 
@@ -34,12 +31,14 @@ function cridaApi(){
                 boto_borrar.setAttribute("class", "btn btn-primary btn-lg borrar");
                 boto_borrar.setAttribute("id", id_autor);
                 boto_borrar.appendChild(text_boto_borrar);
+                boto_borrar.addEventListener("click", borrarAutor);
 
                 //Botón para modificar el autor
                 var boto_editar = document.createElement("button");
                 boto_editar.setAttribute("class", "btn btn-primary btn-lqg editar");
                 boto_editar.setAttribute("id", id_autor);
                 boto_editar.appendChild(text_boto_editar);
+                boto_editar.addEventListener("click", editarAutor);
 
                 //Elementos del documento 'HTML'
                 var tr = document.createElement("tr");
@@ -65,29 +64,9 @@ function cridaApi(){
                 arrayAux.push(element);
             })
         )
-        .then(afegirEventBorrar)
-        .then(afegirEventEditar)
         .catch(error => {
             console.log("Ha ocorregut un error realitzant la petició " + error);
         })
-}
-
-//Añadido de los eventos para borrar autores
-function afegirEventBorrar(){
-    var llistaBotons = document.getElementsByClassName("borrar");
-
-    for(var i=0; i < llistaBotons.length; i++){
-        llistaBotons[i].addEventListener("click", borrarAutor);
-    }
-}
-
-//Añadido de los eventos para editar autores
-function afegirEventEditar(){
-    var llistaBotons = document.getElementsByClassName("editar");
-    
-    for(var i=0; i < llistaBotons.length; i++){
-        llistaBotons[i].addEventListener("click", editarAutor);
-    }
 }
 
 //Función para borrar el autor seleccionado
@@ -98,8 +77,8 @@ function borrarAutor(){
     fetch(url, {
         method: "DELETE"
     })
-    .then(location.reload())
-
+    var elementEsborrar = document.getElementById(id);
+    elementEsborrar.parentNode.parentNode.parentNode.removeChild(elementEsborrar.parentNode.parentNode);
 }
 
 //Función para enviar al formulario de edición del autor

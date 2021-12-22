@@ -47,6 +47,7 @@ function creaLlibre(){
         body: JSON.stringify(llibreNou),
     })
     .then(response => response.json())
+    .then(data => location.assign("../html/llistatLlibres.html"))
     .catch((error) => {
         console.log("Error:", error)
     })

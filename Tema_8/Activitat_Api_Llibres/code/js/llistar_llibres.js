@@ -15,8 +15,6 @@ function main() {
         .catch(error => {
             console.log("Ha ocorregut un error realitzant la petició " + error);
         })
-
-
 }
 
 var arrInfo = [];
@@ -53,11 +51,13 @@ function cridaApi() {
             boto_esborrar.setAttribute("class", "btn btn-primary btn-lg borrar");
             boto_esborrar.setAttribute("id", id_llibre);
             boto_esborrar.appendChild(val_boto_esborrar);
+            boto_esborrar.addEventListener("click", borrarLlibre);
 
             var boto_modificar = document.createElement("button");
             boto_modificar.setAttribute("class", "btn btn-primary btn-lg editar");
             boto_modificar.setAttribute("id", id_llibre);
             boto_modificar.appendChild(val_boto_modificar);
+            boto_modificar.addEventListener("click", editarLlibre);
 
             //Elementos del documento 'HTML'
             var tr = document.createElement("tr");
@@ -85,8 +85,8 @@ function cridaApi() {
             tr.appendChild(td_6);
             lista.appendChild(tr);
         }))
-        .then(afegirEventBorrar)
-        .then(afegirEventEditar)
+        // .then(afegirEventBorrar)
+        // .then(afegirEventEditar)
         .catch(error => {
             console.log("Ha ocorregut un error realitzant la petició " + error);
         })
@@ -112,13 +112,14 @@ function afegirEventEditar(){
 
 //Función para borrar el libro seleccionado
 function borrarLlibre(){
-    var id = this.id;
+    var id = this.id;  
     var url = "https://serverred.es/api/libros/"+id;
 
     fetch(url, {
         method: "DELETE"
     })
-    .then(location.reload())
+    var elementEsborrar = document.getElementById(id);
+    elementEsborrar.parentNode.parentNode.parentNode.removeChild(elementEsborrar.parentNode.parentNode);
 }
 
 //Función para editar el libro seleccionado

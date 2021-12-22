@@ -185,7 +185,7 @@ function modificaLlibre(){
         body: JSON.stringify(newLlibre),
     })
     .then(response => response.json())
-    .then(location.assign("../html/llistatLlibres.html"))
+    .then(data => location.assign("../html/llistatLlibres.html"))
     .catch((error) => {
         console.log("Error => ", error)
     })
