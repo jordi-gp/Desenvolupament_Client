@@ -85,8 +85,6 @@ function cridaApi() {
             tr.appendChild(td_6);
             lista.appendChild(tr);
         }))
-        // .then(afegirEventBorrar)
-        // .then(afegirEventEditar)
         .catch(error => {
             console.log("Ha ocorregut un error realitzant la petició " + error);
         })

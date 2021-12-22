@@ -73,7 +73,6 @@ function validar(e){
     //Llamamiento de funciones de validación creadas
     if(validaNomAutor() && validaAnyNaix()){
         creaAutor();
-        location.assign("../html/index.html");
         return true;
     } else {
         return false;
@@ -99,6 +98,7 @@ function creaAutor(){
         body: JSON.stringify(autor),
     })
     .then(response => response.json())
+    .then(data => location.assign("../html/llistatAutors.html"))
     .catch((error) => {
         console.log("Error => ", error)
     });

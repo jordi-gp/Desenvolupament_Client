@@ -2,9 +2,11 @@ window.onload = main;
 
 function main(){
     cridaApi();
+    obtinInfo();
 }
 
 var arrayAux = [];
+var arrAuxLib = [];
 
 function cridaApi(){
     var url = "https://www.serverred.es/api/autores";
@@ -31,7 +33,8 @@ function cridaApi(){
                 boto_borrar.setAttribute("class", "btn btn-primary btn-lg borrar");
                 boto_borrar.setAttribute("id", id_autor);
                 boto_borrar.appendChild(text_boto_borrar);
-                boto_borrar.addEventListener("click", borrarAutor);
+                //boto_borrar.addEventListener("click", borrarAutor);
+                boto_borrar.addEventListener("click", comprovar);
 
                 //Botón para modificar el autor
                 var boto_editar = document.createElement("button");
@@ -69,9 +72,37 @@ function cridaApi(){
         })
 }
 
+//Obtención de la información almacenada en la api de libros
+function obtinInfo(){
+    const urlLlibres = "https://serverred.es/api/libros";
+    
+    fetch(urlLlibres)
+        .then(response => response.json())
+        .then(data => data.resultado.forEach(element => {
+            arrAuxLib.push(element);
+        }))
+}
+
+//Comprovación de que el autor no tiene libros a su nombre
+function comprovar(){
+    var contador = 0;
+
+    arrAuxLib.forEach(element => {
+        if(this.id == element.autor){
+            contador++;
+            return contador;
+        }
+    })
+
+    if(contador >= 1){
+        window.alert("Estas tractant de borrar un autor que té llibres associats prro!");
+    } else {
+        borrarAutor(this.id);
+    }
+}
+
 //Función para borrar el autor seleccionado
-function borrarAutor(){
-    var id = this.id;
+function borrarAutor(id){
     var url = "https://www.serverred.es/api/autores/"+id;
 
     fetch(url, {
