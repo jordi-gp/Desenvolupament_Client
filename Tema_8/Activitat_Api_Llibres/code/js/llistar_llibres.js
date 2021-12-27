@@ -90,6 +90,16 @@ function cridaApi() {
         })
 }
 
+function buscarAutor(val_autor) {
+    arrInfoAux.forEach(element => {
+        if(val_autor == element._id){
+            val_autor = element.nombre;
+            return val_autor;
+        }
+    });
+    return val_autor;
+}
+
 //Función para borrar libros
 function afegirEventBorrar(){
     var llistaBotons = document.getElementsByClassName("borrar");
@@ -135,14 +145,4 @@ function editarLlibre(){
         }
     })
     location.assign("../html/modificarLlibres.html");
-}
-
-function buscarAutor(val_autor) {
-    arrInfoAux.forEach(element => {
-        if(val_autor == element._id){
-            val_autor = element.nombre;
-            return val_autor;
-        }        
-    });
-    return val_autor;
 }
