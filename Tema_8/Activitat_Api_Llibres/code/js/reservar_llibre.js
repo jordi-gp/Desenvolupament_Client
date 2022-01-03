@@ -17,6 +17,7 @@ function main(){
 }
 
 var usuario;
+var cliente;
 var arrayInfo = [];
 var arrayInfoAux = [];
 const apiLibros = "https://serverred.es/api/libros";
@@ -57,6 +58,7 @@ function listaLibros(){
         var checkBox = document.createElement("input");
         checkBox.type = "checkbox";
         checkBox.setAttribute("id", element._id);
+        checkBox.addEventListener("click", compraLlibre);
 
         //Elementos del documento 'HTML'
         var tr = document.createElement("tr");
@@ -81,13 +83,16 @@ function listaLibros(){
         tr.appendChild(td_5);
 
         lista.appendChild(tr);
-        console.log(element);
 
         arrayInfo.push(element);
+        
     }))
-    // .then(filtrar())
+    .then(filtro => {
+        filtrar();
+    })
 }
 
+//Función para mostrar el nombre de los autores en la lista
 function buscarAutor(autor) {
     arrayInfoAux.forEach(element => {
         if(autor == element._id){
@@ -100,7 +105,38 @@ function buscarAutor(autor) {
 
 //Función del filtro para buscar libros
 function filtrar() {
+    var arrTitulos = [];
+
+    arrayInfo.forEach(element => {
+        arrTitulos.push(element.titulo);
+    })
+    
     $("#titol").autocomplete({
-        source:"https://serverred.es/api/libros/titulo/filtro"
+        source:arrTitulos
     });
+}
+
+//Función para comprar libros
+function compraLlibre(){
+    getCliente();
+    var newPedido;
+
+    arrayInfo.forEach(element => {
+        if(this.id == element._id){
+            newPedido = {
+                nombreCliente: cliente.nombre,
+                libroComprado: element.titulo
+            }
+        }
+        localStorage.setItem("newPedido", JSON.stringify(newPedido));
+    })
+    location.assign("../html/reservarConfirmar.html");
+}
+
+//Función para crear obtener el nombre del cliente
+function getCliente() {
+    if(JSON.parse(localStorage.getItem("Usuario")) != null) {
+        cliente = JSON.parse(localStorage.getItem("Usuario"));
+        return cliente;
+    }
 }
