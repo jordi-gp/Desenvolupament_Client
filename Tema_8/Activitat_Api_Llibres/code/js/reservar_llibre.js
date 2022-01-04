@@ -124,7 +124,9 @@ function compraLlibre(){
     arrayInfo.forEach(element => {
         if(this.id == element._id){
             newPedido = {
+                idCliente: cliente.id,
                 nombreCliente: cliente.nombre,
+                idLibro: element._id,
                 libroComprado: element.titulo
             }
         }

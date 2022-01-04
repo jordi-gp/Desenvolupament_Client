@@ -61,6 +61,7 @@ function confirmarUsuario() {
     arrInfo.forEach(element => {
         if(this.id == element._id){
             var objUsuario = {
+                id: element._id,
                 nombre: element.nombre,
                 email: element.email
             }

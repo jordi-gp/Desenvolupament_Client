@@ -4,7 +4,6 @@ function main(){
     document.getElementById("btnGravar").addEventListener("click", validar, false);
 }
 
-
 //Campo de las validaciones
 //Validación del nombre del autor
 function validaNomAutor(){
