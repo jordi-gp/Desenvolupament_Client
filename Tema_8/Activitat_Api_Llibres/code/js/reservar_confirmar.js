@@ -38,11 +38,11 @@ function establirData() {
     var campData = document.getElementById("dataPrestec");    
 
     if(mes < 10) {
-        mes = "0"+mes;
+        mes = "0" + mes;
     }
 
     if(mes < 10) {
-        dia = "0"+dia;
+        dia = "0" + dia;
     }
 
     var fechaAct = any+"-"+mes+"-"+dia;
@@ -135,12 +135,19 @@ function addReserva() {
     var dateVal = document.getElementById("dataPrestec").value;
     var dataRes = new Date(dateVal);
 
+    //Fecha de devolución
+    var dataDev = new Date();
+    dataDev.setDate(dataRes.getDate() + diesDev);
+
     //Objeto a añadir a la API
     var reserva = {
         usuario: newReserva.idCliente,
         libro: newReserva.idLibro,
-        fecha: dataRes
+        fecha: dataRes,
+        fechaDevolucion: dataDev
     }
+
+    console.log(dataDev);
 
     //Subida del objeto a la API
     fetch(apiLlibres, {
