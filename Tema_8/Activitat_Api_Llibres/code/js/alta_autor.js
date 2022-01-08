@@ -17,7 +17,6 @@ function validaNomAutor(){
         }
         return false;
     }
-    //esborrarError();
     return true;
 }
 
@@ -36,7 +35,6 @@ function validaAnyNaix(){
         }
         return false;
     }
-    //esborrarError();
     return true;
 }
 
@@ -92,9 +90,9 @@ function creaAutor(){
     fetch(apiAutors, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
         },
-        body: JSON.stringify(autor),
+        body: JSON.stringify(autor)
     })
     .then(response => response.json())
     .then(data => location.assign("../html/llistatAutors.html"))
