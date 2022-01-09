@@ -57,13 +57,12 @@ function getDataDev() {
     var dataParse = new Date(dataVal);
 
     //Suma de los dias de devolución en función de la fecha seleccionada
-    var dataDevolucio = new Date();
-    dataDevolucio.setDate(dataParse.getDate() + diesDev);
+    dataParse.setDate(dataParse.getDate() + diesDev);
 
     //Conversión a string de la fecha de devolución
-    var anyDev = dataDevolucio.getFullYear();
-    var mesDev = dataDevolucio.getMonth() + 1;
-    var diaDev = dataDevolucio.getDate();
+    var anyDev = dataParse.getFullYear();
+    var mesDev = dataParse.getMonth() + 1;
+    var diaDev = dataParse.getDate();
 
     var fechaDev = diaDev+"/"+mesDev+"/"+anyDev;
     var valFechaDev = document.createTextNode(fechaDev);
