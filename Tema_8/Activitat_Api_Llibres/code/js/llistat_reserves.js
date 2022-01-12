@@ -15,7 +15,7 @@ const apiReservas = "https://serverred.es/api/reservas";
 const apiUsuarios = "https://serverred.es/api/usuarios";
 
 //Obtención de la información de la api de usuarios
-function getUsuarios(idUsuario){
+function getUsuarios(){
     fetch(apiUsuarios)
     .then(response => response.json())
     .then(data => {

@@ -41,7 +41,7 @@ function establirData() {
         mes = "0" + mes;
     }
 
-    if(mes < 10) {
+    if(dia < 10) {
         dia = "0" + dia;
     }
 
