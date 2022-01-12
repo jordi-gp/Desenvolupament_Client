@@ -45,16 +45,14 @@
                     <a id="user" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Àrea personal
                     </a>
-                 
 
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li><a class="dropdown-item" href="areaPersonal.html"><i class="fa fa-fw fa-cog"></i>Perfil Usuari</a></li>
                       <li><a class="dropdown-item" href="register.html"><i class="fa fa-fw fa-user-plus"></i>Registre</a></li>
                       <li><a class="dropdown-item" href="login.html"><i class="fa fa-fw fa-user"></i>Login</a></li>
                       <li><a class="dropdown-item" href="logout.html"><i class="fa fa-fw fa-power-off "></i>Logout</a></li>
-                     </ul>
+                    </ul>
                   </li>
-                     
                 </div>
             </ul>
               </div>
@@ -65,35 +63,35 @@
         <h1>Registrar nou usuari</h1>
         <h4 class="text-danger" id="missatgeError"></h4>
         <form>
+          <!--Nombre del usuario-->
           <div class="form-group">
             <label for="nom">Nom</label>
-            <input type="text" class="form-control" id="nom" name="nom" placeholder="Introduir nom">
+            <input type="text" class="form-control" id="nom" name="nom" placeholder="Jordi Garcia Pons" pattern="[A-Z]{1}[a-z]{2,15}[\s][A-Z]{1}[a-z]{2,15}[\s][A-Z]{1}[a-z]{2,15}" required>
           </div>
+          <!--Correo electrónico del usuario-->
           <div class="form-group">
             <label for="email">Correu electrònic</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Introduir email" >
+            <input type="email" class="form-control" id="email" name="email" placeholder="jordigarcia932@gmail.com" pattern="^\w{3,15}@\w{3,15}\.\w{2,3}$" required>
           </div>
           <div class="form-group">
+            <!--Contraseña del usuario-->
             <div class="row">
               <div class="col">
                 <label for="password">Contrasenya</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Contrasenya" >
+                <input type="password" class="form-control" id="password" name="password" placeholder="Contrasenya" pattern="[\w]{3,20}" required>
               </div>
+              <!--Contraseña del usuario repetida-->
               <div class="col">
                 <label for="passwordc">Repetir contrasenya</label>
-                <input type="password" class="form-control" id="passwordc" name="passwordc" placeholder=" Repetir contrasenya">
+                <input type="password" class="form-control" id="passwordc" name="passwordc" placeholder=" Repetir contrasenya" pattern="[\w]{3,20}" required>
               </div>
             </div>
-
           <button type="submit" id="enviar" class="mt-2 btn btn-primary">Registrar</button>
         </form>
-
     
     <footer class="mt-5">
         <p class="mx-auto">DWEC - Exercici Ajax 2021 - David Crespo</p>
     </footer>
-
-
 </body>
 </html>
 
