@@ -108,20 +108,30 @@ function getReservas() {
 
 //Búsqueda para obtener el nombre de usuario
 function buscarUsuario(idUsuario) {
-    infoUsu.forEach(element => {
-        if(idUsuario == element._id) {
-            idUsuario = element.nombre;
+    var idAux = "Usuario no encontrado";
+    var i = 0;  
+    
+    do{  
+        if(idUsuario == infoUsu[i]._id) {
+           idAux = infoUsu[i].nombre;
         }
-    })
-    return idUsuario;
+
+        i++;
+    } while(idAux == "Usuario no encontrado" && i < infoUsu.length);
+    return idAux;
 }
 
 //Búsqueda para obtener el nombre del libro reservado
 function buscarLibro(idLibro) {
-    infoLib.forEach(element => {
-        if(idLibro == element._id) {
-            idLibro = element.titulo;
+    var idLib = "Libro no encontrado";
+    var i = 0;
+
+    do {
+        if(idLibro == infoLib[i]._id) {
+            idLib = infoLib[i].titulo;
         }
-    })
-    return idLibro;
+
+        i++
+    } while(idLib == "Libro no encontrado" && i < infoLib.length);
+    return idLib;
 }
