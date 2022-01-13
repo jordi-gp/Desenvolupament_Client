@@ -68,15 +68,30 @@ function registraUsurio() {
 //Validación de la contraseña del usuario
 function validaContraseña() {
     var contraseña = document.getElementById("password");
-    var contraseñaRep = document.getElementById("passwordc");
 
     if(!contraseña.checkValidity()) {
         if(contraseña.validity.valueMissing) {
             error2(contraseña, "El campo de contraseña no se puede dejar en blanco");
         } else if(contraseña.validity.patternMismatch) {
             error2(contraseña, "El formato de la contraseña no es correcto");
-        } else if(contraseñaRep != contraseña) {
-            error2(contraseñaRep, "Las contraseñas no coinciden");
+        }
+        return false;
+    }
+    return true;
+}
+
+//Validación de la contraseña repetida
+function validaContraseñaRep() {
+    var contraseñaRep = document.getElementById("passwordc");
+    var contraseña = document.getElementById("password");
+
+    if(!contraseñaRep.checkValidity()) {
+        if(contraseñaRep.validity.valueMissing) {
+            error2(contraseñaRep, "Se ha de repetir la contraseña introducida");
+        } else if(contraseñaRep.validity.patternMismatch) {
+            error2(contraseñaRep, "La contraseña introducida no es correcta");
+        } else if(contraseñaRep.value != contraseña.value) {
+            error2(contraseñaRep, "Las dos contraseñas han de coincidir");
         }
         return false;
     }
@@ -88,8 +103,10 @@ function validar(e) {
     e.preventDefault();
     esborrarError();
 
-    if(validaNom() && validaEmail() && validaContraseña()) {
-        registraUsurio();
+    if(validaNom() & validaEmail() && validaContraseña() && validaContraseñaRep()) {
+        //registraUsurio();
+        console.log(document.getElementById("passwordc").value)
+        return true;
     } else {
         return false;
     }
