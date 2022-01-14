@@ -47,7 +47,6 @@ function registraUsurio() {
         name: nom.value,
         email: email.value,
         password: contraseña.value,
-        avatar: ""
     }
 
     //Subida del objeto a la API
@@ -60,6 +59,7 @@ function registraUsurio() {
         body: JSON.stringify(usuario)
     })
     .then(response => response.json())
+    .then(data => console.log(data))
     .catch((error) => {
         console.log("Ha ocurrido un error => ", error)
     })
@@ -68,12 +68,15 @@ function registraUsurio() {
 //Validación de la contraseña del usuario
 function validaContraseña() {
     var contraseña = document.getElementById("password");
+    var contraseñaRep = document.getElementById("passwordc");
 
     if(!contraseña.checkValidity()) {
         if(contraseña.validity.valueMissing) {
             error2(contraseña, "El campo de contraseña no se puede dejar en blanco");
         } else if(contraseña.validity.patternMismatch) {
             error2(contraseña, "El formato de la contraseña no es correcto");
+        } else if(contraseña.value != contraseñaRep.value) {
+            error2(contraseñaRep, "Les contraseñes han de coincidir");
         }
         return false;
     }
@@ -90,9 +93,11 @@ function validaContraseñaRep() {
             error2(contraseñaRep, "Se ha de repetir la contraseña introducida");
         } else if(contraseñaRep.validity.patternMismatch) {
             error2(contraseñaRep, "La contraseña introducida no es correcta");
-        } else if(contraseñaRep.value != contraseña.value) {
-            error2(contraseñaRep, "Las dos contraseñas han de coincidir");
         }
+        return false;
+    }
+    if(contraseña.value != contraseñaRep.value) {
+        error2(contraseñaRep, "Las dos contraseñas han de coincidir");
         return false;
     }
     return true;
@@ -103,9 +108,8 @@ function validar(e) {
     e.preventDefault();
     esborrarError();
 
-    if(validaNom() & validaEmail() && validaContraseña() && validaContraseñaRep()) {
-        //registraUsurio();
-        console.log(document.getElementById("passwordc").value)
+    if(validaNom() & validaEmail() /*&& validaContraseña()*/ && validaContraseñaRep()) {
+        registraUsurio();
         return true;
     } else {
         return false;
