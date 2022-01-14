@@ -75,29 +75,11 @@ function validaContraseña() {
             error2(contraseña, "El campo de contraseña no se puede dejar en blanco");
         } else if(contraseña.validity.patternMismatch) {
             error2(contraseña, "El formato de la contraseña no es correcto");
-        } else if(contraseña.value != contraseñaRep.value) {
-            error2(contraseñaRep, "Les contraseñes han de coincidir");
-        }
-        return false;
-    }
-    return true;
-}
-
-//Validación de la contraseña repetida
-function validaContraseñaRep() {
-    var contraseñaRep = document.getElementById("passwordc");
-    var contraseña = document.getElementById("password");
-
-    if(!contraseñaRep.checkValidity()) {
-        if(contraseñaRep.validity.valueMissing) {
-            error2(contraseñaRep, "Se ha de repetir la contraseña introducida");
-        } else if(contraseñaRep.validity.patternMismatch) {
-            error2(contraseñaRep, "La contraseña introducida no es correcta");
         }
         return false;
     }
     if(contraseña.value != contraseñaRep.value) {
-        error2(contraseñaRep, "Las dos contraseñas han de coincidir");
+        error2(contraseñaRep, "Las contraseñas han de coincidir");
         return false;
     }
     return true;
@@ -108,7 +90,7 @@ function validar(e) {
     e.preventDefault();
     esborrarError();
 
-    if(validaNom() & validaEmail() /*&& validaContraseña()*/ && validaContraseñaRep()) {
+    if(validaNom() & validaEmail() && validaContraseña()) {
         registraUsurio();
         return true;
     } else {
