@@ -59,7 +59,17 @@ function registraUsurio() {
         body: JSON.stringify(usuario)
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    //Comprovación de que el email no ha sido registrado anteriormente
+    .then(data => {
+        if(data.error != null) {
+            var msgError = document.createTextNode(data.error);
+            var error = document.getElementById("missatgeError");
+
+            error.appendChild(msgError);
+        } else {
+            location.assign("../html/login.html");
+        }
+    })
     .catch((error) => {
         console.log("Ha ocurrido un error => ", error)
     })
