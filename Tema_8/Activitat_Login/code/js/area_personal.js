@@ -3,7 +3,10 @@ window.onload = main;
 function main() {
     compruebaLog();
     infoForm();
+    document.getElementById("enviarAvatar").addEventListener("click", cambiaAvatar);
 }
+
+const api = "https://userprofile.serverred.es/api/areapersonal";
 
 //Comprovación de que el usuario esta logeado
 function compruebaLog() {
@@ -13,8 +16,6 @@ function compruebaLog() {
         var auth_token = JSON.parse(localStorage.getItem("auth-token"));
 
         //Obtención de la información almacenada en la API
-        const api = "https://userprofile.serverred.es/api/areapersonal";
-
         fetch(api, {
             method: "GET",
             headers: {
@@ -42,6 +43,32 @@ function compruebaLog() {
             avatar.setAttribute("src", "../../img/profile-pic.png");
         })
     }
+}
+
+//Función para cambiar el avatar del usuario
+function cambiaAvatar(e) {
+    if(JSON.parse(localStorage.getItem("auth-token")) != null) {
+        var token = JSON.parse(localStorage.getItem("auth-token"));
+    }
+
+    const formData = new formData();
+    const img = document.querySelector("input[type='file']");
+
+    formData.append("avatar", img.files[0]);
+
+    fetch(api, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept": "application/json",
+            "auth-token": token.token
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .catch(error => {
+        console.log("Error => ", error);
+    })
 }
 
 function infoForm() {
