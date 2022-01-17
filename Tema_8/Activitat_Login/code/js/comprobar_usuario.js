@@ -28,7 +28,16 @@ function compruebaLog() {
             //Imagen del usuario
             var imgAvatar = document.getElementById("avatar");
 
-            imgAvatar.setAttribute("src", "../../img/profile-pic.png")
+            if(data.data.user.avatar == null) {
+                imgAvatar.setAttribute("src", "../../img/profile-pic.png");
+            } else {
+                imgAvatar.setAttribute("src", "https://userprofile.serverred.es/public/img/"+data.data.user.avatar);
+                if(document.getElementById("avatarAP") != null) {
+                    document.getElementById("avatarAP").setAttribute("src", "https://userprofile.serverred.es/public/img/"+data.data.user.avatar);
+                }
+                compruebaLog();
+            }
+            
         })
     }
 }

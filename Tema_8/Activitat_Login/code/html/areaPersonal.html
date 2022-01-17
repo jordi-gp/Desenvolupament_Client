@@ -83,25 +83,24 @@
 
           <div class="form-group">
             <label for="nom">Nom</label>
-            <input type="text" class="form-control" id="nom" name="nom" placeholder="Introduir nom" pattern="[A-Z]{1}[a-z]{2,15}[\s][A-Z]{1}[a-z]{2,15}[\s][A-Z]{1}[a-z]{2,15}" required>
+            <input type="text" class="form-control" id="nom" name="nom" placeholder="Introduir nom"
+              pattern="[A-Z]{1}[a-z]{2,15}[\s][A-Z]{1}[a-z]{2,15}[\s][A-Z]{1}[a-z]{2,15}" required>
           </div>
 
           <div class="form-group">
             <label for="passworda">Contrasenya Actual</label>
-            <input type="password" class="form-control" id="passworda" name="passworda"
-              placeholder="Introduir contrasenya actual" >
-            </div>
-  
-            <div class=" form-group">
+            <input type="password" class="form-control" id="passworda" name="passworda" placeholder="Introduir contrasenya actual" pattern="[\w]{6,20}" required>
+          </div>
+
+          <div class=" form-group">
             <div class="row">
               <div class="col">
                 <label for="password">Nova Contrasenya</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Contrasenya">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Contrasenya" pattern="[\w]{6,20}" required>
               </div>
               <div class="col">
                 <label for="passwordc">Repetir contrasenya</label>
-                <input type="password" class="form-control" id="passwordc" name="passwordc"
-                  placeholder=" Repetir contrasenya">
+                <input type="password" class="form-control" id="passwordc" name="passwordc" placeholder=" Repetir contrasenya" pattern="[\w]{6,20}" required>
               </div>
             </div>
           </div>
