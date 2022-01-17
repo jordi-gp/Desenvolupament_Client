@@ -14,7 +14,7 @@
     crossorigin="anonymous"></script>
   <!-- Load an icon library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- <script src="../js/comprobar_usuario.js"></script> -->
+  <script src="../js/comprobar_usuario.js"></script>
   <script src="../js/area_personal.js"></script>
   <title>Menu APP</title>
 </head>
@@ -83,14 +83,13 @@
 
           <div class="form-group">
             <label for="nom">Nom</label>
-            <input type="text" class="form-control" id="nom" name="nom" placeholder="Introduir nom" pattern=".{8,255}"
-              required>
+            <input type="text" class="form-control" id="nom" name="nom" placeholder="Introduir nom" pattern="[A-Z]{1}[a-z]{2,15}[\s][A-Z]{1}[a-z]{2,15}[\s][A-Z]{1}[a-z]{2,15}" required>
           </div>
 
           <div class="form-group">
             <label for="passworda">Contrasenya Actual</label>
             <input type="password" class="form-control" id="passworda" name="passworda"
-              placeholder="Introduir contrasenya actual" ">
+              placeholder="Introduir contrasenya actual" >
             </div>
   
             <div class=" form-group">

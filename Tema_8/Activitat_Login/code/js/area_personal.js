@@ -2,70 +2,75 @@ window.onload = main;
 
 function main() {
     compruebaLog();
+    infoUsu();
     infoForm();
     document.getElementById("enviarAvatar").addEventListener("click", cambiaAvatar);
 }
 
 const api = "https://userprofile.serverred.es/api/areapersonal";
+const apiAvatar = "https://userprofile.serverred.es/api/areapersonal/avatar";
 
 //Comprovación de que el usuario esta logeado
-function compruebaLog() {
-    if(JSON.parse(localStorage.getItem("auth-token")) == null) {
-        location.assign("../html/login.html");
-    } else {
-        var auth_token = JSON.parse(localStorage.getItem("auth-token"));
+function infoUsu() {
+    //Token del usuario
+    var auth_token = JSON.parse(localStorage.getItem("auth-token"));
 
-        //Obtención de la información almacenada en la API
-        fetch(api, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "auth-token": auth_token.token
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            //Nombre del usuario
-            var nombreUsu = data.data.user.name;
+    //Obtención de la información almacenada en la API
+    fetch(api, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "auth-token": auth_token.token
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        //Nombre del usuario
+        var nombreUsu = data.data.user.name;
 
-            var nombre = document.createTextNode(nombreUsu);
-            var info = document.getElementById("user");
-            var nom = document.getElementById("nom");
+        var nombre = document.createTextNode(nombreUsu);
+        var info = document.getElementById("user");
+        var nom = document.getElementById("nom");
 
-            info.replaceChildren(nombre);
-            nom.setAttribute("value", nombreUsu);
+        info.replaceChildren(nombre);
+        nom.setAttribute("value", nombreUsu);
 
-            //Imagen del usuario
-            var imgAvatar = document.getElementById("avatar");
-            var avatar = document.getElementById("avatarAP");
+        //Imagen del usuario
+        var imgAvatar = document.getElementById("avatar");
+        var avatar = document.getElementById("avatarAP");
 
-            imgAvatar.setAttribute("src", "../../img/profile-pic.png")
-            avatar.setAttribute("src", "../../img/profile-pic.png");
-        })
-    }
+        imgAvatar.setAttribute("src", "../../img/profile-pic.png")
+        avatar.setAttribute("src", "../../img/profile-pic.png");
+    })
 }
+
 
 //Función para cambiar el avatar del usuario
 function cambiaAvatar(e) {
+    e.preventDefault();
+
     if(JSON.parse(localStorage.getItem("auth-token")) != null) {
         var token = JSON.parse(localStorage.getItem("auth-token"));
     }
 
-    const formData = new formData();
+    var nom = document.getElementById("nom").value;
+
+    const formData = new FormData();
     const img = document.querySelector("input[type='file']");
 
     formData.append("avatar", img.files[0]);
 
-    fetch(api, {
+
+    fetch(apiAvatar, {
         method: "PUT",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/json",
             "auth-token": token.token
         },
         body: formData
     })
     .then(response => response.json())
+    .then(data => console.log(data))
     .catch(error => {
         console.log("Error => ", error);
     })

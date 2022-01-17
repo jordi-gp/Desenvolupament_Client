@@ -1,9 +1,3 @@
-window.onload = main;
-
-function main() {
-    compruebaLog();
-}
-
 //Comprovación de que el usuario esta logeado
 function compruebaLog() {
     if(JSON.parse(localStorage.getItem("auth-token")) == null) {
