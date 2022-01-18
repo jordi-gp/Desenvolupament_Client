@@ -13,7 +13,7 @@ function compruebaLog() {
             headers: {
                 "Content-Type": "application/json",
                 "auth-token": auth_token.token
-            },
+            }
         })
         .then(response => response.json())
         .then(data => {
