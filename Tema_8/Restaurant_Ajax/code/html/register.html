@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<!-- Load an icon library -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="../js/validar_register.js"></script>
 
-    <title>Menu APP</title>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+  </script>
+  <!-- Load an icon library -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="../js/validar_register.js"></script>
+
+  <title>Menu APP</title>
 </head>
+
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,8 +45,16 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
             <li class="nav-item">
               <a class="nav-link" href="#"><i class="fas fa-fw fa-utensils"></i>Sala</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"><i class="far fa-folder-open"></i>Gestión</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="far fa-folder-open"></i>Gestión</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="mesas.html">Mesas</a>
+                <a class="dropdown-item" href="bebidas.html">Bebidas</a>
+                <a class="dropdown-item" href="platos.html">Platos</a>
+                <a class="dropdown-item" href="comandas.html">Comandas</a>
+              </ul>
             </li>
 
             <li>
@@ -78,36 +91,38 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
       </div>
     </nav>
   </header>
-    <div class="container">
-        <h1>Registrar nou usuari</h1>
-        <h4 class="text-danger" id="missatgeError"></h4>
-        <form>
-          <div class="form-group">
-            <label for="nom">Nombre</label>
-            <input type="text" class="form-control" id="nom" name="nom" placeholder="Introduir nom" >
+  <div class="container">
+    <h1>Registrar nou usuari</h1>
+    <h4 class="text-danger" id="missatgeError"></h4>
+    <form>
+      <div class="form-group">
+        <label for="nom">Nombre</label>
+        <input type="text" class="form-control" id="nom" name="nom" placeholder="Introduir nom">
+      </div>
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Introducir email">
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <label for="password">Contraseña</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
           </div>
-          <div class="form-group">
-            <label for="email">Correo electrónico</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Introducir email"  >
+          <div class="col">
+            <label for="passwordc">Repetir contraseña</label>
+            <input type="password" class="form-control" id="passwordc" name="passwordc"
+              placeholder=" Repetir contraseña">
           </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col">
-                <label for="password">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
-              </div>
-              <div class="col">
-                <label for="passwordc">Repetir contraseña</label>
-                <input type="password" class="form-control" id="passwordc" name="passwordc" placeholder=" Repetir contraseña" >
-              </div>
-            </div>
+        </div>
 
-          <button type="submit" id="enviar" class="mt-2 btn btn-primary">Registrar</button>
-        </form>
+        <button type="submit" id="enviar" class="mt-2 btn btn-primary">Registrar</button>
+    </form>
 
-    
-        <footer class="mt-5">
-          <p class="mx-auto">DWEC - Restaurante 2022 - David Crespo </p>
-        </footer>
+
+    <footer class="mt-5">
+      <p class="mx-auto">DWEC - Restaurante 2022 - David Crespo </p>
+    </footer>
 </body>
+
 </html>
