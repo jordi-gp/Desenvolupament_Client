@@ -20,6 +20,8 @@ function getToken() {
 
 //Obtención de la información de las mesas
 function getMesas() {
+    document.getElementById("formulario").setAttribute("class", "visually-hidden");
+
     fetch(apiMesas, {
             method: "GET",
             headers: {
@@ -54,7 +56,7 @@ function getMesas() {
             boto_editar.setAttribute("class", "btn btn-primary btn-lg editar");
             boto_editar.setAttribute("id", idMesa);
             boto_editar.appendChild(val_boto_editar);
-            boto_editar.addEventListener("click", editarMesa);
+            boto_editar.addEventListener("click", getInfoMesa);
 
             //Elements del HTML
             var tr = document.createElement("tr");
@@ -86,49 +88,167 @@ function getMesas() {
 
 //TODO: Función para añadir nuevas mesas
 function añadirMesa() {
+    borrarFormulario();
     var formulario = document.getElementById("formulario");
     formulario.setAttribute("class", "");
 
-    //document.getElementById("cancelar").addEventListener("click", borrarFormulario);
     //document.getElementById("confirmar").addEventListener("click", validar);
+    document.getElementById("cancelar").addEventListener("click", cancelar => {
+        borrarFormulario();
+        document.getElementById("formulario").setAttribute("class", "visually-hidden");
+    });
 }
 
-//TODO: validar formulario
-//TODO: borrar formulario añadido
-//TODO: añadir nueva mesa
+//Borrar formulario añadido
+function borrarFormulario() {
+    var formulario = document.forms[0];
+
+    for(var i=0; i < formulario.elements.length - 2; i++) {
+        formulario.elements[i].setAttribute("value", "");
+    }
+}
 
 //Función para editar las mesas
-function editarMesa() {
+function getInfoMesa() {
     var formulario = document.getElementById("formulario");
     formulario.setAttribute("class", "");
-    console.log(this.parentNode.parentNode.childNodes)
-
     var llista = this.parentNode.parentNode.childNodes;
-    //console.log(llista[3].innerText)
 
-    document.getElementById("numero").setAttribute("value", llista[2].innerText)
+    document.getElementById("_id").setAttribute("value", this.id);
+    document.getElementById("numero").setAttribute("value", llista[2].innerText);
     document.getElementById("comensales").setAttribute("value", llista[3].innerText);
     document.getElementById("descripcion").setAttribute("value", llista[4].innerText);
 
-    var id = document.getElementById("_id").value = this.id;
-
+    document.getElementById("confirmar").addEventListener("click", editarMesa);
+    document.getElementById("cancelar").addEventListener("click", cancelar => {
+        //borrarFormulario();
+        document.getElementById("formulario").setAttribute("class", "visually-hidden");
+    });
 }
 
+//Función para editar la mesa seleccionada
+function editarMesa() {
+    borrarErrores();
+
+    if(validaNumMesa() && validaNumComensales() && validaDescripcion()) {
+        //En caso de validar el formulario
+        var numMesa = document.getElementById("numero").value;
+        var numComensales = document.getElementById("comensales").value;
+        var descripcion = document.getElementById("descripcion").value;
+
+        var mesa = {
+            comensales: numComensales,
+            descripcion: descripcion,
+            numero: numMesa
+        }
+
+        var idMesa = document.getElementById("_id").value;
+        var urlMesa = apiMesas+"/"+idMesa;
+
+        fetch(urlMesa, {
+            method:"PUT",
+            headers: {
+                "Content-type": "application/json",
+                "auth-token": token.token
+            },
+            body: JSON.stringify(mesa)
+        })
+        .then(response => response.json())
+        .then(getMesas())
+        .catch((error) => {
+            console.log("Error => ", error)
+        });
+        return true;
+    } else {
+        return false;
+    }
+}
 
 //TODO:Función para comprovar que la mesa esta vacia
-function comprovarMesa() {
+// function comprovarMesa() {
 
-}
+// }
 
 //TODO:Función para eliminar la mesa
-function borrarMesa(id) {
-    console.log(this.id);
-    // var url = apiMesas+"/"+id;
+// function borrarMesa(id) {
+//     console.log(this.id);
+//     var url = apiMesas+"/"+id;
 
-    // fetch(url, {
-    //     method: "DELETE"
-    // })
+//     fetch(url, {
+//         method: "DELETE"
+//     })
 
-    // var mesaBorrada = document.getElementById(id);
-    // mesaBorrada.parentNode.parentNode.parentNode.removeChild(mesaBorrada.parentNode.parentNode);
+//     var mesaBorrada = document.getElementById(id);
+//     mesaBorrada.parentNode.parentNode.parentNode.removeChild(mesaBorrada.parentNode.parentNode);
+// }
+
+//Validaciones del formulario
+function validaNumMesa() {
+    var mesa = document.getElementById("numero");
+
+    if(!mesa.checkValidity()) {
+        if(mesa.validity.valueMissing) {
+            error2(mesa, "Se ha de indicar el número de la mesa");
+        } else if(mesa.validity.patternMismatch) {
+            error2(mesa, "El número de mesa introducido no es correcto");
+        } else if(mesa.validity.rangeOverflow) {
+            error2(mesa, "El número de mesa no puede ser superior a 100");
+        } else if(mesa.validity.rangeUnderflow) {
+            error2(mesa, "El número de mesa no puede ser inferior a 1");
+        }
+        return false;
+    }
+    return true;
+}
+
+function validaNumComensales() {
+    var numComensales = document.getElementById("comensales");
+
+    if(!numComensales.checkValidity()) {
+        if(numComensales.validity.valueMissing) {
+            error2(numComensales, "Se ha de indicar de forma obligatoria el número de comensales");
+        } else if(numComensales.validity.patternMismatch) {
+            error2(numComensales, "El número introducido no es correcto");
+        } else if(numComensales.validity.rangeOverflow) {
+            error2(numComensales, "El número de comensales no puede ser superior a 50");
+        } else if(numComensales.validity.rangeUnderflow) {
+            error2(numComensales, "El número de comensales no puede ser inferior a 1");
+        }
+        return false;
+    }
+    return true;
+}
+
+function validaDescripcion() {
+    var descripcion = document.getElementById("descripcion");
+
+    if(!descripcion.checkValidity()) {
+        if(descripcion.validity.valueMissing) {
+            error2(descripcion, "Se ha de proporcionar una descripción");
+        }
+        return false;
+    }
+    return true;
+}
+
+//Mostrado y borrado de errores en el formulario
+function error2(element, missatge) {
+    var msgError = document.createTextNode(missatge);
+    var error = document.getElementById("missatgeError");
+
+    error.replaceChildren(msgError);
+    element.focus();
+}
+
+function borrarErrores() {
+    var formulario = document.forms[0];
+
+    for(var i = 0; i < formulario.elements.length; i++) {
+        formulario.elements[i].className = "form-control";
+    }
+
+    var msgError = document.createTextNode("");
+    var error = document.getElementById("missatgeError");
+
+    error.replaceChildren(msgError);
 }
