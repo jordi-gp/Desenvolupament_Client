@@ -4,7 +4,7 @@ function main() {
     compruebaLog();
     getToken();
     getMesas();
-    document.getElementById("newMesa").addEventListener("click", añadirMesa);
+    document.getElementById("newMesa").addEventListener("click", nuevaMesa);
 }
 
 var token = "";
@@ -49,7 +49,7 @@ function getMesas() {
             boto_borrar.setAttribute("class", "btn btn-primary btn-lg borrar");
             boto_borrar.setAttribute("id", idMesa);
             boto_borrar.appendChild(val_boto_borrar);
-            //TODO: boto_borrar.addEventListener("click", borrarMesa);
+            boto_borrar.addEventListener("click", borrarMesa);
 
             //Botó per a editar la taula
             var boto_editar = document.createElement("button");
@@ -86,25 +86,60 @@ function getMesas() {
         }));
 }
 
+//Borrar formulario añadido
+function borrarFormulario() {
+    var formulario = document.forms[0];
+
+    for (var i = 0; i < formulario.elements.length - 2; i++) {
+        formulario.elements[i].setAttribute("value", "");
+    }
+}
+
 //TODO: Función para añadir nuevas mesas
-function añadirMesa() {
+function nuevaMesa() {
     borrarFormulario();
     var formulario = document.getElementById("formulario");
     formulario.setAttribute("class", "");
 
-    //document.getElementById("confirmar").addEventListener("click", validar);
+    document.getElementById("confirmar").addEventListener("click", anyadirMesa, false);
     document.getElementById("cancelar").addEventListener("click", cancelar => {
         borrarFormulario();
         document.getElementById("formulario").setAttribute("class", "visually-hidden");
     });
 }
 
-//Borrar formulario añadido
-function borrarFormulario() {
-    var formulario = document.forms[0];
+function anyadirMesa() {
+    borrarErrores();
+    //e.preventDefault();
 
-    for(var i=0; i < formulario.elements.length - 2; i++) {
-        formulario.elements[i].setAttribute("value", "");
+    if (validaNumMesa() && validaNumComensales() && validaDescripcion()) {
+        //En caso de ser válido el formulario
+        var numMesa = document.getElementById("numero").value;
+        var numComensales = document.getElementById("comensales").value;
+        var descripcion = document.getElementById("descripcion").value;
+
+        var newMesa = {
+            comensales: numComensales,
+            descripcion: descripcion,
+            numero: numMesa
+        }
+
+        fetch(apiMesas, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": token.token
+                },
+                body: JSON.stringify(newMesa)
+            })
+            .then(response => response.json())
+            getMesas()
+            .catch((error) => {
+                console.log("Error => ", error)
+            });
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -130,7 +165,7 @@ function getInfoMesa() {
 function editarMesa() {
     borrarErrores();
 
-    if(validaNumMesa() && validaNumComensales() && validaDescripcion()) {
+    if (validaNumMesa() && validaNumComensales() && validaDescripcion()) {
         //En caso de validar el formulario
         var numMesa = document.getElementById("numero").value;
         var numComensales = document.getElementById("comensales").value;
@@ -143,21 +178,21 @@ function editarMesa() {
         }
 
         var idMesa = document.getElementById("_id").value;
-        var urlMesa = apiMesas+"/"+idMesa;
+        var urlMesa = apiMesas + "/" + idMesa;
 
         fetch(urlMesa, {
-            method:"PUT",
-            headers: {
-                "Content-type": "application/json",
-                "auth-token": token.token
-            },
-            body: JSON.stringify(mesa)
-        })
-        .then(response => response.json())
-        .then(getMesas())
-        .catch((error) => {
-            console.log("Error => ", error)
-        });
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json",
+                    "auth-token": token.token
+                },
+                body: JSON.stringify(mesa)
+            })
+            .then(response => response.json())
+            .then(getMesas())
+            .catch((error) => {
+                console.log("Error => ", error)
+            });
         return true;
     } else {
         return false;
@@ -170,30 +205,37 @@ function editarMesa() {
 // }
 
 //TODO:Función para eliminar la mesa
-// function borrarMesa(id) {
-//     console.log(this.id);
-//     var url = apiMesas+"/"+id;
+function borrarMesa(id) {
+    console.log(this.id);
+    id = this.id;
+    var url = apiMesas+"/"+id;
 
-//     fetch(url, {
-//         method: "DELETE"
-//     })
+    fetch(url, {
+        method: "DELETE",
+        headers: {
+            "auth-token": token.token
+        }
+    })
+    .catch((error) => {
+        console.log("Error => ", error)
+    });
 
-//     var mesaBorrada = document.getElementById(id);
-//     mesaBorrada.parentNode.parentNode.parentNode.removeChild(mesaBorrada.parentNode.parentNode);
-// }
+    var mesaBorrada = document.getElementById(id);
+    mesaBorrada.parentNode.parentNode.parentNode.removeChild(mesaBorrada.parentNode.parentNode);
+}
 
 //Validaciones del formulario
 function validaNumMesa() {
     var mesa = document.getElementById("numero");
 
-    if(!mesa.checkValidity()) {
-        if(mesa.validity.valueMissing) {
+    if (!mesa.checkValidity()) {
+        if (mesa.validity.valueMissing) {
             error2(mesa, "Se ha de indicar el número de la mesa");
-        } else if(mesa.validity.patternMismatch) {
+        } else if (mesa.validity.patternMismatch) {
             error2(mesa, "El número de mesa introducido no es correcto");
-        } else if(mesa.validity.rangeOverflow) {
+        } else if (mesa.validity.rangeOverflow) {
             error2(mesa, "El número de mesa no puede ser superior a 100");
-        } else if(mesa.validity.rangeUnderflow) {
+        } else if (mesa.validity.rangeUnderflow) {
             error2(mesa, "El número de mesa no puede ser inferior a 1");
         }
         return false;
@@ -204,14 +246,14 @@ function validaNumMesa() {
 function validaNumComensales() {
     var numComensales = document.getElementById("comensales");
 
-    if(!numComensales.checkValidity()) {
-        if(numComensales.validity.valueMissing) {
+    if (!numComensales.checkValidity()) {
+        if (numComensales.validity.valueMissing) {
             error2(numComensales, "Se ha de indicar de forma obligatoria el número de comensales");
-        } else if(numComensales.validity.patternMismatch) {
+        } else if (numComensales.validity.patternMismatch) {
             error2(numComensales, "El número introducido no es correcto");
-        } else if(numComensales.validity.rangeOverflow) {
+        } else if (numComensales.validity.rangeOverflow) {
             error2(numComensales, "El número de comensales no puede ser superior a 50");
-        } else if(numComensales.validity.rangeUnderflow) {
+        } else if (numComensales.validity.rangeUnderflow) {
             error2(numComensales, "El número de comensales no puede ser inferior a 1");
         }
         return false;
@@ -222,8 +264,8 @@ function validaNumComensales() {
 function validaDescripcion() {
     var descripcion = document.getElementById("descripcion");
 
-    if(!descripcion.checkValidity()) {
-        if(descripcion.validity.valueMissing) {
+    if (!descripcion.checkValidity()) {
+        if (descripcion.validity.valueMissing) {
             error2(descripcion, "Se ha de proporcionar una descripción");
         }
         return false;
@@ -243,7 +285,7 @@ function error2(element, missatge) {
 function borrarErrores() {
     var formulario = document.forms[0];
 
-    for(var i = 0; i < formulario.elements.length; i++) {
+    for (var i = 0; i < formulario.elements.length; i++) {
         formulario.elements[i].className = "form-control";
     }
 
