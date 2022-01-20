@@ -45,7 +45,7 @@ function addBebida(element) {
     //Botón para editar la bebida
     var botonEditar = document.createElement("button");
     botonEditar.appendChild(valBotonEditar);
-    botonEditar.setAttribute("class", "btn btn-primary btn-lg editar")
+    botonEditar.setAttribute("class", "btn btn-primary btn-lg editar");
     botonEditar.setAttribute("id", idBebida);
 
     //Elementos del HTML
@@ -89,15 +89,15 @@ function getBebidas() {
 }
 
 function mostrarFormulario() {
+    //TODO: solucionar esta porqueria
     var form = document.forms[0];
 
     for(var i=0; i < form.elements.length; i++) {
         form.elements[i].setAttribute("value", "");
-        console.log(form.elements[i].value)
     }
 
-    var formulraio = document.getElementById("formulario");
-    formulraio.setAttribute("class", "");
+    var formulario = document.getElementById("formulario");
+    formulario.setAttribute("class", "");
 
     document.getElementById("confirmar").addEventListener("click", validar, false);
     document.getElementById("cancelar").addEventListener("click", ocultarForm => {
@@ -185,7 +185,6 @@ function validaPrecioBebida() {
 }
 
 //Apartado de formulario
-//TODO: validar el formulario
 function validar(e) {
     e.preventDefault();
     borrarErrores();
@@ -196,7 +195,7 @@ function validar(e) {
         if(id == "") {
             nuevaBebida();
         } else {
-            console.log("edicio de beguda");
+            console.log("edicion de bebida");
         }
     }
 }

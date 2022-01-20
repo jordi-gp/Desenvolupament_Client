@@ -17,10 +17,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <script src="../js/comprobar_usuario.js"></script>
+    <script src="../js/platos.js"></script>
   <title>App Restaurante</title>
 </head>
-
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -55,16 +55,14 @@
                 <a class="dropdown-item" href="comandas.html">Comandas</a>
               </ul>
             </li>
-
             <li>
               <hr class="dropdown-divider">
             </li>
           </ul>
-
           <ul class="navbar-nav mb-2 mb-lg-0">
             <div class="d-flex">
               <a id="areaPersonal" class="navbar-text nav-link" href="#">
-                <img id="avatar" src="/img/profile-pic.png" alt="" style="width: 2em"
+                <img id="avatar" src="../../img/profile-pic.png" alt="" style="width: 2em"
                   class="img-responsive user-avatar-md rounded-circle">
               </a>
               <li class="nav-item dropdown">
@@ -72,8 +70,6 @@
                   data-bs-toggle="dropdown" aria-expanded="false">
                   Àrea personal
                 </a>
-
-
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="areaPersonal.html"><i class="fa fa-fw fa-cog"></i>Perfil
                       Usuario</a></li>
@@ -83,7 +79,6 @@
                   <li><a class="dropdown-item" href="logout.html"><i class="fa fa-fw fa-power-off "></i>Logout</a></li>
                 </ul>
               </li>
-
             </div>
           </ul>
         </div>
@@ -93,7 +88,6 @@
   <div class="container">
     <h1>Platos</h1>
     <button class=" btn btn-primary btn-lg my-3" id="newPlato"> Nuevo Plato</button></br>
-
     <form id="formulario" class="visually-hidden">
       <div class="row">
         <div class="col">
@@ -116,17 +110,13 @@
         </div>
         <div class="col">
           <label for="precio">Precio</label>
-          <input type="number" class="form-control" id="precio">
+          <input type="number" class="form-control" id="precio" min=0 required>
           <button type="submit" id="cancelar" class="mt-2 btn btn-primary">Cancelar</button>
           <button type="submit" id="confirmar" class="mt-2 btn btn-primary">Confirmar</button>
         </div>
-
       </div>
-
     </form>
-
     <h4 class="text-danger" id="missatgeError"></h4>
-
     <table class="table">
       <thead class="thead-light">
         <tr>
@@ -138,15 +128,11 @@
         </tr>
       </thead>
       <tbody id="files">
-
       </tbody>
     </table>
-
     <footer class="mt-5">
       <p class="mx-auto">DWEC - Restaurante 2022 - David Crespo </p>
     </footer>
   </div>
-
 </body>
-
 </html>

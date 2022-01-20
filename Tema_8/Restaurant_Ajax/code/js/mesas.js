@@ -160,10 +160,6 @@ function getInfoMesa() {
     document.getElementById("comensales").setAttribute("value", llista[3].innerText);
     document.getElementById("descripcion").setAttribute("value", llista[4].innerText);
 
-    console.log(llista[2].innerText)
-    console.log(llista[3].innerText)
-    console.log(llista[4].innerText)
-
     document.getElementById("confirmar").addEventListener("click", (e) => {
         e.preventDefault();
         editarMesa();
