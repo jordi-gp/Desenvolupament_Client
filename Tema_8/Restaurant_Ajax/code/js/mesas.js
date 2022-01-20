@@ -18,6 +18,61 @@ function getToken() {
     return token;
 }
 
+function addMesa(element) {
+    //Información obtenida del JSON
+    var numMesa = element.numero;
+    var numComensales = element.comensales;
+    var descripcion = element.descripcion;
+    var idMesa = element._id;
+
+    //Nodos de texto utilizados
+    var val_boto_borrar = document.createTextNode("Borrar");
+    var val_boto_editar = document.createTextNode("Editar");
+    var val_numMesa = document.createTextNode(numMesa);
+    var val_numComensales = document.createTextNode(numComensales);
+    var val_descripcion = document.createTextNode(descripcion);
+
+    //Botó per borrar la taula
+    var boto_borrar = document.createElement("button");
+    boto_borrar.setAttribute("class", "btn btn-primary btn-lg borrar");
+    boto_borrar.setAttribute("id", idMesa);
+    boto_borrar.appendChild(val_boto_borrar);
+    boto_borrar.addEventListener("click", borrarMesa);
+
+    //Botó per a editar la taula
+    var boto_editar = document.createElement("button");
+    boto_editar.setAttribute("class", "btn btn-primary btn-lg editar");
+    boto_editar.setAttribute("id", idMesa);
+    boto_editar.appendChild(val_boto_editar);
+    boto_editar.addEventListener("click", getInfoMesa);
+
+    //Elements del HTML
+    var tr = document.createElement("tr");
+    var td1 = document.createElement("td");
+    var td2 = document.createElement("td");
+    var td3 = document.createElement("td");
+    var td4 = document.createElement("td");
+    var td5 = document.createElement("td");
+
+    //Añadido de información a las columnas
+    td1.appendChild(boto_borrar);
+    td2.appendChild(boto_editar);
+    td3.appendChild(val_numMesa);
+    td4.appendChild(val_numComensales);
+    td5.appendChild(val_descripcion);
+
+    //Añadido de las columnas a las filas
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    tr.appendChild(td4);
+    tr.appendChild(td5);
+
+    //Añadido de la tabla al documento
+    var tabla = document.getElementById("files");
+    tabla.appendChild(tr);
+}
+
 //Obtención de la información de las mesas
 function getMesas() {
     document.getElementById("formulario").setAttribute("class", "visually-hidden");
@@ -31,58 +86,7 @@ function getMesas() {
         })
         .then(response => response.json())
         .then(data => data.data.data.forEach(element => {
-            //Información obtenida del JSON
-            var numMesa = element.numero;
-            var numComensales = element.comensales;
-            var descripcion = element.descripcion;
-            var idMesa = element._id;
-
-            //Nodos de texto utilizados
-            var val_boto_borrar = document.createTextNode("Borrar");
-            var val_boto_editar = document.createTextNode("Editar");
-            var val_numMesa = document.createTextNode(numMesa);
-            var val_numComensales = document.createTextNode(numComensales);
-            var val_descripcion = document.createTextNode(descripcion);
-
-            //Botó per borrar la taula
-            var boto_borrar = document.createElement("button");
-            boto_borrar.setAttribute("class", "btn btn-primary btn-lg borrar");
-            boto_borrar.setAttribute("id", idMesa);
-            boto_borrar.appendChild(val_boto_borrar);
-            boto_borrar.addEventListener("click", borrarMesa);
-
-            //Botó per a editar la taula
-            var boto_editar = document.createElement("button");
-            boto_editar.setAttribute("class", "btn btn-primary btn-lg editar");
-            boto_editar.setAttribute("id", idMesa);
-            boto_editar.appendChild(val_boto_editar);
-            boto_editar.addEventListener("click", getInfoMesa);
-
-            //Elements del HTML
-            var tr = document.createElement("tr");
-            var td1 = document.createElement("td");
-            var td2 = document.createElement("td");
-            var td3 = document.createElement("td");
-            var td4 = document.createElement("td");
-            var td5 = document.createElement("td");
-
-            //Añadido de información a las columnas
-            td1.appendChild(boto_borrar);
-            td2.appendChild(boto_editar);
-            td3.appendChild(val_numMesa);
-            td4.appendChild(val_numComensales);
-            td5.appendChild(val_descripcion);
-
-            //Añadido de las columnas a las filas
-            tr.appendChild(td1);
-            tr.appendChild(td2);
-            tr.appendChild(td3);
-            tr.appendChild(td4);
-            tr.appendChild(td5);
-
-            //Añadido de la tabla al documento
-            var tabla = document.getElementById("files");
-            tabla.appendChild(tr);
+            addMesa(element)
         }));
 }
 
@@ -90,8 +94,9 @@ function getMesas() {
 function borrarFormulario() {
     var formulario = document.forms[0];
 
-    for (var i = 0; i < formulario.elements.length - 2; i++) {
+    for (var i = 0; i < formulario.elements.lengt - 2; i++) {
         formulario.elements[i].setAttribute("value", "");
+        console.log(formulario.elements[i]);
     }
 }
 
@@ -108,9 +113,9 @@ function nuevaMesa() {
     });
 }
 
-function anyadirMesa() {
+function anyadirMesa(e) {
     borrarErrores();
-    //e.preventDefault();
+    e.preventDefault();
 
     if (validaNumMesa() && validaNumComensales() && validaDescripcion()) {
         //En caso de ser válido el formulario
@@ -133,7 +138,8 @@ function anyadirMesa() {
                 body: JSON.stringify(newMesa)
             })
             .then(response => response.json())
-            getMesas()
+            .then(data => addMesa(data.resultado))
+            .then(borrarFormulario())
             .catch((error) => {
                 console.log("Error => ", error)
             });
@@ -154,9 +160,17 @@ function getInfoMesa() {
     document.getElementById("comensales").setAttribute("value", llista[3].innerText);
     document.getElementById("descripcion").setAttribute("value", llista[4].innerText);
 
-    document.getElementById("confirmar").addEventListener("click", editarMesa);
+    console.log(llista[2].innerText)
+    console.log(llista[3].innerText)
+    console.log(llista[4].innerText)
+
+    document.getElementById("confirmar").addEventListener("click", (e) => {
+        e.preventDefault();
+        editarMesa();
+    })
+    // document.getElementById("confirmar").addEventListener("click", editarMesa);
     document.getElementById("cancelar").addEventListener("click", cancelar => {
-        //borrarFormulario();
+        borrarFormulario();
         document.getElementById("formulario").setAttribute("class", "visually-hidden");
     });
 }
@@ -164,12 +178,21 @@ function getInfoMesa() {
 //Función para editar la mesa seleccionada
 function editarMesa() {
     borrarErrores();
+    // e.preventDefault();
 
     if (validaNumMesa() && validaNumComensales() && validaDescripcion()) {
         //En caso de validar el formulario
+        var id = document.getElementById("_id").value;
         var numMesa = document.getElementById("numero").value;
         var numComensales = document.getElementById("comensales").value;
         var descripcion = document.getElementById("descripcion").value;
+
+        var valId = document.createTextNode(id);
+        var valNumMesa = document.createTextNode(numMesa);
+        var valNumComen = document.createTextNode(numComensales);
+        var valDescripcion = document.createTextNode(descripcion);
+
+        var fila = document.getElementById(id).parentNode.parentNode.childNodes;
 
         var mesa = {
             comensales: numComensales,
@@ -189,10 +212,16 @@ function editarMesa() {
                 body: JSON.stringify(mesa)
             })
             .then(response => response.json())
-            .then(getMesas())
+            .then(cambiar => {
+                fila[2].replaceChildren(valNumMesa);
+                fila[3].replaceChildren(valNumComen);
+                fila[4].replaceChildren(valDescripcion);
+                document.getElementById("formulario").setAttribute("class", "visually-hidden");
+            })
             .catch((error) => {
                 console.log("Error => ", error)
             });
+
         return true;
     } else {
         return false;
@@ -208,17 +237,17 @@ function editarMesa() {
 function borrarMesa(id) {
     console.log(this.id);
     id = this.id;
-    var url = apiMesas+"/"+id;
+    var url = apiMesas + "/" + id;
 
     fetch(url, {
-        method: "DELETE",
-        headers: {
-            "auth-token": token.token
-        }
-    })
-    .catch((error) => {
-        console.log("Error => ", error)
-    });
+            method: "DELETE",
+            headers: {
+                "auth-token": token.token
+            }
+        })
+        .catch((error) => {
+            console.log("Error => ", error)
+        });
 
     var mesaBorrada = document.getElementById(id);
     mesaBorrada.parentNode.parentNode.parentNode.removeChild(mesaBorrada.parentNode.parentNode);
