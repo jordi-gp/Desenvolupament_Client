@@ -237,7 +237,7 @@ function editarMesa() {
 function borrarMesa(id) {
     console.log(this.id);
     id = this.id;
-    var url = apiMesas + "/" + id;
+    var url = apiMesas+"/"+id;
 
     fetch(url, {
             method: "DELETE",
