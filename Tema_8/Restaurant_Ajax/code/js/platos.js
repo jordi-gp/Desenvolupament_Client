@@ -155,7 +155,6 @@ function editarPlato() {
 
     var info = Array.from(ordenPlato.options);
     info.forEach(element => {
-        console.log(lista[3].innerText)
         if (lista[3].innerText == element.value) {
             element.selected = true;
         }

@@ -47,6 +47,7 @@ function addBebida(element) {
     botonEditar.appendChild(valBotonEditar);
     botonEditar.setAttribute("class", "btn btn-primary btn-lg editar");
     botonEditar.setAttribute("id", idBebida);
+    botonEditar.addEventListener("click", editarBebida);
 
     //Elementos del HTML
     var tr = document.createElement("tr");
@@ -92,7 +93,7 @@ function mostrarFormulario() {
     //TODO: solucionar esta porqueria
     var form = document.forms[0];
 
-    for(var i=0; i < form.elements.length; i++) {
+    for (var i = 0; i < form.elements.length; i++) {
         form.elements[i].setAttribute("value", "");
     }
 
@@ -100,7 +101,8 @@ function mostrarFormulario() {
     formulario.setAttribute("class", "");
 
     document.getElementById("confirmar").addEventListener("click", validar, false);
-    document.getElementById("cancelar").addEventListener("click", ocultarForm => {
+    document.getElementById("cancelar").addEventListener("click", function (e) {
+        e.preventDefault();
         document.getElementById("formulario").setAttribute("class", "visually-hidden");
     })
 }
@@ -119,35 +121,87 @@ function nuevaBebida() {
 
     //Petición a la API para añadir una nueva bebida
     fetch(apiBebidas, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "auth-token": token.token
-        },
-        body: JSON.stringify(bebida)
-    })
-    .then(response => response.json())
-    .then(data => addBebida(data.resultado))
-    .catch((error) => {
-        console.log("Error => ", error);
-    })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": token.token
+            },
+            body: JSON.stringify(bebida)
+        })
+        .then(response => response.json())
+        .then(data => addBebida(data.resultado))
+        .catch((error) => {
+            console.log("Error => ", error);
+        })
     document.getElementById("formulario").setAttribute("class", "visually-hidden");
+}
+
+//Edición de la bebida seleccionada
+function editarBebida() {
+    mostrarFormulario();
+
+    var lista = this.parentNode.parentNode.childNodes;
+
+    //Información del formulario
+    var idBebida = document.getElementById("_id");
+    var nombreBebida = document.getElementById("nombre");
+    var precioBebida = document.getElementById("precio");
+
+    idBebida.setAttribute("value", this.id);
+    nombreBebida.setAttribute("value", lista[2].innerText);
+    precioBebida.setAttribute("value", lista[3].innerText);
+}
+
+//Función para enviar la bebida editada
+function enviaEdicion() {
+    //Información del usuario
+    var idBebida = document.getElementById("_id");
+    var nombreBebida = document.getElementById("nombre");
+    var precioBebida = document.getElementById("precio");
+
+    var lista = document.getElementById(idBebida.value).parentNode.parentNode.childNodes;
+
+    //Objeto de tipo bebida actualizado
+    var bebidaAct = {
+        nombre: nombreBebida.value,
+        precio: precioBebida.value
+    }
+
+    var url = apiBebidas + "/" + idBebida.value;
+
+    fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": token.token
+            },
+            body: JSON.stringify(bebidaAct)
+        })
+        .then(response => response.json())
+        .then(cambiar => {
+            lista[2].replaceChildren(nombreBebida.value);
+            lista[3].replaceChildren(precioBebida.value);
+            document.getElementById("formulario").setAttribute("class", "visually-hidden");
+        })
+        .catch((error) => {
+            console.log("Error => ", error);
+        })
 }
 
 //Eliminación de la bebida seleccionada
 function eliminarBebida() {
     id = this.id;
-    var url = apiBebidas+"/"+id;
+    var url = apiBebidas + "/" + id;
 
     fetch(url, {
-        method: "DELETE",
-        headers: {
-            "auth-token": token.token
-        }
-    })
-    .catch((error) => {
-        console.log("Error => ", error);
-    })
+            method: "DELETE",
+            headers: {
+                "auth-token": token.token
+            }
+        })
+        .catch((error) => {
+            console.log("Error => ", error);
+        })
 
     var bebidaBorrada = document.getElementById(id);
     bebidaBorrada.parentNode.parentNode.parentNode.removeChild(bebidaBorrada.parentNode.parentNode);
@@ -157,10 +211,10 @@ function eliminarBebida() {
 function validaNombreBebida() {
     var nombreBebida = document.getElementById("nombre");
 
-    if(!nombreBebida.checkValidity()) {
-        if(nombreBebida.validity.valueMissing) {
+    if (!nombreBebida.checkValidity()) {
+        if (nombreBebida.validity.valueMissing) {
             error2(nombreBebida, "Se ha de proporcionar el nombre de la bebida");
-        } else if(nombreBebida.validity.patternMismatch) {
+        } else if (nombreBebida.validity.patternMismatch) {
             error2(nombreBebida, "El nombre introducido no es vàlido");
         }
         return false;
@@ -171,12 +225,12 @@ function validaNombreBebida() {
 function validaPrecioBebida() {
     var precioBebida = document.getElementById("precio");
 
-    if(!precioBebida.checkValidity()) {
-        if(precioBebida.validity.valueMissing) {
+    if (!precioBebida.checkValidity()) {
+        if (precioBebida.validity.valueMissing) {
             error2(precioBebida, "Se ha de proporcionar un precio para la bebida");
-        } else if(precioBebida.validity.patternMismatch) {
+        } else if (precioBebida.validity.patternMismatch) {
             error2(precioBebida, "El precio introducido no es correcto");
-        } else if(precioBebida.validity.rangeUnderflow) {
+        } else if (precioBebida.validity.rangeUnderflow) {
             error2(precioBebida, "El precio de la bebida no puede ser inferior a 0");
         }
         return false;
@@ -191,11 +245,11 @@ function validar(e) {
 
     var id = document.getElementById("_id").value;
 
-    if(validaNombreBebida() && validaPrecioBebida()) {
-        if(id == "") {
+    if (validaNombreBebida() && validaPrecioBebida()) {
+        if (id == "") {
             nuevaBebida();
         } else {
-            console.log("edicion de bebida");
+            enviaEdicion();
         }
     }
 }
