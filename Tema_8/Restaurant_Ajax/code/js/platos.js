@@ -106,7 +106,7 @@ function mostrarFormulario() {
     document.getElementById("cancelar").addEventListener("click", function (e) {
         e.preventDefault();
         document.getElementById("formulario").setAttribute("class", "visually-hidden");
-    })
+    });
 }
 
 //Funciones de la pàgina
@@ -146,7 +146,6 @@ function editarPlato() {
     mostrarFormulario();
 
     var lista = this.parentNode.parentNode.childNodes;
-    console.log(lista);
 
     //Información del formulario
     var idPlato = document.getElementById("_id");
@@ -164,14 +163,11 @@ function editarPlato() {
 
     idPlato.setAttribute("value", this.id);
     nombrePlato.setAttribute("value", lista[2].innerText);
-    ordenPlato.setAttribute("selected", lista[3].innerText);
+    //ordenPlato.setAttribute("selected", lista[3].innerText);
     precioPlato.setAttribute("value", lista[4].innerText);
 }
 
 function enviaEdicion() {
-    //var lista = this.parentNode.parentNode.childNodes;
-    //console.log(lista);
-
     //Información del formulario
     var idPlato = document.getElementById("_id");
     var nombrePlato = document.getElementById("nombre");
@@ -247,6 +243,7 @@ function validaOrdenPlato() {
     var orden = document.getElementById("orden");
     if (orden.value == "Selecciona Orden") {
         error2(orden, "Se ha de seleccionar el orden del plato");
+        return false;
     } else {
         return true;
     }
