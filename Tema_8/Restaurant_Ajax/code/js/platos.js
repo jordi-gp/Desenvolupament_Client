@@ -2,9 +2,6 @@ window.onload = main;
 
 /**
  * TODO:
- * -Mostrar Platos
- * -Añadir Platos
- * -Borrar Platos
  * -Editar Platos
 */
 
@@ -148,18 +145,37 @@ function editarPlato() {
     mostrarFormulario();
     
     var lista = this.parentNode.parentNode.childNodes;
+    console.log(lista);
 
     //Información del formulario
-    var idMesa = document.getElementById("_id");
+    var idPlato = document.getElementById("_id");
     var nombrePlato = document.getElementById("nombre");
     var ordenPlato = document.getElementById("orden");
     var precioPlato = document.getElementById("precio");
 
+    var info = Array.from(ordenPlato.options);
+    info.forEach(element => {
+        console.log(lista[3].innerText)
+        if(lista[3].innerText == element.value) {
+            element.selected = true;
+        }
+    });
 
-    idMesa.setAttribute("value", this.id);
+    idPlato.setAttribute("value", this.id);
     nombrePlato.setAttribute("value", lista[2].innerText);
-    ordenPlato.setAttribute("value", lista[3].innerText);
+    ordenPlato.setAttribute("selected", lista[3].innerText);
     precioPlato.setAttribute("value", lista[4].innerText);
+}
+
+function enviaEdicion() {
+    var lista = this.parentNode.parentNode.childNodes;
+    console.log(lista);
+
+    //Información del formulario
+    var idPlato = document.getElementById("_id");
+    var nombrePlato = document.getElementById("nombre");
+    var ordenPlato = document.getElementById("orden");
+    var precioPlato = document.getElementById("precio");
 
     //Objeto de tipo plato actualizado
     var platoAct = {
@@ -168,27 +184,26 @@ function editarPlato() {
         precio: precioPlato.value
     }
 
-    var url = apiPlatos+"/"+idMesa.value;
-    console.log(url);
+    var url = apiPlatos+"/"+idPlato.value;
 
-    // fetch(url, {
-    //     method: "PUT",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //         "auth-token": token.token
-    //     },
-    //     body: JSON.stringify(platoAct)
-    // })
-    // .then(response => response.json())
-    // .then(cambiar => {
-    //     lista[2].replaceChildren(nombrePlato.value);
-    //     lista[3].replaceChildren(ordenPlato.value);
-    //     lista[4].replaceChildren(precioPlato.value);
-    //     document.getElementById("formulario").setAttribute("class", "visually-hidden");
-    // })
-    // .catch((error) => {
-    //     console.log("Error => ", error);
-    // })
+    fetch(url, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "auth-token": token.token
+        },
+        body: JSON.stringify(platoAct)
+    })
+    .then(response => response.json())
+    .then(cambiar => {
+        lista[2].replaceChildren(nombrePlato.value);
+        lista[3].replaceChildren(ordenPlato.value);
+        lista[4].replaceChildren(precioPlato.value);
+        document.getElementById("formulario").setAttribute("class", "visually-hidden");
+    })
+    .catch((error) => {
+        console.log("Error => ", error);
+    })
 }
 
 //Función para eliminar el plato seleccionado
@@ -257,10 +272,9 @@ function validar(e) {
 
     if(validaNombrePlato() && validaOrdenPlato() && validaPrecioPlato()) {
         if(id == "") {
-            console.log("añadido de nuevo plato");
             nuevoPlato();
         } else {
-            editarPlato();
+            enviaEdicion();
         }
     }
 }
