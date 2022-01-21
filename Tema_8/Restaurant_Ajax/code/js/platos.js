@@ -3,7 +3,7 @@ window.onload = main;
 /**
  * TODO:
  * -Editar Platos
-*/
+ */
 
 function main() {
     compruebaLog();
@@ -16,7 +16,7 @@ var token = "";
 const apiPlatos = "https://restaurante.serverred.es/api/platos";
 
 function getToken() {
-    if(JSON.parse(localStorage.getItem("auth-token")) != null) {
+    if (JSON.parse(localStorage.getItem("auth-token")) != null) {
         token = JSON.parse(localStorage.getItem("auth-token"));
     }
     return token;
@@ -80,30 +80,31 @@ function addPlato(element) {
 //Mostrado de platos
 function getPlatos() {
     fetch(apiPlatos, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json", 
-            "auth-token": token.token
-        }
-    })
-    .then(response => response.json())
-    .then(data => data.data.data.forEach(element => {
-        addPlato(element);
-    }));
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": token.token
+            }
+        })
+        .then(response => response.json())
+        .then(data => data.data.data.forEach(element => {
+            addPlato(element);
+        }));
 }
 
 function mostrarFormulario() {
     //TODO: Solucionar esta porqueria
     var form = document.forms[0];
 
-    for(var i=0; i < form.elements.length; i++) {
+    for (var i = 0; i < form.elements.length; i++) {
         form.elements[i].setAttribute("value", "");
     }
 
     document.getElementById("formulario").setAttribute("class", "");
 
     document.getElementById("confirmar").addEventListener("click", validar, false);
-    document.getElementById("cancelar").addEventListener("click", ocultarForm => {
+    document.getElementById("cancelar").addEventListener("click", function (e) {
+        e.preventDefault();
         document.getElementById("formulario").setAttribute("class", "visually-hidden");
     })
 }
@@ -125,25 +126,25 @@ function nuevoPlato() {
 
     //Petición a la API para añadir un nuevo plato
     fetch(apiPlatos, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "auth-token": token.token
-        },
-        body: JSON.stringify(plato)
-    })
-    .then(response => response.json())
-    .then(data => addPlato(data.resultado))
-    .catch((error) => {
-        console.log("Error => ", error);
-    })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": token.token
+            },
+            body: JSON.stringify(plato)
+        })
+        .then(response => response.json())
+        .then(data => addPlato(data.resultado))
+        .catch((error) => {
+            console.log("Error => ", error);
+        })
     document.getElementById("formulario").setAttribute("class", "visually-hidden");
 }
 
 //Función para editar el plato seleccionado
 function editarPlato() {
     mostrarFormulario();
-    
+
     var lista = this.parentNode.parentNode.childNodes;
     console.log(lista);
 
@@ -156,7 +157,7 @@ function editarPlato() {
     var info = Array.from(ordenPlato.options);
     info.forEach(element => {
         console.log(lista[3].innerText)
-        if(lista[3].innerText == element.value) {
+        if (lista[3].innerText == element.value) {
             element.selected = true;
         }
     });
@@ -168,14 +169,16 @@ function editarPlato() {
 }
 
 function enviaEdicion() {
-    var lista = this.parentNode.parentNode.childNodes;
-    console.log(lista);
+    //var lista = this.parentNode.parentNode.childNodes;
+    //console.log(lista);
 
     //Información del formulario
     var idPlato = document.getElementById("_id");
     var nombrePlato = document.getElementById("nombre");
     var ordenPlato = document.getElementById("orden");
     var precioPlato = document.getElementById("precio");
+
+    var lista = document.getElementById(idPlato.value).parentNode.parentNode.childNodes;
 
     //Objeto de tipo plato actualizado
     var platoAct = {
@@ -184,42 +187,42 @@ function enviaEdicion() {
         precio: precioPlato.value
     }
 
-    var url = apiPlatos+"/"+idPlato.value;
+    var url = apiPlatos + "/" + idPlato.value;
 
     fetch(url, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            "auth-token": token.token
-        },
-        body: JSON.stringify(platoAct)
-    })
-    .then(response => response.json())
-    .then(cambiar => {
-        lista[2].replaceChildren(nombrePlato.value);
-        lista[3].replaceChildren(ordenPlato.value);
-        lista[4].replaceChildren(precioPlato.value);
-        document.getElementById("formulario").setAttribute("class", "visually-hidden");
-    })
-    .catch((error) => {
-        console.log("Error => ", error);
-    })
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": token.token
+            },
+            body: JSON.stringify(platoAct)
+        })
+        .then(response => response.json())
+        .then(cambiar => {
+            lista[2].replaceChildren(nombrePlato.value);
+            lista[3].replaceChildren(ordenPlato.value);
+            lista[4].replaceChildren(precioPlato.value);
+            document.getElementById("formulario").setAttribute("class", "visually-hidden");
+        })
+        .catch((error) => {
+            console.log("Error => ", error);
+        })
 }
 
 //Función para eliminar el plato seleccionado
 function eliminarPlato() {
     id = this.id;
-    var url = apiPlatos+"/"+id;
+    var url = apiPlatos + "/" + id;
 
     fetch(url, {
-        method: "DELETE",
-        headers: {
-            "auth-token": token.token
-        }
-    })
-    .catch((error) => {
-        console.log("Error => ", error);
-    })
+            method: "DELETE",
+            headers: {
+                "auth-token": token.token
+            }
+        })
+        .catch((error) => {
+            console.log("Error => ", error);
+        })
 
     var platoBorrado = document.getElementById(id);
     platoBorrado.parentNode.parentNode.parentNode.removeChild(platoBorrado.parentNode.parentNode);
@@ -229,10 +232,10 @@ function eliminarPlato() {
 function validaNombrePlato() {
     var nombrePlato = document.getElementById("nombre");
 
-    if(!nombrePlato.checkValidity()) {
-        if(nombrePlato.validity.valueMissing) {
+    if (!nombrePlato.checkValidity()) {
+        if (nombrePlato.validity.valueMissing) {
             error2(nombrePlato, "Se ha de indicar un nombre para el plato");
-        } else if(nombrePlato.validity.patternMismatch) {
+        } else if (nombrePlato.validity.patternMismatch) {
             error2(nombrePlato, "El nombre introducido para el plato no es correcto");
         }
         return false;
@@ -242,7 +245,7 @@ function validaNombrePlato() {
 
 function validaOrdenPlato() {
     var orden = document.getElementById("orden");
-    if(orden.value == "Selecciona Orden") {
+    if (orden.value == "Selecciona Orden") {
         error2(orden, "Se ha de seleccionar el orden del plato");
     } else {
         return true;
@@ -252,10 +255,10 @@ function validaOrdenPlato() {
 function validaPrecioPlato() {
     var precioPlato = document.getElementById("precio");
 
-    if(!precioPlato.checkValidity()) {
-        if(precioPlato.validity.valueMissing) {
+    if (!precioPlato.checkValidity()) {
+        if (precioPlato.validity.valueMissing) {
             error2(precioPlato, "Se ha de indicar un precio para el plato");
-        } else if(precioPlato.validity.rangeUnderflow) {
+        } else if (precioPlato.validity.rangeUnderflow) {
             error2(precioPlato, "El precio del plato no puede ser inferior a 0");
         }
         return false;
@@ -270,8 +273,8 @@ function validar(e) {
 
     var id = document.getElementById("_id").value;
 
-    if(validaNombrePlato() && validaOrdenPlato() && validaPrecioPlato()) {
-        if(id == "") {
+    if (validaNombrePlato() && validaOrdenPlato() && validaPrecioPlato()) {
+        if (id == "") {
             nuevoPlato();
         } else {
             enviaEdicion();
