@@ -3,6 +3,11 @@ window.onload = main;
 function main() {
     compruebaLog();
     getDatos();
+    document.getElementById("newComanda").addEventListener("click", altaComanda);
+}
+
+function altaComanda() {
+    location.assign("../html/altaComandas.html");
 }
 
 var arrComandas = [];
