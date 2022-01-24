@@ -3,7 +3,11 @@ window.onload = main;
 function main() {
     compruebaLog();
     getDatos();
+    document.getElementById("confirmar").addEventListener("click", validar, false);
 }
+
+//Arrays con la información de la API
+var arrMesas = [];
 
 //API's de donde se obtiene la información
 const apiMesas = "https://restaurante.serverred.es/api/mesas";
@@ -34,6 +38,7 @@ async function getMesas() {
         })
         .then(response => response.json())
         .then(data => data.data.data.forEach(element => {
+            arrMesas.push(element);
             addMesa(element);
         }))
         .catch((error) => {
@@ -93,6 +98,7 @@ function addMesa(element) {
     button.setAttribute("class", "mt-2 btn btn-primary p-3");
     button.setAttribute("value", element.numero);
     button.appendChild(val_buton);
+    button.addEventListener("click", infoMesa);
 
     div.appendChild(button);
     document.getElementById("mesas").appendChild(div);
@@ -136,6 +142,13 @@ function addPlatos(element) {
     document.getElementById("platos" + element.orden).appendChild(div);
 }
 
+/*************************
+* FUNCIONES DE LA PÁGINA * 
+*************************/
+function infoMesa() {
+    
+}
+
 /****************************** 
  * VALIDACIONES DEL FORMULARIO *
  ******************************/
@@ -170,16 +183,17 @@ function validaNumComensales() {
 }
 
 function validar(e) {
-    e.preventDefaul();
+    e.preventDefault();
     borrarErrores();
 
     //En caso de validarse la comanda se añade a la lista
     if(validaNombre() && validaNumComensales()) {
+        console.log("se ha validado el formulario")
         return true;
     } else {
+        console.log("no se ha validado el formulario");
         return false;
     }
-
 }
 
 function error2(element, missatge) {
