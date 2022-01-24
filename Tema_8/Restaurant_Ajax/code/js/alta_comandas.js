@@ -22,8 +22,8 @@ async function getDatos() {
 }
 
 /*********************
-* LLAMADAS A LAS API *
-*********************/
+ * LLAMADAS A LAS API *
+ *********************/
 async function getMesas() {
     fetch(apiMesas, {
             method: "GET",
@@ -76,8 +76,8 @@ async function getPlatos() {
 }
 
 /*****************************
-* AÑADIDO DE BOTONES AL HTML *
-*****************************/
+ * AÑADIDO DE BOTONES AL HTML *
+ *****************************/
 
 //Función para añadir las bebidas disponibles
 function addMesa(element) {
@@ -128,26 +128,24 @@ function addPlatos(element) {
     var val_button = document.createTextNode(element.nombre);
 
     button.setAttribute("type", "button");
-    button.style.background = "#ffc309";
-    button.style.border = "#ffc309";
-    button.setAttribute("class", "mt-2 btn btn-info p-3");
+    button.setAttribute("class", "mt-2 btn btn-warning p-3");
     button.setAttribute("value", element.nombre);
     button.appendChild(val_button);
 
     div.appendChild(button);
-    document.getElementById("platos"+element.orden).appendChild(div);
+    document.getElementById("platos" + element.orden).appendChild(div);
 }
 
 /****************************** 
-* VALIDACIONES DEL FORMULARIO *
-******************************/
+ * VALIDACIONES DEL FORMULARIO *
+ ******************************/
 function validaNombre() {
     var nombre = document.getElementById("nombre");
 
-    if(!nombre.checkValidity()) {
-        if(nombre.validity.valueMissing) {
+    if (!nombre.checkValidity()) {
+        if (nombre.validity.valueMissing) {
             error2(nombre, "Se ha de indicar un nombre");
-        } else if(nombre.validity.patternMismatch) {
+        } else if (nombre.validity.patternMismatch) {
             error2(nombre, "Se ha de indicar un nombre que contenga 4-60 caracteres");
         }
         return false;
@@ -158,17 +156,30 @@ function validaNombre() {
 function validaNumComensales() {
     var comensales = document.getElementById("comensales");
 
-    if(!comensales.checkValidity()) {
-        if(comensales.validity.valueMissing) {
+    if (!comensales.checkValidity()) {
+        if (comensales.validity.valueMissing) {
             error2(comensales, "Se ha de indicar el número de comensales");
-        } else if(comensales.validity.patternMismatch) {
+        } else if (comensales.validity.patternMismatch) {
             error2(comensales, "El número de comensales introducido no es correcto");
-        } else if(comensales.validity.rangeOverflow) {
+        } else if (comensales.validity.rangeOverflow) {
             error2(comensales, "El número de comensales no puede ser inferior a 1");
         }
         return false;
     }
     return true;
+}
+
+function validar(e) {
+    e.preventDefaul();
+    borrarErrores();
+
+    //En caso de validarse la comanda se añade a la lista
+    if(validaNombre() && validaNumComensales()) {
+        return true;
+    } else {
+        return false;
+    }
+
 }
 
 function error2(element, missatge) {
