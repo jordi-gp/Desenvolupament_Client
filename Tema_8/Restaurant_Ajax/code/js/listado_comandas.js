@@ -82,10 +82,12 @@ function addComanda(element) {
     var logoSumBebidas = document.createElement("i");
     logoSumBebidas.setAttribute("class", "fas fa-plus");
     var editBebidas = document.createElement("button");
+    editBebidas.setAttribute("id", element._id);
     editBebidas.setAttribute("class", "btn btn-info btn-lg p-2");
     var val_edit_bebidas = document.createTextNode("Bebidas");
     editBebidas.appendChild(logoSumBebidas);
     editBebidas.appendChild(val_edit_bebidas);
+    editBebidas.addEventListener("click", editaBebidas)
 
     //Botón para editar la comanda de platos
     var logoSumPlatos = document.createElement("i");
@@ -139,6 +141,20 @@ function addComanda(element) {
     tr.appendChild(td7);
 
     document.getElementById("files").appendChild(tr);
+}
+
+function editaBebidas() {
+    var url = apiComandas+"/"+this.id;
+
+    fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "auth-token": token.token
+        }
+    })
+    .then(response => response.json())
+    //.then(data => )
 }
 
 //TODO:

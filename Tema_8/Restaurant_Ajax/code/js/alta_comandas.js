@@ -10,17 +10,21 @@ function main() {
 var arrMesas = [];
 var arrBebidas = [];
 
+var bebidaSelec = [];
+var bebida = {
+    bebida: "",
+    cantidad: 0
+};
+
 //API's de donde se obtiene la información
 const apiMesas = "https://restaurante.serverred.es/api/mesas";
 const apiPlatos = "https://restaurante.serverred.es/api/platos";
 const apiBebidas = "https://restaurante.serverred.es/api/bebidas";
 
-
 //Token del usuario
 var token = JSON.parse(localStorage.getItem("auth-token"));
 
 async function getDatos() {
-    //TODO:
     getMesas();
     getBebidas();
     getPlatos();
@@ -153,10 +157,11 @@ function addPlatos(element) {
 *************************/
 //Mostrado de la información sobre la mesa
 function infoMesa() {
-    var seleccionat = document.getElementById(this.id);
-    console.log(seleccionat.parentNode.parentNode)
+    arrMesas.forEach(element => {
+        document.getElementById(element._id).setAttribute("class", "mt-2 btn btn-primary p-3")
+    })
+
     var infoMesa = arrMesas.find(item => item._id == this.id);
-    //console.log(infoMesa.comensales, infoMesa.descripcion);
     var button = document.getElementById(infoMesa._id);
     button.setAttribute("class", "mt-2 btn btn-danger p-3");
 
@@ -164,44 +169,22 @@ function infoMesa() {
     document.getElementById("datosMesa").replaceChildren(info);
 }
 
+//TODO:
 //Función para añadir bebidas a la lista
 function compraBebida() {
-    var infoBebida = arrBebidas.find(item => item._id == this.id);
-    var i = 1;
+    cant = 1;
 
-    //Nodos de texto utilizados
-    var valBebida = document.createTextNode(infoBebida.nombre);
-    var valCantidad = document.createTextNode(i);
-    var valBotonBorrar = document.createTextNode("Borrar");
-
-    //Elementos de la lista
-    var tr = document.createElement("tr");
-    var td1 = document.createElement("td");
-    var td2 = document.createElement("td");
-    var td3 = document.createElement("td");
-
-    //Elementos del HTML utilizados
-    var botonBorrar = document.createElement("button");
-    botonBorrar.appendChild(valBotonBorrar);
-    botonBorrar.setAttribute("class", "mt-2 btn btn-primary p-3");
-    botonBorrar.setAttribute("id", this.id);
-    //botonBorrar.addEventListener("click", eliminarPlato);
-
-    //Añadido de información a la tabla
-    td1.appendChild(botonBorrar);
-    td2.appendChild(valBebida);    
-    td3.appendChild(valCantidad);
-
-    if(td3.innerText >= 1) {
-        i++;
-        td3.replaceChildren(valCantidad);
+    bebida = {
+        nomBebida: this.value,
+        cantidad: cant
     }
 
-    tr.appendChild(td1);
-    tr.appendChild(td2);
-    tr.appendChild(td3);
-
-    document.getElementById("comBebidas").appendChild(tr);
+    if(bebida.cantidad >= 1) {
+        cant++;
+        //bebida.cantidad.splice(cant);
+    }
+    bebidaSelec.push(bebida);
+    console.log(bebidaSelec);
 }
 
 /****************************** 
