@@ -23,7 +23,7 @@ const apiMesas = "https://restaurante.serverred.es/api/mesas";
 async function getDatos() {
     await getMesas();
     await getCamareros();
-    await getComandas();    
+    await getComandas();
 }
 
 async function getComandas() {

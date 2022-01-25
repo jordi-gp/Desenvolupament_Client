@@ -8,6 +8,7 @@ function main() {
 
 //Arrays con la información de la API
 var arrMesas = [];
+var arrBebidas = [];
 
 //API's de donde se obtiene la información
 const apiMesas = "https://restaurante.serverred.es/api/mesas";
@@ -56,6 +57,7 @@ async function getBebidas() {
         })
         .then(response => response.json())
         .then(data => data.data.data.forEach(element => {
+            arrBebidas.push(element);
             addBebida(element);
         }))
         .catch((error) => {
@@ -95,10 +97,12 @@ function addMesa(element) {
     var val_buton = document.createTextNode(element.numero);
 
     button.setAttribute("type", "button");
+    button.setAttribute("id", element._id);
     button.setAttribute("class", "mt-2 btn btn-primary p-3");
     button.setAttribute("value", element.numero);
     button.appendChild(val_buton);
     button.addEventListener("click", infoMesa);
+    //button.onclick = infoMesa;
 
     div.appendChild(button);
     document.getElementById("mesas").appendChild(div);
@@ -115,9 +119,11 @@ function addBebida(element) {
     var val_buton = document.createTextNode(element.nombre);
 
     button.setAttribute("type", "button");
+    button.setAttribute("id", element._id);
     button.setAttribute("class", "mt-2 btn btn-info p-3");
     button.setAttribute("value", element.nombre);
     button.appendChild(val_buton);
+    button.addEventListener("click", compraBebida);
 
     div.appendChild(button);
     document.getElementById("bebidas").appendChild(div);
@@ -145,8 +151,57 @@ function addPlatos(element) {
 /*************************
 * FUNCIONES DE LA PÁGINA * 
 *************************/
+//Mostrado de la información sobre la mesa
 function infoMesa() {
-    
+    var seleccionat = document.getElementById(this.id);
+    console.log(seleccionat.parentNode.parentNode)
+    var infoMesa = arrMesas.find(item => item._id == this.id);
+    //console.log(infoMesa.comensales, infoMesa.descripcion);
+    var button = document.getElementById(infoMesa._id);
+    button.setAttribute("class", "mt-2 btn btn-danger p-3");
+
+    var info = document.createTextNode("Comensales:"+infoMesa.comensales+", Descripcion:"+infoMesa.descripcion);
+    document.getElementById("datosMesa").replaceChildren(info);
+}
+
+//Función para añadir bebidas a la lista
+function compraBebida() {
+    var infoBebida = arrBebidas.find(item => item._id == this.id);
+    var i = 1;
+
+    //Nodos de texto utilizados
+    var valBebida = document.createTextNode(infoBebida.nombre);
+    var valCantidad = document.createTextNode(i);
+    var valBotonBorrar = document.createTextNode("Borrar");
+
+    //Elementos de la lista
+    var tr = document.createElement("tr");
+    var td1 = document.createElement("td");
+    var td2 = document.createElement("td");
+    var td3 = document.createElement("td");
+
+    //Elementos del HTML utilizados
+    var botonBorrar = document.createElement("button");
+    botonBorrar.appendChild(valBotonBorrar);
+    botonBorrar.setAttribute("class", "mt-2 btn btn-primary p-3");
+    botonBorrar.setAttribute("id", this.id);
+    //botonBorrar.addEventListener("click", eliminarPlato);
+
+    //Añadido de información a la tabla
+    td1.appendChild(botonBorrar);
+    td2.appendChild(valBebida);    
+    td3.appendChild(valCantidad);
+
+    if(td3.innerText >= 1) {
+        i++;
+        td3.replaceChildren(valCantidad);
+    }
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+
+    document.getElementById("comBebidas").appendChild(tr);
 }
 
 /****************************** 
