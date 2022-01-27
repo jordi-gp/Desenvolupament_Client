@@ -9,8 +9,10 @@ function main() {
 //Arrays con la información de la API
 var arrMesas = [];
 var arrBebidas = [];
+var arrPlatos = [];
 
 var bebidaSelec = [];
+var platoSelec = [];
 
 //API's de donde se obtiene la información
 const apiMesas = "https://restaurante.serverred.es/api/mesas";
@@ -75,6 +77,7 @@ async function getPlatos() {
         })
         .then(response => response.json())
         .then(data => data.data.data.forEach(element => {
+            arrPlatos.push(element);
             addPlatos(element);
         }))
         .catch((error) => {
@@ -140,9 +143,11 @@ function addPlatos(element) {
     var val_button = document.createTextNode(element.nombre);
 
     button.setAttribute("type", "button");
+    button.setAttribute("id", element._id);
     button.setAttribute("class", "mt-2 btn btn-warning p-3");
     button.setAttribute("value", element.nombre);
     button.appendChild(val_button);
+    button.addEventListener("click", compraPlato);
 
     div.appendChild(button);
     document.getElementById("platos" + element.orden).appendChild(div);
@@ -166,7 +171,7 @@ function infoMesa() {
 }
 
 //TODO:
-//Función para añadir bebidas a la lista
+//Función para añadir bebidas a la comanda
 function compraBebida() {
     const objBebida = arrBebidas.find(item => item._id == this.id);    
     const comprova = bebidaSelec.find(item => item._id == this.id)
@@ -179,6 +184,24 @@ function compraBebida() {
     }
 
     console.log(bebidaSelec);
+}
+
+//TODO: function compraPlato() {}
+//Función para añadir platos a la comanda
+function compraPlato() {
+    const objPlato = arrPlatos.find(item => item._id == this.id);
+    const comprova = platoSelec.find(item => item._id == this.id);
+
+    if(comprova == undefined) {
+        objPlato.cantidad = 1;
+        platoSelec.push(objPlato);
+    } else {
+        comprova.cantidad += 1;
+    }
+
+    console.log(platoSelec);
+
+
 }
 
 /****************************** 
