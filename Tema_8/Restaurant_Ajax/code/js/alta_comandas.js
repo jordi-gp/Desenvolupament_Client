@@ -11,10 +11,6 @@ var arrMesas = [];
 var arrBebidas = [];
 
 var bebidaSelec = [];
-var bebida = {
-    bebida: "",
-    cantidad: 0
-};
 
 //API's de donde se obtiene la información
 const apiMesas = "https://restaurante.serverred.es/api/mesas";
@@ -172,18 +168,16 @@ function infoMesa() {
 //TODO:
 //Función para añadir bebidas a la lista
 function compraBebida() {
-    cant = 1;
+    const objBebida = arrBebidas.find(item => item._id == this.id);    
+    const comprova = bebidaSelec.find(item => item._id == this.id)
 
-    bebida = {
-        nomBebida: this.value,
-        cantidad: cant
+    if(comprova == undefined) {
+        objBebida.cantidad = 1;
+        bebidaSelec.push(objBebida);
+    } else {
+        comprova.cantidad += 1;
     }
 
-    if(bebida.cantidad >= 1) {
-        cant++;
-        //bebida.cantidad.splice(cant);
-    }
-    bebidaSelec.push(bebida);
     console.log(bebidaSelec);
 }
 

@@ -1,8 +1,8 @@
 window.onload = main;
 
-function main() {
+async function main() {
     compruebaLog();
-    getDatos();
+    getCamareros();
     document.getElementById("newComanda").addEventListener("click", altaComanda);
 }
 
@@ -20,12 +20,6 @@ const apiComandas = "https://restaurante.serverred.es/api/comandas";
 const apiCamareros = "https://restaurante.serverred.es/api/camareros";
 const apiMesas = "https://restaurante.serverred.es/api/mesas";
 
-async function getDatos() {
-    await getMesas();
-    await getCamareros();
-    await getComandas();
-}
-
 async function getComandas() {
     await fetch(apiComandas, {
             method: "GET",
@@ -36,17 +30,19 @@ async function getComandas() {
         })
         .then(response => response.json())
         //data => arrComandas = data.data.data
-        .then(data => data.data.data.forEach(element => {
-            arrComandas.push(element);
-            addComanda(element);
-        }))
+        .then(data => {
+            arrComandas = data.data.data;
+            arrComandas.forEach(element => {
+                addComanda(element);
+            })
+        })
         .catch((error) => {
             console.log("Error => ", error);
         });
 }
 
 async function getCamareros() {
-    fetch(apiCamareros, {
+    await fetch(apiCamareros, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -54,16 +50,17 @@ async function getCamareros() {
             }
         })
         .then(response => response.json())
-        .then(data => data.data.data.forEach(element => {
-            arrCamareros.push(element);
-        }))
+        .then(data => {
+            arrCamareros = data.data.data;
+            getMesas();
+        })
         .catch((error) => {
             console.log("Error => ", error);
         })
 }
 
 async function getMesas() {
-    fetch(apiMesas, {
+    await fetch(apiMesas, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -71,10 +68,10 @@ async function getMesas() {
             }
         })
         .then(response => response.json())
-        .then(data => data.data.data.forEach(element => {
-            arrMesas.push(element);
-        }))
-
+        .then(data => {
+            arrMesas = data.data.data;
+            getComandas();
+        })
 }
 
 function addComanda(element) {
@@ -161,13 +158,23 @@ function editaBebidas() {
 //Función para encontrar el nombre del camarero
 function buscarCamarero(val_camarero) {
     var infoCam = arrCamareros.find(item => item._id == val_camarero);
-    return infoCam.name;
+    if(infoCam != undefined) {
+        return infoCam.name;
+    } else {
+        return "Camarero no encontrado";
+    }
+    
 }
 
 //Función para encontrar el nombre de la mesa
 function buscaMesa(val_mesa) {
     var infoMesa = arrMesas.find(item => item._id == val_mesa);
-    return infoMesa.numero;
+    
+    if(infoMesa != undefined) {
+        return infoMesa.numero;
+    } else {
+        return "Mesa no encontrada";
+    }
 }
 
 //TODO: Comprovar perqué no funciona aquesta funció
