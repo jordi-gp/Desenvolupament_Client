@@ -141,17 +141,18 @@ function addComanda(element) {
 }
 
 function editaBebidas() {
-    var url = apiComandas+"/"+this.id;
+    // var url = apiComandas+"/"+this.id;
 
-    fetch(url, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "auth-token": token.token
-        }
-    })
-    .then(response => response.json())
-    //.then(data => )
+    // fetch(url, {
+    //     method: "GET",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //         "auth-token": token.token
+    //     }
+    // })
+    // .then(response => response.json())
+    // //.then(data => )
+    console.log(this.id)
 }
 
 //TODO:

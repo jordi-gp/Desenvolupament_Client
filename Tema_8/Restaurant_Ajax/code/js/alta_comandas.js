@@ -154,8 +154,8 @@ function addPlatos(element) {
 }
 
 /*************************
-* FUNCIONES DE LA PÁGINA * 
-*************************/
+ * FUNCIONES DE LA PÁGINA * 
+ *************************/
 //Mostrado de la información sobre la mesa
 function infoMesa() {
     arrMesas.forEach(element => {
@@ -166,42 +166,118 @@ function infoMesa() {
     var button = document.getElementById(infoMesa._id);
     button.setAttribute("class", "mt-2 btn btn-danger p-3");
 
-    var info = document.createTextNode("Comensales:"+infoMesa.comensales+", Descripcion:"+infoMesa.descripcion);
+    var info = document.createTextNode("Comensales:" + infoMesa.comensales + ", Descripcion:" + infoMesa.descripcion);
     document.getElementById("datosMesa").replaceChildren(info);
 }
 
-//TODO:
 //Función para añadir bebidas a la comanda
 function compraBebida() {
-    const objBebida = arrBebidas.find(item => item._id == this.id);    
+    const objBebida = arrBebidas.find(item => item._id == this.id);
     const comprova = bebidaSelec.find(item => item._id == this.id)
 
-    if(comprova == undefined) {
+    if (comprova == undefined) {
         objBebida.cantidad = 1;
         bebidaSelec.push(objBebida);
     } else {
         comprova.cantidad += 1;
     }
 
-    console.log(bebidaSelec);
+    borrarBebida();
+    addBebidaCompra();
 }
 
-//TODO: function compraPlato() {}
+function borrarBebida() {
+    var filas = document.getElementById("comBebidas");
+
+    if (filas.lastChild != null) {
+        do {
+            filas.lastChild.parentNode.removeChild(filas.lastChild);
+        } while (filas.lastChild != null);
+    }
+}
+
+function addBebidaCompra() {
+    bebidaSelec.forEach(element => {
+        //Botón para borrar las bebidas
+        var button = document.createElement("button");
+        var valButton = document.createTextNode("Borrar");
+        button.setAttribute("class", "mt-2 btn btn-primary p-3");
+        button.appendChild(valButton);
+
+        //Nodos de texto de la tabla
+        var valNombreBebida = document.createTextNode(element.nombre);
+        var valCantidad = document.createTextNode(element.cantidad);
+
+        var tr = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+
+        td1.appendChild(button);
+        td2.appendChild(valNombreBebida);
+        td3.appendChild(valCantidad);
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+
+        document.getElementById("comBebidas").appendChild(tr);
+    })
+}
+
+function borrarPlatos() {
+    var filas = document.getElementById("comPlatos");
+
+    if (filas.lastChild != null) {
+        do {
+            filas.lastChild.parentNode.removeChild(filas.lastChild);
+        } while (filas.lastChild != null);
+    }
+}
+
+function addPlatoCompra() {
+    platoSelec.forEach(element => {
+        //Botón para borrar el plato
+        var button = document.createElement("button");
+        var valButton = document.createTextNode("Borrar");
+        button.setAttribute("class", "mt-2 btn btn-primary p-3");
+        button.appendChild(valButton);
+
+        //Nodos de texto utilizados
+        var valNombrePlato = document.createTextNode(element.nombre);
+        var valCantidad = document.createTextNode(element.cantidad);
+
+        var tr = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+
+        td1.appendChild(button);
+        td2.appendChild(valNombrePlato);
+        td3.appendChild(valCantidad);
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+
+        document.getElementById("comPlatos").appendChild(tr);
+    })
+}
+
 //Función para añadir platos a la comanda
 function compraPlato() {
     const objPlato = arrPlatos.find(item => item._id == this.id);
     const comprova = platoSelec.find(item => item._id == this.id);
 
-    if(comprova == undefined) {
+    if (comprova == undefined) {
         objPlato.cantidad = 1;
         platoSelec.push(objPlato);
     } else {
         comprova.cantidad += 1;
     }
 
-    console.log(platoSelec);
-
-
+    borrarPlatos();
+    addPlatoCompra();
 }
 
 /****************************** 
@@ -242,7 +318,7 @@ function validar(e) {
     borrarErrores();
 
     //En caso de validarse la comanda se añade a la lista
-    if(validaNombre() && validaNumComensales()) {
+    if (validaNombre() && validaNumComensales()) {
         console.log("se ha validado el formulario")
         return true;
     } else {
