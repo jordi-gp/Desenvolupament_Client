@@ -18,6 +18,7 @@ var platoSelec = [];
 const apiMesas = "https://restaurante.serverred.es/api/mesas";
 const apiPlatos = "https://restaurante.serverred.es/api/platos";
 const apiBebidas = "https://restaurante.serverred.es/api/bebidas";
+const apiComandas = "https://restaurante.serverred.es/api/comandas";
 
 //Token del usuario
 var token = JSON.parse(localStorage.getItem("auth-token"));
@@ -320,11 +321,44 @@ function validar(e) {
     //En caso de validarse la comanda se añade a la lista
     if (validaNombre() && validaNumComensales()) {
         console.log("se ha validado el formulario")
+        addComanda();
         return true;
     } else {
         console.log("no se ha validado el formulario");
         return false;
     }
+}
+
+//Función para añadir una nueva comanda
+function addComanda() {
+    var nombre = document.getElementById("nombre").value;
+    var comensales = document.getElementById("comensales").value;
+    var fecha = new Date();
+    var bebidas = bebidaSelec;
+    var platos = platoSelec;
+    var notas = document.getElementById("notas").value;
+
+    var reserva = {
+        nombre: nombre,
+        comensales: comensales,
+        fechaEntrada: fecha,
+        bebidas: bebidas,
+        platos: platos,
+        notas: notas
+    }
+
+    fetch(apiComandas, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "auth-token": token.token
+        },
+        body: JSON.stringify(reserva)
+    })
+    .then(response => response.json())
+    .catch((error) => {
+        console.log("Error => ", error);
+    })
 }
 
 function error2(element, missatge) {
