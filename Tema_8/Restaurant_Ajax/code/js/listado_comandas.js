@@ -90,6 +90,7 @@ function addComanda(element) {
     var logoSumPlatos = document.createElement("i");
     logoSumPlatos.setAttribute("class", "fas fa-plus");
     var editPlatos = document.createElement("button");
+    editPlatos.setAttribute("id", element._id);
     editPlatos.setAttribute("class", "btn btn-warning btn-lg m-2 p-2");
     var val_edit_platos = document.createTextNode("Platos");
     editPlatos.appendChild(logoSumPlatos);
@@ -141,21 +142,21 @@ function addComanda(element) {
 }
 
 function editaBebidas() {
-    // var url = apiComandas+"/"+this.id;
+    var infoCom = this.parentNode.parentNode.childNodes;
+    
+    var comanda = {
+        idComanda: this.id,
+        nombre: infoCom[2].innerText,
+        mesa: infoCom[3].innerText,
+        comensales: infoCom[4].innerText,
+        camarero: infoCom[5].innerText
+    }
 
-    // fetch(url, {
-    //     method: "GET",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //         "auth-token": token.token
-    //     }
-    // })
-    // .then(response => response.json())
-    // //.then(data => )
-    console.log(this.id)
+
+    //localStorage.setItem("info", )
+    //location.assign("../html/comandasAddBebidas.html");
 }
 
-//TODO:
 //Función para encontrar el nombre del camarero
 function buscarCamarero(val_camarero) {
     var infoCam = arrCamareros.find(item => item._id == val_camarero);
@@ -177,13 +178,3 @@ function buscaMesa(val_mesa) {
         return "Mesa no encontrada";
     }
 }
-
-//TODO: Comprovar perqué no funciona aquesta funció
-/*function buscarMesa(mesa) {
-    //console.log(val_mesa, arrMesas)
-    var infoMesa = arrMesas.find(item => item._id == mesa);
-    console.log(infoMesa);
-}*/
-
-//Función para añadir comandas
-//Llamada a la API donde se recogen las comanda
