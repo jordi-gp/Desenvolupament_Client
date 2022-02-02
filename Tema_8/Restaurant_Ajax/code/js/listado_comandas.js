@@ -95,6 +95,7 @@ function addComanda(element) {
     var val_edit_platos = document.createTextNode("Platos");
     editPlatos.appendChild(logoSumPlatos);
     editPlatos.appendChild(val_edit_platos);
+    editPlatos.addEventListener("click", editaPlatos)
 
     //Información obtenida del JSON
     var nombre = element.nombre;
@@ -152,9 +153,24 @@ function editaBebidas() {
         camarero: infoCom[5].innerText
     }
 
+    localStorage.setItem("info", JSON.stringify(comanda));
+    location.assign("../html/comandasAddBebidas.html");
+}
 
-    //localStorage.setItem("info", )
-    //location.assign("../html/comandasAddBebidas.html");
+function editaPlatos() {
+    var infoCom = this.parentNode.parentNode.childNodes;
+
+    var comanda = {
+        idComanda: this.id,
+        nombre: infoCom[2].innerText,
+        mesa: infoCom[3].innerText,
+        comensales: infoCom[4].innerText,
+        camarero: infoCom[5].innerText,
+        hora: infoCom[6].innerText
+    }
+
+    localStorage.setItem("infoPlato", JSON.stringify(comanda));
+    location.assign("../html/comandasAddPlatos.html");
 }
 
 //Función para encontrar el nombre del camarero
