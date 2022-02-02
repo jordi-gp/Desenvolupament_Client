@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+var technologyData = ['React', 'Vue', 'Angular'];
+<App title="My title" version = {1} tech = {technologyData} />
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
