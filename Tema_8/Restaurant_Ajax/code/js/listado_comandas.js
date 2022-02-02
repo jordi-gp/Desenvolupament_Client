@@ -149,12 +149,12 @@ function editaBebidas() {
         nombre: infoCom[2].innerText,
         mesa: infoCom[3].innerText,
         comensales: infoCom[4].innerText,
-        camarero: infoCom[5].innerText
+        camarero: infoCom[5].innerText,
+        hora: infoCom[6].innerText
     }
 
-
-    //localStorage.setItem("info", )
-    //location.assign("../html/comandasAddBebidas.html");
+    localStorage.setItem("info", JSON.stringify(comanda));
+    location.assign("../html/comandasAddBebidas.html");
 }
 
 //Función para encontrar el nombre del camarero

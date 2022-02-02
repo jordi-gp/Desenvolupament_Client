@@ -333,18 +333,17 @@ function validar(e) {
 function addComanda() {
     var nombre = document.getElementById("nombre").value;
     var comensales = document.getElementById("comensales").value;
-    var fecha = new Date();
+    var mesa = document.getElementsByClassName("mt-2 btn btn-danger p-3");
     var bebidas = bebidaSelec;
     var platos = platoSelec;
-    var notas = document.getElementById("notas").value;
 
     var reserva = {
         nombre: nombre,
         comensales: comensales,
-        fechaEntrada: fecha,
+        estado: "Pendiente",
         bebidas: bebidas,
+        mesa: mesa[0].id,
         platos: platos,
-        notas: notas
     }
 
     fetch(apiComandas, {
