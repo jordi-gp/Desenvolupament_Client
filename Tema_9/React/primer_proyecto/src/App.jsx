@@ -1,14 +1,19 @@
 import logo from './logo.svg';
 import React from 'react';
 import './App.css';
+import PropType from 'prop-types';
 
 class App extends React.Component {
-    
+  static defaultProps = {
+    title: "Default title",
+    version: 0
+  }
+
   render() {
     //console.log(this.props.title);
     const title = this.props.title;
-
-    console.log(title);
+    const tech = this.props.tech;
+    const version = this.props.version;
 
     var h1class = {
       textAlign: 'center',
@@ -23,10 +28,16 @@ class App extends React.Component {
       <div>
         <h1 style={h1class}>React no m'agrada</h1>
         <h2 style={h2class}>Yo soles vuic ser feliç :c</h2>
-        <p>{this.props.title}</p>
+        <h1>{title}</h1>
+        <h2>{tech[0]}</h2>
+        <h3>{version}</h3>
       </div>
     )
   }
+}
+
+App.propTypes = {
+  title: this.PropTypes.string.isRequired
 }
 
 

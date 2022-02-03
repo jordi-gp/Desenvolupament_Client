@@ -4,12 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-var technologyData = ['React', 'Vue', 'Angular'];
-<App title="My title" version = {1} tech = {technologyData} />
+let technologyData = ['React', 'Vue', 'Angular'];
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App title="My title" tech = {technologyData} />
   </React.StrictMode>,
   document.getElementById('root')
 );
