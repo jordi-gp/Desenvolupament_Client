@@ -37,7 +37,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  title: this.PropTypes.string.isRequired
+  title: PropType.string.isRequired
 }
 
 
