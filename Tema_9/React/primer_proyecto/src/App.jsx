@@ -40,7 +40,6 @@ App.propTypes = {
   title: PropType.string.isRequired
 }
 
-
 // class App extends React.Component {
 //   arrowHandleClick = (e) => {
 //     e.preventDefault();
