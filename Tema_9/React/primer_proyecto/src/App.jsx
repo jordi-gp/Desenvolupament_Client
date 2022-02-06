@@ -4,6 +4,13 @@ import propTypes from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
 
+/*
+* COSES A PREGUNTAR
+* 1-El tema del 'super(props)'
+* 2-'let numbers = this.state.numbers' ¿?
+* 3-El tema del '<li>' amb les 'key{x}'
+*/
+
 //Actividad sobre estados en React
 class App extends Component {
   constructor(props) {
@@ -34,7 +41,7 @@ class App extends Component {
     console.log('Render was called -->', this.state);
 
     const colors = ['red', 'yellow', 'green', 'blue', 'orange'];
-    const color = color[this.state.number];
+    const color = colors[this.state.number];
 
     return (
       <div className="App" style={{backgroundColor: color}}>
@@ -44,10 +51,29 @@ class App extends Component {
             {this.state.title} - {this.state.number}
           </h1>
         </header>
+        <div className="App-intro">
+          <div>{this.state.time}</div>
+          Press this button to change state
+        </div>
+        <div>
+          <button onClick={() => this.changeState()}>
+            Change state
+          </button>
+        </div>
+        <div>
+          Generated numbers
+            <ul>
+              {this.state.numbers.map((x) => (
+                <li key={x}> {x} </li>
+              ))}
+            </ul>
+        </div>
       </div>
     )
   }
 }
+
+export default App;
 
 //Activitat guiada amb React
 /*class App extends Component {
@@ -85,6 +111,8 @@ class App extends Component {
     )
   }
 }
+
+//export default App;
 
 App.propTypes = {
   title: propTypes.string.isRequired,
@@ -127,6 +155,8 @@ App.propTypes = {
   }
 }
 
+//export default App;
+
 App.propTypes = {
   title: PropType.string.isRequired
 }*/
@@ -160,6 +190,8 @@ class App extends React.Component {
   }
 }*/
 
+//export default App;
+
 /*function App() {
   return (
     <div className="App">
@@ -181,4 +213,4 @@ class App extends React.Component {
   );
 }*/
 
-export default App;
+//export default App;
