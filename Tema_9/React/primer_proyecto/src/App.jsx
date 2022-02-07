@@ -1,18 +1,33 @@
 //Librerias importadas
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
+import Formulario from './Component/formulario';
 import logo from './logo.svg';
 import './App.css';
+import Header from './Component/header';
+import Paragraph from './Component/paragraph';
 
-/*
-* COSES A PREGUNTAR
-* 1-El tema del 'super(props)'
-* 2-'let numbers = this.state.numbers' ¿?
-* 3-El tema del '<li>' amb les 'key{x}'
-*/
+//Exemple amb multicomponents
+class App extends Component {
+  showMesg(msg) {
+    alert('This button works' + msg)
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Header logo={logo} />
+        <Paragraph shMsg={this.showMesg} />
+        <Formulario></Formulario>
+      </div>
+    )
+  }
+}
+
+export default App;
 
 //Actividad sobre estados en React
-class App extends Component {
+/*class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -73,7 +88,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App;*/
 
 //Activitat guiada amb React
 /*class App extends Component {
