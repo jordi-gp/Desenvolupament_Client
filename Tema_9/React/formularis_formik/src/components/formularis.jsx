@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
+//Validaciones del formulario
 const SignupSchema = Yup.object().shape({
     email: Yup.string().email('Invalid Email').required('Required'),
     password: Yup.string().min(6, 'Too Short!').max(20, 'Too long').required('Required')
@@ -38,11 +39,11 @@ class Formulari extends React.Component {
                                             type="email"
                                             name="email"
                                             placeholder="example@gmail.com"
-                                            autoComplete="on"
+                                            autoComplete="off"
                                             className="form-control"
                                         />
                                         {errors.email && touched.email ?
-                                            <div>{errors.email}</div> : null}
+                                        <div className="text-danger fw-bold">{errors.email}</div> : null}
                                     </div>
                                 </div>
                                 <div className="mb-3 row">
@@ -57,7 +58,7 @@ class Formulari extends React.Component {
                                             className="form-control"
                                         />
                                         {errors.password && touched.password ? (
-                                            <div>{errors.password}</div>) : null}
+                                        <div className="text-danger fw-bold">{errors.password}</div>) : null}
                                     </div>
                                 </div>
                                 <button type="submit" className="btn btn-primary btn-block mt-4">
