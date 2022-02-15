@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import Conversor from './components/conversors';
+import Conversor from './components/MonoComponentConversor';
 
 
 // function App() {  
@@ -8,7 +8,6 @@ class App extends React.Component {
 
 constructor(props) {
   super(props);
-
   this.state = {canvi: 1.20}
 }
 

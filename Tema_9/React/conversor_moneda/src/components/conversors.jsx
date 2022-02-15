@@ -16,13 +16,14 @@ class Conversor extends React.Component {
 
     obtener(tipoMoneda, valor) {
         valor = parseFloat(valor);
-
+        console.log(this.props);
         if(tipoMoneda === "euros") {
             this.setState ({
                 dollars: this.financial(valor / this.props.canvi),
                 euros: valor
+                
             })
-            console.log(this.state.dollars);
+            console.log(this.state.dollars)
         } else {
             this.setState ({
                 dollars: this.state.euros,
