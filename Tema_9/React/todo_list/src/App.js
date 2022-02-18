@@ -11,6 +11,7 @@ function App() {
   const afigTasca = () => {
     // arrayTasca: this.state.arrayTasca.concat('Tasca 1');
     console.log(newTasca);
+    setArray([...arrayTasca, newTasca]);
     //arrayTasca.push("a")
     //console.log(arrayTasca)
   }
