@@ -3,10 +3,14 @@ import './App.css';
 
 function App() {
   const [arrayTasca, setArray] = useState([]);
+  const [newTasca, setNewArray] = useState([]);
 
-  const afigTasca = (e) => {
+
+
+
+  const afigTasca = () => {
     // arrayTasca: this.state.arrayTasca.concat('Tasca 1');
-    console.log(e.target);
+    console.log(newTasca);
     //arrayTasca.push("a")
     //console.log(arrayTasca)
   }
@@ -18,8 +22,8 @@ function App() {
           <p>Nova tasca</p>
         </div>
         <div>
-          <input type="text"></input>
-          <button type='submit' onClick={(e) => afigTasca(e)}>Afegir</button>
+          <input type="text" value={newTasca} onChange={(e) => setNewArray(e.target.value)}></input>
+          <button type='submit' onClick={() => afigTasca()}>Afegir</button>
         </div>
         <div>
           <p>Tasques</p>
