@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   const [arrayTasca, setArray] = useState([]);
 
   const afigTasca = (e) => {
-    arrayTasca: this.state.arrayTasca.concat('Tasca 1');
-    console.log(arrayTasca)
+    // arrayTasca: this.state.arrayTasca.concat('Tasca 1');
+    console.log(e.target);
+    //arrayTasca.push("a")
+    //console.log(arrayTasca)
   }
 
   return (
