@@ -1,3 +1,4 @@
+import { array } from 'prop-types';
 import React, { useState } from 'react';
 import './App.css';
 
@@ -5,15 +6,15 @@ function App() {
   const [arrayTasca, setArray] = useState([]);
   const [newTasca, setNewArray] = useState([]);
 
-
-
-
   const afigTasca = () => {
-    // arrayTasca: this.state.arrayTasca.concat('Tasca 1');
-    console.log(newTasca);
     setArray([...arrayTasca, newTasca]);
-    //arrayTasca.push("a")
-    //console.log(arrayTasca)
+  }
+
+  const handleChange = (index) => {
+    const arrBorrat = [...arrayTasca];
+    console.log(index)
+    arrBorrat.splice(index, 1);
+    setArray(arrayTasca);
   }
 
   return (
@@ -28,6 +29,15 @@ function App() {
         </div>
         <div>
           <p>Tasques</p>
+          <ul>
+          {
+            arrayTasca.map((item, index) => {
+              return(
+                <li key={index} style={{listStyleType: 'none'}}><input type='checkbox' onClick={() => handleChange(index)} />{item}</li>
+              )
+            })
+          }
+          </ul>
         </div>
         
       </header>
