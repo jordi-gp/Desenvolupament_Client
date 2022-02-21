@@ -22,7 +22,7 @@ class Login extends React.Component {
                     <div className="container-fluid">
                         <div className="row m-3 p-3 col-4 mx-auto d-block" style={{background: "lightgray", borderRadius:"5px"}}>
                             <h2 className='text-primary'>Login</h2>
-                            <Form>
+                            <Form initialValues={{email:"", password:""}} validationSchema={SignupSchema} onSubmit={values => { console.log(values)}}>
                                 <div className="mb-3 row d-flex flex-column">
                                     <label htmlFor="email" className="col-sm-2 col-form-label">
                                         Email
