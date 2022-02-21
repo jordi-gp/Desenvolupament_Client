@@ -1,0 +1,5 @@
+passwordc: Yup.string()
+              .min(6, 'Too Short!')
+              .max(20, 'Too Long!')
+              .oneOf([Yup.ref('password'), null], "Passwords don't match!")
+              .required('Required'),
