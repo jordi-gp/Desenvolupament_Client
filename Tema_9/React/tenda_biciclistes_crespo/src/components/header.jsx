@@ -22,8 +22,8 @@ render (){
                 <Nav.Link href="/users">Pedidos</Nav.Link>
                 <NavDropdown title="Area Personal" id="basic-nav-dropdown">
                     <NavDropdown.Item>Area Personal</NavDropdown.Item>
-                    <NavDropdown.Item>Registrarse</NavDropdown.Item>
-                    <NavDropdown.Item>Login</NavDropdown.Item>
+                    <NavDropdown.Item href="/register">Registrarse</NavDropdown.Item>
+                    <NavDropdown.Item href="/login">Login</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item>Logout</NavDropdown.Item>
                 </NavDropdown>
