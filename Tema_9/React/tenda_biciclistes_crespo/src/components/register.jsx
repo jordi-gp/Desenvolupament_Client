@@ -29,24 +29,26 @@ const mostraInfo = (values) => {
         password: values.password,
     }
 
-    fetch(api, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(usuario)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if(data.error != null) {
-            console.log("Error => "+data.error);
-        } else {
-            console.log("S'ha registrat l'usuari");
-        }
-    })
-    .catch((error) => {
-        console.log("Ha ocorregut un error =>", error);
-    })
+    console.log(usuario);
+
+    // fetch(api, {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify(usuario)
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     if(data.error != null) {
+    //         console.log("Error => "+data.error);
+    //     } else {
+    //         console.log("S'ha registrat l'usuari");
+    //     }
+    // })
+    // .catch((error) => {
+    //     console.log("Ha ocorregut un error =>", error);
+    // })
 }
 
 class Register extends React.Component {

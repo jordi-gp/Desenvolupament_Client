@@ -17,7 +17,7 @@ function App() {
             <Route path="/register" element={<Register />} />
           </Routes>
         </Container> */}
-        <Error404 />
+        <Register />
       <Footer />
     </React.Fragment>
   );
