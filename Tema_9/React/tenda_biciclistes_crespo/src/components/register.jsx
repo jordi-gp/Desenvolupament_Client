@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //URL de la api
 const api = "https://api.tendaciclista.ccpegoilesvalls.es/api/register";
@@ -34,6 +34,7 @@ class Register extends React.Component {
             password: values.password
         }
     
+        const navigate = useNavigate();
         console.log(usuario);
     
         fetch(api, {
@@ -48,7 +49,6 @@ class Register extends React.Component {
             if(data.error != null) {
                 console.log("Error => "+data.error);
             } else {
-                <Navigate to='/login' />
             }
         })
         .catch((error) => {
