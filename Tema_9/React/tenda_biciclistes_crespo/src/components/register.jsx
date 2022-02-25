@@ -1,7 +1,8 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
+//import { App } from './App';
+import { withRouter } from '../withRouter';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
 
 //URL de la api
 const api = "https://api.tendaciclista.ccpegoilesvalls.es/api/register";
@@ -26,6 +27,7 @@ const SignupSchema = Yup.object().shape({
         .required("S'ha d'introduir una contrasenya.")
 });
 
+//Register Amb Classes
 class Register extends React.Component {
     mostraInfo = (values) => {
         var usuario = {
@@ -33,8 +35,6 @@ class Register extends React.Component {
             email: values.email,
             password: values.password
         }
-    
-        const navigate = useNavigate();
         console.log(usuario);
     
         fetch(api, {
@@ -49,6 +49,7 @@ class Register extends React.Component {
             if(data.error != null) {
                 console.log("Error => "+data.error);
             } else {
+                this.props.navigate('/login');
             }
         })
         .catch((error) => {
@@ -134,4 +135,4 @@ class Register extends React.Component {
     }
 }
 
-export default Register;
+export default withRouter(Register);

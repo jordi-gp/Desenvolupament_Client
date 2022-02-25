@@ -1,6 +1,10 @@
 import React from 'react';
 import {Formik, Form, Field} from 'formik';
+import {withRouter} from '../withRouter';
 import * as Yup from 'yup';
+
+//URL de la api
+const api = "https://api.tendaciclista.ccpegoilesvalls.es/api/login";
 
 //Validacions del formulari
 const SignupSchema = Yup.object().shape({
@@ -15,14 +19,42 @@ const SignupSchema = Yup.object().shape({
 
 //Estrucutra del formulari
 class Login extends React.Component {
+    validarInfo = (values) => {
+        var usuario = {
+            email: values.email,
+            password: values.password
+        }
+
+        fetch(api, {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(usuario)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.error != null) {
+                console.log("Error => "+data.error);
+            } else {
+                var token = {
+                    "token": data.data.token
+                }
+                
+                localStorage.setItem("auth-token", JSON.stringify(token));
+                this.props.navigate('/home');
+            }
+        })
+    }
+
     render() {
         return (
-            <Formik initialValues={{email:"", password:""}} validationSchema={SignupSchema} onSubmit={ values => {console.log(values)}}>
+            <Formik initialValues={{email:"", password:""}} validationSchema={SignupSchema} onSubmit={ (values) => this.validarInfo(values)}>
                 {({errors, touched}) => (
                     <div className="container-fluid">
                         <div className="row m-3 p-3 col-4 mx-auto d-block" style={{background: "lightgray", borderRadius:"5px"}}>
                             <h2 className='text-primary'>Login</h2>
-                            <Form initialValues={{email:"", password:""}} validationSchema={SignupSchema} onSubmit={values => { console.log(values)}}>
+                            <Form>
                                 <div className="mb-3 row d-flex flex-column">
                                     <label htmlFor="email" className="col-sm-2 col-form-label">
                                         Email
@@ -40,14 +72,15 @@ class Login extends React.Component {
                                         Contrasenya
                                     </label>
                                     <div className="col-sm-10">
-                                        <Field type="password" name="password" placeholder="Contrasenya" className="form-control"/>
+                                        <Field type="password" name="password" placeholder="Contrasenya" autoComplete="off" className="form-control"/>
                                         {
                                             errors.password && touched.password ?
                                                 <div className='text-danger fw-bold'>{errors.password}</div> : null
                                         }
                                     </div>
                                 </div>
-                                <button type="submit" className="btn btn-primary btn-block mt-4">
+                                {/* type="submit" */}
+                                <button className="btn btn-primary btn-block mt-4">
                                     Enviar
                                 </button>
                             </Form>
@@ -59,4 +92,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);

@@ -25,7 +25,7 @@ render (){
                     <NavDropdown.Item href="/register">Registrarse</NavDropdown.Item>
                     <NavDropdown.Item href="/login">Login</NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item>Logout</NavDropdown.Item>
+                    <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
                 </NavDropdown>
             </Nav>
             </Navbar.Collapse>
