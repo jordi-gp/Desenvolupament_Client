@@ -35,9 +35,9 @@ const Usuarios = () => {
                                     <td>{item.email}</td>
                                     <td>{item.phone}</td>
                                     <td>
-                                        <button className="btn btn-primary" onClick={()=>{console.log("modificar");}}><FontAwesomeIcon icon={faEdit}/></button>
+                                        <button className="btn btn-primary" onClick={()=>{console.log("modificar");}}></button>
                                         {"   "}
-                                        <button className="btn btn-danger" onClick={()=>{console.log("borrar")}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+                                        <button className="btn btn-danger" onClick={()=>{console.log("borrar")}}></button>
                                     </td>
                                 </tr>
                             )
